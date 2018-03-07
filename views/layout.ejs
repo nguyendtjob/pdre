@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%=typeof title == 'undefined' ? 'Peptide Database RE:' : title%></title>
+
+  <!-- Viewport mobile tag for sensible mobile support -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!--STYLES-->
+  <link rel="stylesheet" href="/styles/excel-bootstrap-table-filter-style.css">
+  <link rel="stylesheet" href="/styles/importer.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <!--STYLES END-->
+</head>
+<body>
+<div>
+
+  <nav class="navbar navbar-expand-sm navbar-dark bg-info mb-4" >
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/Peptide/list">Peptide Database</a>
+
+
+      <div class="navbar-collapse">
+        <ul class="navbar-nav mr-auto navbar-right">
+          <li class="nav-item">
+            <a class="nav-link" href="/Peptide/reglist">REG</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/Peptide/add">Add Peptide</a>
+          </li>
+
+        </ul>
+
+        <ul class="navbar-nav ml-auto navbar-right">
+          <li class="nav-item">
+            <a class="nav-link" href="/">About</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/Login">Login</a>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="container-fluid">
+    <%- body %>
+  </div>
+
+  <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="oi oi-chevron-top"></span></a>
+</div>
+
+<!--TEMPLATES-->
+
+<!--TEMPLATES END-->
+
+
+<!--SCRIPTS-->
+<script src="/js/dependencies/sails.io.js"></script>
+<script src="/js/dataTables.rowsGroup.js"></script>
+<script src="/js/excel-bootstrap-table-filter-bundle.js"></script>
+<script src="/js/excel-bootstrap-table-filter-bundle.min.js"></script>
+<!--SCRIPTS END-->
+
+<script>
+  $(document).ready(function(){
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) {
+        $('#back-to-top').fadeIn();
+      } else {
+        $('#back-to-top').fadeOut();
+      }
+    });
+    // scroll body to 0px on click
+    $('#back-to-top').click(function () {
+      //$('#back-to-top').tooltip('hide');
+      $('body,html').animate({
+        scrollTop: 0
+      }, 150);
+      return false;
+    });
+
+    //$('#back-to-top').tooltip('show');
+
+  });
+</script>
+</body>
+</html>

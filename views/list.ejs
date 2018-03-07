@@ -1,0 +1,720 @@
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.1.3/js/dataTables.fixedHeader.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script src="/js/dataTables.rowsGroup.js"></script>
+<script src="/js/excel-bootstrap-table-filter-bundle.js"></script>
+<script src="/js/excel-bootstrap-table-filter-bundle.min.js"></script>
+
+<script>
+  function filterColumn (table, i ) {
+    $(table).DataTable().column( i ).search(
+      $('#col'+i+'_filter').val()).draw();
+  }
+
+  function format ( d ) {
+    // `d` is the original data object for the row
+    var com = "<i>None</i>";
+    if (d[9] != ""){
+      com = '<i>'+d[9]+'</i>';
+    }
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;"><tr><td><i>Comment:</i></td><td>'+com+'</td></tr></table>';
+  }
+
+
+  $(document).ready(function(){
+
+    //setting the general table
+    var generalTable = $('#generalTable').DataTable({
+        "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
+        "lengthMenu": [ [-1, 10, 20, 50, 100], ["All", 10, 20, 50, 100] ],
+        "scrollX": true,
+        fixedHeader: true,
+        responsive: false,
+
+
+
+        rowsGroup: [0],
+
+        "order": [[ 0, "asc" ]],
+        "columnDefs": [
+          {
+            "targets":[0,1,2,3,4,5,6,7,8,9,10,11],
+            "sortable": false
+          },
+          {
+            "targets": [ 8,9 ],
+            "visible": false,
+            "searchable": true
+          }
+
+        ]
+      }
+    );
+
+    $('.oi-chevron-bottom').on('click', function () {
+      console.log("test OK");
+      var tr = $(this).closest('tr');
+      var row = generalTable.row( tr );
+
+      if ( row.child.isShown() ) {
+        // This row is already open - close it
+        row.child.hide();
+        tr.removeClass('shown');
+      }
+      else {
+        // Open this row
+        row.child( format(row.data()) ).show();
+        tr.addClass('shown');
+      }
+    } );
+
+    //setting the mutation datable
+    var mutationTable = $('#mutationTable').DataTable({
+        "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
+        "lengthMenu": [ [-1, 10, 20, 50, 100], ["All", 10, 20, 50, 100] ],
+        "scrollX": true,
+        fixedHeader: true,
+        responsive: false,
+
+        rowsGroup: [0],
+
+        "order": [[ 0, "desc" ]],
+        "columnDefs": [
+          {
+            "targets": [ 8,9 ],
+            "visible": false,
+            "searchable": true
+          }
+        ]
+      }
+    );
+
+    $('#mutationTable .oi-chevron-bottom').on('click', function () {
+      var tr = $(this).closest('tr');
+      var row = mutationTable.row( tr );
+
+      if ( row.child.isShown() ) {
+        // This row is already open - close it
+        row.child.hide();
+        tr.removeClass('shown');
+      }
+      else {
+        // Open this row
+        row.child( format(row.data()) ).show();
+        tr.addClass('shown');
+      }
+    } );
+
+    //setting the tumor datatable
+    var tumorTable = $('#tumorTable').DataTable({
+        "sDom": '<"top"l>rt<"bottom"ip><"clear">',
+        "lengthMenu": [ [-1, 10, 20, 50, 100], ["All", 10, 20, 50, 100] ],
+        "scrollX": true,
+        fixedHeader: true,
+        responsive: false,
+
+        rowsGroup: [0],
+
+        "order": [[ 0, "desc" ]],
+        "columnDefs": [
+          {
+            "targets": [1, 8,9 ],
+            "visible": false,
+            "searchable": true
+          }
+        ]
+      }
+    );
+
+    $('#tumorTable .oi-chevron-bottom').on('click', function () {
+      var tr = $(this).closest('tr');
+      var row = tumorTable.row( tr );
+
+      if ( row.child.isShown() ) {
+        // This row is already open - close it
+        row.child.hide();
+        tr.removeClass('shown');
+      }
+      else {
+        // Open this row
+        row.child( format(row.data()) ).show();
+        tr.addClass('shown');
+      }
+    } );
+
+    //setting the differentiation datatable
+    var differentiationTable = $('#differentationTable').DataTable({
+        "sDom": '<"top"l>rt<"bottom"ip><"clear">',
+        "lengthMenu": [ [-1, 10, 20, 50, 100], ["All", 10, 20, 50, 100] ],
+        "scrollX": true,
+        fixedHeader: true,
+        responsive: false,
+
+        rowsGroup: [0],
+
+        "order": [[ 0, "desc" ]],
+        "columnDefs": [
+          {
+            "targets": [8,9 ],
+            "visible": false,
+            "searchable": true
+          }
+        ]
+      }
+    );
+
+    $('#differentationTable .oi-chevron-bottom').on('click', function () {
+      var tr = $(this).closest('tr');
+      var row = differentiationTable.row( tr );
+
+      if ( row.child.isShown() ) {
+        // This row is already open - close it
+        row.child.hide();
+        tr.removeClass('shown');
+      }
+      else {
+        // Open this row
+        row.child( format(row.data()) ).show();
+        tr.addClass('shown');
+      }
+    } );
+
+    //setting the overexpressed datatable
+    var overexpressedTable = $('#overexpressedTable').DataTable({
+        "sDom": '<"top"l>rt<"bottom"ip><"clear">',
+        "lengthMenu": [ [-1, 10, 20, 50, 100], ["All", 10, 20, 50, 100] ],
+        "scrollX": true,
+        fixedHeader: true,
+        responsive: false,
+
+        rowsGroup: [0],
+
+        "order": [[ 0, "desc" ]],
+        "columnDefs": [
+          {
+            "targets": [8,9 ],
+            "visible": false,
+            "searchable": true
+          }
+        ]
+      }
+    );
+
+    $('#overexpressedTable .oi-chevron-bottom').on('click', function () {
+      var tr = $(this).closest('tr');
+      var row = overexpressedTable.row( tr );
+
+      if ( row.child.isShown() ) {
+        // This row is already open - close it
+        row.child.hide();
+        tr.removeClass('shown');
+      }
+      else {
+        // Open this row
+        row.child( format(row.data()) ).show();
+        tr.addClass('shown');
+      }
+    } );
+
+    //Setting the potential datatable
+    var potentialTable = $('#potentialTable').DataTable({
+        "sDom": '<"top"l>rt<"bottom"ip><"clear">',
+        "lengthMenu": [ [-1, 10, 20, 50, 100], ["All", 10, 20, 50, 100] ],
+        "scrollX": true,
+        fixedHeader: true,
+        responsive: false,
+
+        "order": [[ 0, "desc" ]],
+        "columnDefs": [
+          {
+            "targets": [0,1,2, 3, 4, 5, 6, 8,9 ],
+            "visible": false,
+            "searchable": true
+          }
+        ]
+      }
+    );
+
+
+    $('#potentialTable .oi-chevron-bottom').on('click', function () {
+      var tr = $(this).closest('tr');
+      var row = potentialTable.row( tr );
+
+      if ( row.child.isShown() ) {
+        // This row is already open - close it
+        row.child.hide();
+        tr.removeClass('shown');
+      }
+      else {
+        // Open this row
+        row.child( format(row.data()) ).show();
+        tr.addClass('shown');
+      }
+    } );
+
+    //Event listener: any key input in the column filter class will apply the filtercolumn function on all tables
+    $('input.column_filter').on( 'keyup', function () {
+      filterColumn( $('#generalTable'), $(this).attr('data-column') );
+      filterColumn( $('#mutationTable'), $(this).attr('data-column') );
+      filterColumn( $('#tumorTable'), $(this).attr('data-column') );
+      filterColumn( $('#differentationTable'), $(this).attr('data-column') );
+      filterColumn( $('#overexpressedTable'), $(this).attr('data-column') );
+      filterColumn( $('#potentialTable'), $(this).attr('data-column') );
+    } );
+
+    //Function when a bootstrap tab is clicked
+    $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+      //Adjusting width of the columns for the header for the visible table
+      $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+
+      //Adjusting the fixhedheaders
+      generalTable.fixedHeader.adjust();
+      mutationTable.fixedHeader.adjust();
+      tumorTable.fixedHeader.adjust();
+      differentiationTable.fixedHeader.adjust();
+      overexpressedTable.fixedHeader.adjust();
+      potentialTable.fixedHeader.adjust();
+    } );
+
+
+    /*
+
+    $(function () {
+      $('#generalTable').excelTableFilter();
+    });
+    */
+
+
+  });
+
+</script>
+
+<div align="center">
+  <b>Filters: </b>
+  <input class="column_filter" id="col0_filter" type="text" placeholder="Gene" data-column="0" />
+  <input class="column_filter" id="col1_filter" type="text" placeholder="Tumor" data-column="1" />
+  <input class="column_filter" id="col2_filter" type="text" placeholder="HLA" data-column="2" />
+  <input class="column_filter" id="col3_filter" type="text" placeholder="HLA frequency" data-column="3" />
+  <input class="column_filter" id="col4_filter" type="text" placeholder="Sequence" data-column="4" />
+  <input class="column_filter" id="col5_filter" type="text" placeholder="Position" data-column="5" />
+  <input class="column_filter" id="col6_filter" type="text" placeholder="Simulation" data-column="6" />
+  <input class="column_filter" id="col7_filter" type="text" placeholder="Reference" data-column="7" />
+</div>
+
+<br/>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" href="#generalTab" role="tab" data-toggle="tab">Complete database</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#mutationTab" role="tab" data-toggle="tab">Mutation</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#tumorTab" role="tab" data-toggle="tab">Tumor-specific</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#differentationTab" role="tab" data-toggle="tab">Differentiation</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#overexpressedTab" role="tab" data-toggle="tab">Overexpressed</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#potentialTab" role="tab" data-toggle="tab">Potential</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active in" id="generalTab">
+    <br/>
+    <h4 class="display-5">Complete database</h4>
+    <table id="generalTable" class="display " width="100%">
+      <thead>
+      <tr>
+        <th>Gene/Protein</th>
+        <th>Tumor</th>
+        <th>HLA</th>
+        <th>HLA Frequency</th>
+        <th>Peptide Sequence</th>
+        <th>Position</th>
+        <th>Lymphocyte Stimulation Method</th>
+        <th>Reference</th>
+        <th>Full Reference</th>
+        <th>Comment content</th>
+        <th>Comment</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% mutations.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence ? peptide.leftSequence : '' %><span style="color:red"><%= peptide.redPart ? peptide.redPart:''%></span><%= peptide.rightSequence ? peptide.rightSequence:'' %></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+
+      <% tumors.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence%></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+
+      <% differentiations.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence%></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+
+      <% overs.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence%></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="mutationTab">
+    <br/>
+    <h4 class="display-5">Table 1. Tumor antigens resulting from mutations</h4>
+    <table id="mutationTable" class="display " width="100%">
+      <thead>
+      <tr>
+        <th>Gene/Protein</th>
+        <th>Tumor</th>
+        <th>HLA</th>
+        <th>HLA Frequency</th>
+        <th>Peptide Sequence</th>
+        <th>Position</th>
+        <th>Lymphocyte Stimulation Method</th>
+        <th>Reference</th>
+        <th>Full Reference</th>
+        <th>Comment content</th>
+        <th>Comment</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% mutations.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence ? peptide.leftSequence : '' %><span style="color:red"><%= peptide.redPart ? peptide.redPart:''%></span><%= peptide.rightSequence ? peptide.rightSequence:'' %></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="tumorTab">
+    <br/>
+    <h4 class="display-5">Table 2. Shared tumor-specific antigens</h4>
+    <table id="tumorTable" class="display " width="100%">
+      <thead>
+      <tr>
+        <th>Gene/Protein</th>
+        <th></th>
+        <th>HLA</th>
+        <th>HLA Frequency</th>
+        <th>Peptide Sequence</th>
+        <th>Position</th>
+        <th>Lymphocyte Stimulation Method</th>
+        <th>Reference</th>
+        <th>Full Reference</th>
+        <th>Comment content</th>
+        <th>Comment</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% tumors.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence ? peptide.leftSequence : '' %></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="differentationTab">
+    <br/>
+    <h4 class="display-5">Table 3. Differentiation antigens</h4>
+    <table id="differentationTable" class="display " width="100%">
+      <thead>
+      <tr>
+        <th>Gene/Protein</th>
+        <th>Tumor</th>
+        <th>HLA</th>
+        <th>HLA Frequency</th>
+        <th>Peptide Sequence</th>
+        <th>Position</th>
+        <th>Lymphocyte Stimulation Method</th>
+        <th>Reference</th>
+        <th>Full Reference</th>
+        <th>Comment content</th>
+        <th>Comment</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% differentiations.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence ? peptide.leftSequence : '' %></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="overexpressedTab">
+    <br/>
+    <h4 class="display-5">Table 4. Antigens overexpressed in tumors</h4>
+    <table id="overexpressedTable" class="display " width="100%">
+      <thead>
+      <tr>
+        <th>Gene/Protein</th>
+        <th>Tumor</th>
+        <th>HLA</th>
+        <th>HLA Frequency</th>
+        <th>Peptide Sequence</th>
+        <th>Position</th>
+        <th>Lymphocyte Stimulation Method</th>
+        <th>Reference</th>
+        <th>Full Reference</th>
+        <th>Comment content</th>
+        <th>Comment</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% overs.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence ? peptide.leftSequence : '' %></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="potentialTab">
+    <br/>
+    <h4 class="display-5">Table 5. Potential antigens</h4>
+    <table id="potentialTable" class="display " width="100%">
+      <thead>
+      <tr>
+        <th>0</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th>6</th>
+        <th>Reference</th>
+        <th>8</th>
+        <th>Comment content</th>
+        <th>Comment</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% potentials.forEach(function(peptide){ %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.fullReference ? peptide.fullReference:'' %></a></td>
+        <td></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+

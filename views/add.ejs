@@ -1,0 +1,152 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="/Peptide/list">Peptides</a></li>
+  <li class="breadcrumb-item active">Add</li>
+</ol>
+
+<h1 class="display-5">Add Peptide</h1>
+<p><i>Fields in <b><span style="color:red">red</span></b> are mandatory.</i></p>
+<form method="post" action="/Peptide/create" id="addForm">
+  <div class="form-group">
+    <label><b>Peptide Category</b></label>
+    <select class="form-control" name="type" onchange="showHide(this.options[this.selectedIndex].value)">
+      <option value="mutation" selected>Mutation</option>
+      <option value="tumor">Tumor Specific</option>
+      <option value="differentiation">Differentiation</option>
+      <option value="overexpressed">Overexpressed</option>
+      <option value="potential">Potential</option>
+    </select>
+  </div>
+  <div class="form-group" id="geneDiv">
+    <label><b>Gene</b></label>
+    <input type="text" name="gene" class="form-control" placeholder="Gene">
+  </div>
+  <div class="form-group" id="geneCardDiv">
+    <label><b>URL of the Gene Card</b></label>
+    <input type="text" name="geneCard" class="form-control" placeholder="URL of the Gene Card">
+  </div>
+  <div class="form-group" id="tumorDiv">
+    <label><b>Tumor</b></label>
+    <input type="text" name="tumor" class="form-control" placeholder="Tumor">
+  </div>
+  <div class="form-group" id="hlaDiv">
+    <label><b>HLA</b></label>
+    <input type="text" name="hla" class="form-control" placeholder="HLA">
+  </div>
+  <div class="form-group" id="freqDiv">
+    <label><b>HLA Frequency</b></label>
+    <input type="text" name="freq" class="form-control" placeholder="HLA frequency">
+  </div>
+  <div class="form-group" id="sequence">
+    <label><b>Peptide sequence</b></label>
+    <input type="text" name="leftSequence" class="form-control" placeholder="Sequence">
+  </div>
+  <div class="form-group" id="preMutationDiv">
+    <label><b>Peptide sequence before the mutated part</b></label>
+    <input type="text" name="leftSequence" class="form-control" placeholder="Sequence before the mutated part">
+  </div>
+  <div class="form-group" id="mutationDiv">
+    <label><b>Mutated part of the sequence</b></label>
+    <input type="text" name="redPart" class="form-control" placeholder="Mutated part of the sequence">
+  </div>
+  <div class="form-group" id="postMutationDiv">
+    <label><b>Peptide sequence after the mutated part</b></label>
+    <input type="text" name="rightSequence" class="form-control" placeholder="Sequence after the mutated part">
+  </div>
+  <div class="form-group" id="posDiv">
+    <label><b>Position</b></label>
+    <input type="text" name="pos" class="form-control" placeholder="Position">
+  </div>
+  <div class="form-group" id="stimDiv">
+    <label><b>Lymphocyte Stimulation Method</b></label>
+    <input type="text" name="stimulation" class="form-control" placeholder="Lymphocyte Stimulation Method">
+  </div>
+  <div class="form-group">
+    <label><span style="color:red"><b>Reference: Name and Year</b></span></label>
+    <input type="text" name="reference" class="form-control" placeholder="Reference: Name and Year" required>
+  </div>
+  <div class="form-group">
+    <label><b>Full Reference</b></label>
+    <input type="text" name="fullReference" class="form-control" placeholder="Full reference">
+  </div>
+  <div class="form-group">
+    <label><b>URL of the article</b></label>
+    <input type="text" name="url" class="form-control" placeholder="URL of the article">
+  </div>
+    <label><b>Comment</b></label>
+    <div class="form-group">
+  <input type="text" name="comment" class="form-control" placeholder="Comment">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+<script type="text/javascript">
+
+  function showHide(select_item) {
+    if (select_item == "mutation"){
+      document.getElementById("tumorDiv").style.display = 'block';
+      document.getElementById("sequence").style.display = 'none';
+      document.getElementById("preMutationDiv").style.display = 'block';
+      document.getElementById("mutationDiv").style.display = 'block';
+      document.getElementById("postMutationDiv").style.display = 'block';
+
+      document.getElementById("geneDiv").style.display = 'block';
+      document.getElementById("geneCardDiv").style.display = 'block';
+      document.getElementById("hlaDiv").style.display = 'block';
+      document.getElementById("freqDiv").style.display = 'block';
+      document.getElementById("posDiv").style.display = 'block';
+      document.getElementById("stimDiv").style.display = 'block';
+    }
+
+    if (select_item =="tumor"){
+      document.getElementById("tumorDiv").style.display = 'none';
+      document.getElementById("sequence").style.display = 'block';
+      document.getElementById("preMutationDiv").style.display = 'none';
+      document.getElementById("mutationDiv").style.display = 'none';
+      document.getElementById("postMutationDiv").style.display = 'none';
+
+      document.getElementById("geneDiv").style.display = 'block';
+      document.getElementById("geneCardDiv").style.display = 'block';
+      document.getElementById("hlaDiv").style.display = 'block';
+      document.getElementById("freqDiv").style.display = 'block';
+      document.getElementById("posDiv").style.display = 'block';
+      document.getElementById("stimDiv").style.display = 'block';
+    }
+
+    if (select_item == "differentiation" || select_item == "overexpressed"){
+      document.getElementById("tumorDiv").style.display = 'block';
+      document.getElementById("sequence").style.display = 'block';
+      document.getElementById("preMutationDiv").style.display = 'none';
+      document.getElementById("mutationDiv").style.display = 'none';
+      document.getElementById("postMutationDiv").style.display = 'none';
+
+      document.getElementById("geneDiv").style.display = 'block';
+      document.getElementById("geneCardDiv").style.display = 'block';
+      document.getElementById("hlaDiv").style.display = 'block';
+      document.getElementById("freqDiv").style.display = 'block';
+      document.getElementById("posDiv").style.display = 'block';
+      document.getElementById("stimDiv").style.display = 'block';
+    }
+
+    if (select_item == "potential"){
+      document.getElementById("geneDiv").style.display = 'none';
+      document.getElementById("geneCardDiv").style.display = 'none';
+      document.getElementById("hlaDiv").style.display = 'none';
+      document.getElementById("freqDiv").style.display = 'none';
+      document.getElementById("posDiv").style.display = 'none';
+      document.getElementById("stimDiv").style.display = 'none';
+
+      document.getElementById("tumorDiv").style.display = 'none';
+      document.getElementById("sequence").style.display = 'none';
+      document.getElementById("preMutationDiv").style.display = 'none';
+      document.getElementById("mutationDiv").style.display = 'none';
+      document.getElementById("postMutationDiv").style.display = 'none';
+    }
+  }
+
+  window.onload = function() {
+    document.getElementById("sequence").style.display = 'none';
+  };
+
+</script>

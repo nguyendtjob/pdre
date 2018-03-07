@@ -1,0 +1,445 @@
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="/js/excel-bootstrap-table-filter-bundle.js"></script>
+<script src="/js/excel-bootstrap-table-filter-bundle.min.js"></script>
+
+<script>
+
+  $(document).ready(function(){
+
+    $(function () {
+      $('#generalTable').excelTableFilter();
+    });
+
+
+  });
+
+</script>
+
+<div align="center">
+  <b>Filters: </b>
+  <input class="column_filter" id="col0_filter" type="text" placeholder="Gene" data-column="0" />
+  <input class="column_filter" id="col1_filter" type="text" placeholder="Tumor" data-column="1" />
+  <input class="column_filter" id="col2_filter" type="text" placeholder="HLA" data-column="2" />
+  <input class="column_filter" id="col3_filter" type="text" placeholder="HLA frequency" data-column="3" />
+  <input class="column_filter" id="col4_filter" type="text" placeholder="Sequence" data-column="4" />
+  <input class="column_filter" id="col5_filter" type="text" placeholder="Position" data-column="5" />
+  <input class="column_filter" id="col6_filter" type="text" placeholder="Simulation" data-column="6" />
+  <input class="column_filter" id="col7_filter" type="text" placeholder="Reference" data-column="7" />
+</div>
+
+<br/>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" href="#generalTab" role="tab" data-toggle="tab">Complete database</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#mutationTab" role="tab" data-toggle="tab">Mutation</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#tumorTab" role="tab" data-toggle="tab">Tumor-specific</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#differentationTab" role="tab" data-toggle="tab">Differentiation</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#overexpressedTab" role="tab" data-toggle="tab">Overexpressed</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#potentialTab" role="tab" data-toggle="tab">Potential</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active in" id="generalTab">
+    <br/>
+    <h4 class="display-5">Complete database</h4>
+    <table id="generalTable" class="display " width="100%">
+      <thead>
+      <tr>
+        <th>Gene/Protein</th>
+        <th>Tumor</th>
+        <th>HLA</th>
+        <th>HLA Frequency</th>
+        <th>Peptide Sequence</th>
+        <th>Position</th>
+        <th>Lymphocyte Stimulation Method</th>
+        <th>Reference</th>
+        <th>Full Reference</th>
+        <th>Comment content</th>
+        <th>Comment</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% mutations.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence ? peptide.leftSequence : '' %><span style="color:red"><%= peptide.redPart ? peptide.redPart:''%></span><%= peptide.rightSequence ? peptide.rightSequence:'' %></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+
+      <% tumors.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence%></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+
+      <% differentiations.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence%></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+
+      <% overs.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence%></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="mutationTab">
+    <br/>
+    <h4 class="display-5">Table 1. Tumor antigens resulting from mutations</h4>
+    <table id="mutationTable" class="display " width="100%">
+      <thead>
+      <tr>
+        <th>Gene/Protein</th>
+        <th>Tumor</th>
+        <th>HLA</th>
+        <th>HLA Frequency</th>
+        <th>Peptide Sequence</th>
+        <th>Position</th>
+        <th>Lymphocyte Stimulation Method</th>
+        <th>Reference</th>
+        <th>Full Reference</th>
+        <th>Comment content</th>
+        <th>Comment</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% mutations.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence ? peptide.leftSequence : '' %><span style="color:red"><%= peptide.redPart ? peptide.redPart:''%></span><%= peptide.rightSequence ? peptide.rightSequence:'' %></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="tumorTab">
+    <br/>
+    <h4 class="display-5">Table 2. Shared tumor-specific antigens</h4>
+    <table id="tumorTable" class="display " width="100%">
+      <thead>
+      <tr>
+        <th>Gene/Protein</th>
+        <th></th>
+        <th>HLA</th>
+        <th>HLA Frequency</th>
+        <th>Peptide Sequence</th>
+        <th>Position</th>
+        <th>Lymphocyte Stimulation Method</th>
+        <th>Reference</th>
+        <th>Full Reference</th>
+        <th>Comment content</th>
+        <th>Comment</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% tumors.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence ? peptide.leftSequence : '' %></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="differentationTab">
+    <br/>
+    <h4 class="display-5">Table 3. Differentiation antigens</h4>
+    <table id="differentationTable" class="display " width="100%">
+      <thead>
+      <tr>
+        <th>Gene/Protein</th>
+        <th>Tumor</th>
+        <th>HLA</th>
+        <th>HLA Frequency</th>
+        <th>Peptide Sequence</th>
+        <th>Position</th>
+        <th>Lymphocyte Stimulation Method</th>
+        <th>Reference</th>
+        <th>Full Reference</th>
+        <th>Comment content</th>
+        <th>Comment</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% differentiations.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence ? peptide.leftSequence : '' %></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="overexpressedTab">
+    <br/>
+    <h4 class="display-5">Table 4. Antigens overexpressed in tumors</h4>
+    <table id="overexpressedTable" class="display " width="100%">
+      <thead>
+      <tr>
+        <th>Gene/Protein</th>
+        <th>Tumor</th>
+        <th>HLA</th>
+        <th>HLA Frequency</th>
+        <th>Peptide Sequence</th>
+        <th>Position</th>
+        <th>Lymphocyte Stimulation Method</th>
+        <th>Reference</th>
+        <th>Full Reference</th>
+        <th>Comment content</th>
+        <th>Comment</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% overs.forEach(function(peptide){ %>
+      <tr>
+        <td><% if(peptide.geneCard) {%>
+          <b><a href="<%= peptide.geneCard ? peptide.geneCard:''%>"><%= peptide.gene ? peptide.gene:'' %></a></b>
+          <% } else {%>
+          <i><b><%= peptide.gene ? peptide.gene:'' %></b></i>
+          <% } %>
+        </td>
+        <td><%= peptide.tumor ? peptide.tumor:''%></td>
+        <td><%= peptide.hla ? peptide.hla:'' %></td>
+        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.leftSequence ? peptide.leftSequence : '' %></td>
+        <td><%= peptide.pos ? peptide.pos : '' %></td>
+        <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.reference ? peptide.reference:'' %></a></td>
+        <td><%= peptide.fullReference? peptide.fullReference:''%></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="potentialTab">
+    <br/>
+    <h4 class="display-5">Table 5. Potential antigens</h4>
+    <table id="potentialTable" class="display " width="100%">
+      <thead>
+      <tr>
+        <th>0</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th>6</th>
+        <th>Reference</th>
+        <th>8</th>
+        <th>Comment content</th>
+        <th>Comment</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% potentials.forEach(function(peptide){ %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><a href="<%= peptide.url ? peptide.url:''%>"><%= peptide.fullReference ? peptide.fullReference:'' %></a></td>
+        <td></td>
+        <td><%= peptide.comment? peptide.comment:''%></td>
+        <td><% if(peptide.comment) {%>
+          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <% } %>
+        </td>
+        <td>
+          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+        </td>
+      </tr>
+      <% })%>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
