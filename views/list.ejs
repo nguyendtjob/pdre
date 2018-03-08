@@ -4,8 +4,6 @@
 <script src="https://cdn.datatables.net/fixedheader/3.1.3/js/dataTables.fixedHeader.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 <script src="/js/dataTables.rowsGroup.js"></script>
-<script src="/js/excel-bootstrap-table-filter-bundle.js"></script>
-<script src="/js/excel-bootstrap-table-filter-bundle.min.js"></script>
 
 <script>
   function filterColumn (table, i ) {
@@ -366,12 +364,12 @@
         <td><%= peptide.fullReference? peptide.fullReference:''%></td>
         <td><%= peptide.comment? peptide.comment:''%></td>
         <td><% if(peptide.comment) {%>
-          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
           <% } %>
         </td>
         <td>
-          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
-          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+          <a href="edit/<%= peptide.id %>" class="btn btn-sm btn-primary"><em class="fa fa-pencil"></em></a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');"><em class="fa fa-trash"></em></a>
         </td>
       </tr>
       <% })%>
@@ -394,12 +392,12 @@
         <td><%= peptide.fullReference? peptide.fullReference:''%></td>
         <td><%= peptide.comment? peptide.comment:''%></td>
         <td><% if(peptide.comment) {%>
-          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
           <% } %>
         </td>
         <td>
-          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
-          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+          <a href="edit/<%= peptide.id %>" class="btn btn-sm btn-primary"><em class="fa fa-pencil"></em></a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');"><em class="fa fa-trash"></em></a>
         </td>
       </tr>
       <% })%>
@@ -422,12 +420,12 @@
         <td><%= peptide.fullReference? peptide.fullReference:''%></td>
         <td><%= peptide.comment? peptide.comment:''%></td>
         <td><% if(peptide.comment) {%>
-          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
           <% } %>
         </td>
         <td>
-          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
-          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+          <a href="edit/<%= peptide.id %>" class="btn btn-sm btn-primary"><em class="fa fa-pencil"></em></a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');"><em class="fa fa-trash"></em></a>
         </td>
       </tr>
       <% })%>
@@ -450,12 +448,12 @@
         <td><%= peptide.fullReference? peptide.fullReference:''%></td>
         <td><%= peptide.comment? peptide.comment:''%></td>
         <td><% if(peptide.comment) {%>
-          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
           <% } %>
         </td>
         <td>
-          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
-          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+          <a href="edit/<%= peptide.id %>" class="btn btn-sm btn-primary"><em class="fa fa-pencil"></em></a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');"><em class="fa fa-trash"></em></a>
         </td>
       </tr>
       <% })%>
@@ -502,12 +500,12 @@
         <td><%= peptide.fullReference? peptide.fullReference:''%></td>
         <td><%= peptide.comment? peptide.comment:''%></td>
         <td><% if(peptide.comment) {%>
-          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
           <% } %>
         </td>
         <td>
-          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
-          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+          <a href="edit/<%= peptide.id %>" class="btn btn-sm btn-primary"><em class="fa fa-pencil"></em></a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');"><em class="fa fa-trash"></em></a>
         </td>
       </tr>
       <% })%>
@@ -554,12 +552,12 @@
         <td><%= peptide.fullReference? peptide.fullReference:''%></td>
         <td><%= peptide.comment? peptide.comment:''%></td>
         <td><% if(peptide.comment) {%>
-          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
           <% } %>
         </td>
         <td>
-          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
-          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+          <a href="edit/<%= peptide.id %>" class="btn btn-sm btn-primary"><em class="fa fa-pencil"></em></a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');"><em class="fa fa-trash"></em></a>
         </td>
       </tr>
       <% })%>
@@ -605,12 +603,12 @@
         <td><%= peptide.fullReference? peptide.fullReference:''%></td>
         <td><%= peptide.comment? peptide.comment:''%></td>
         <td><% if(peptide.comment) {%>
-          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
           <% } %>
         </td>
         <td>
-          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
-          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+          <a href="edit/<%= peptide.id %>" class="btn btn-sm btn-primary"><em class="fa fa-pencil"></em></a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');"><em class="fa fa-trash"></em></a>
         </td>
       </tr>
       <% })%>
@@ -656,12 +654,12 @@
         <td><%= peptide.fullReference? peptide.fullReference:''%></td>
         <td><%= peptide.comment? peptide.comment:''%></td>
         <td><% if(peptide.comment) {%>
-          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
           <% } %>
         </td>
         <td>
-          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
-          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+          <a href="edit/<%= peptide.id %>" class="btn btn-sm btn-primary"><em class="fa fa-pencil"></em></a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');"><em class="fa fa-trash"></em></a>
         </td>
       </tr>
       <% })%>
@@ -702,12 +700,12 @@
         <td></td>
         <td><%= peptide.comment? peptide.comment:''%></td>
         <td><% if(peptide.comment) {%>
-          <span class="btn btn-primary btn-sm oi oi-chevron-bottom"></span>
+          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
           <% } %>
         </td>
         <td>
-          <a href="edit/<%= peptide.id %>" class="btn btn-primary">Edit</a>
-          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');">Delete</a>
+          <a href="edit/<%= peptide.id %>" class="btn btn-sm btn-primary"><em class="fa fa-pencil"></em></a>
+          <a href="/Peptide/delete/<%= peptide.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this peptide?');"><em class="fa fa-trash"></em></a>
         </td>
       </tr>
       <% })%>

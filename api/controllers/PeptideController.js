@@ -9,8 +9,6 @@ module.exports = {
 
 
 
-
-
   /**
    * `PeptideController.create()`
    */
@@ -62,7 +60,7 @@ module.exports = {
 
 
   /**
-   * `PeptideController.findAll()`
+   * `PeptideController.list()`
    */
   list: function (req, res) {
       Peptide.find().where({type:"mutation"}).exec(function (err, mutations){
