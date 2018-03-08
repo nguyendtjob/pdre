@@ -51,3 +51,7 @@ body {
   color: #fff;
   top: 5px;
 }
+
+th { font-size: 12px; }
+
+td { font-size: 12px; }

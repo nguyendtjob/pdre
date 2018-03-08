@@ -2,17 +2,14 @@
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="/js/excel-bootstrap-table-filter-bundle.js"></script>
 <script src="/js/excel-bootstrap-table-filter-bundle.min.js"></script>
+<script src="/js/table-section.js"></script>
 
 <script>
 
   $(document).ready(function(){
 
-    $(function () {
-      $('#generalTable').excelTableFilter();
-    });
-
-
-
+    $('#generalTable').excelTableFilter();
+    $(document).tableSection();
 
   });
 
@@ -75,6 +72,7 @@
       </tr>
       </thead>
       <tbody>
+      <tr class="ts-row-section"><td colspan="12">1. Mutations</td></tr>
       <% mutations.forEach(function(peptide){ %>
       <tr>
         <td><% if(peptide.geneCard) {%>

@@ -21,7 +21,7 @@ module.exports = {
 
     hla : { type: 'string' },
 
-    freq : { type: 'string' },
+    freq : { type: 'integer' },
 
     leftSequence : { type: 'string' },
 
