@@ -67,7 +67,7 @@
     <input type="text" name="freq" class="form-control" placeholder="HLA frequency" value="<%= peptide.freq %>">
   </div>
   <div class="form-group" id="preMutationDiv">
-    <label id="seqText"><b>Peptide sequence before the mutated part</b></label>
+    <label><b id="seqText">Peptide sequence before the mutated part</b></label>
     <input type="text" name="leftSequence" class="form-control" placeholder="Sequence" value="<%= peptide.leftSequence %>">
   </div>
   <div class="form-group" id="mutationDiv">
@@ -108,6 +108,7 @@
 
 <script type="text/javascript">
 
+  //Function that hide or show form fields based on the peptide type chosen in the select field
   function showHide(select_item) {
     if (select_item == "mutation"){
       document.getElementById("tumorDiv").style.display = 'block';
@@ -120,7 +121,7 @@
       document.getElementById("freqDiv").style.display = 'block';
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
-      document.getElementById("seqText").textContent="<b>Peptide sequence before the mutated part</b>";
+      document.getElementById("seqText").textContent="Peptide sequence before the mutated part";
     }
 
     if (select_item =="tumor"){
@@ -135,7 +136,7 @@
       document.getElementById("freqDiv").style.display = 'block';
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
-      document.getElementById("seqText").textContent="<b>Peptide sequence</b>";
+      document.getElementById("seqText").textContent="Peptide sequence";
     }
 
     if (select_item == "differentiation" || select_item == "overexpressed"){
@@ -150,7 +151,7 @@
       document.getElementById("freqDiv").style.display = 'block';
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
-      document.getElementById("seqText").textContent="<b>Peptide sequence</b>";
+      document.getElementById("seqText").textContent="Peptide sequence";
     }
 
     if (select_item == "potential"){
@@ -164,8 +165,12 @@
       document.getElementById("preMutationDiv").style.display = 'none';
       document.getElementById("mutationDiv").style.display = 'none';
       document.getElementById("postMutationDiv").style.display = 'none';
-      document.getElementById("seqText").textContent="<b>Peptide sequence</b>";
+      document.getElementById("seqText").textContent="Peptide sequence";
     }
   };
+  var sel = document.getElementById("selType");
+
+  //Change the form accordingly based on the peptide to edit
+  window.onload = showHide(sel.options[sel.selectedIndex].value);
 
 </script>
