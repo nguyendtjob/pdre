@@ -5,6 +5,9 @@
 <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 <script src="/js/dataTables.rowsGroup.js"></script>
 <script src="/js/table-section.js"></script>
+<script src="/js/excel-bootstrap-table-filter-bundle.js"></script>
+<script src="/js/excel-bootstrap-table-filter-bundle.min.js"></script>
+<script src="/js/afnFiltering.js"></script>
 
 <script>
   function filterColumn (table, i ) {
@@ -14,10 +17,8 @@
 
   function format ( d ) {
     // `d` is the original data object for the row
-    var com = "<i>None</i>";
-    if (d[9] != ""){
-      com = '<i>'+d[9]+'</i>';
-    }
+    var com = '<i>'+d[9]+'</i>';
+
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;"><tr><td><i>Comment:</i></td><td>'+com+'</td></tr></table>';
   }
 
@@ -43,6 +44,8 @@
           "targets":[10,12],
           "sortable": false
         },
+
+        { "type": "num", "targets": 3 },
 
         {
           "targets": [ 8,9, 11 ],
@@ -76,7 +79,7 @@
         api.column(11, {page:'current'} ).data().each( function ( group, i ) {
           if ( last !== group && colorCount < 4) {
             $(rows).eq( i ).before(
-              '<tr class="group ts-row-section fh-fixedHeader"><td colspan="10"><span style='+colors[colorCount]+'>'+group+'</td></tr>'
+              '<tr class="group ts-row-section fh-fixedHeader" section="'+colorCount+'"><td colspan="10"><span style='+colors[colorCount]+'>'+group+'</td></tr>'
             );
             last = group;
             colorCount += 1;
@@ -90,14 +93,9 @@
       $(document).tableSection();
     });
 
-    $('.group').on( 'click', function() {
-      console.log("TEXT OK");
-      generalTable.row(0).scrollTo();
-    });
 
 
-
-    $('.oi-chevron-bottom').on('click', function () {
+    $('#generalTable .oi-chevron-bottom').on('click', function () {
       var tr = $(this).closest('tr');
       var row = generalTable.row( tr );
 
@@ -324,6 +322,10 @@
       $(document).tableSection();
     } );
 
+
+
+
+
     //Function when a bootstrap tab is clicked
     $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
       //Adjusting width of the columns for the header for the visible table
@@ -339,14 +341,50 @@
     } );
 
 
-    /*
 
-    $(function () {
-      $('#generalTable').excelTableFilter();
-    });
-    */
+
+
+
 
     $(document).tableSection();
+
+    $('#min').keyup( function() {
+      console.log("keyup OK");
+      generalTable.draw();
+      mutationTable.draw();
+      tumorTable.draw();
+      differentiationTable.draw();
+      overexpressedTable.draw();
+    } );
+
+    $('#max').keyup( function() {
+      console.log("keyup OK");
+      generalTable.draw();
+      mutationTable.draw();
+      tumorTable.draw();
+      differentiationTable.draw();
+      overexpressedTable.draw();
+    } );
+
+
+    //Function that makes the table scroll to the section header
+    $('.ts-row-fixed').on( 'click', function() {
+      var sectionNumb = $(this).attr('section');
+      console.log(sectionNumb);
+      var section = $("[section="+sectionNumb+"]");
+      console.log(section);
+      var tableTop = $('#generalTable').scrollTop();
+      var tableBottom = tableTop + $('#generalTable').height();
+      var sectionTop = section.offsetTop;
+      var sectionBottom = sectionTop + $(section).height();
+      if (sectionTop < tableTop) {
+        $('#generalTable').scrollTop(sectionTop);
+      } else if (sectionBottom > tableBottom) {
+        $('#generalTable').scrollTop(sectionBottom - $('#generalTable').height());
+      }
+
+    });
+
 
 
   });
@@ -360,6 +398,8 @@
   <input class="column_filter" id="col2_filter" type="text" placeholder="HLA" data-column="2" />
   <input class="column_filter" id="col3_filter" type="text" placeholder="HLA frequency" data-column="3" />
   <input class="column_filter" id="col4_filter" type="text" placeholder="Sequence" data-column="4" />
+  <input id="min" type="text" placeholder="min"/>
+  <input id="max" type="text" placeholder="max"/>
   <input class="column_filter" id="col5_filter" type="text" placeholder="Position" data-column="5" />
   <input class="column_filter" id="col6_filter" type="text" placeholder="Simulation" data-column="6" />
   <input class="column_filter" id="col7_filter" type="text" placeholder="Reference" data-column="7" />
@@ -398,7 +438,7 @@
         <th>Gene/Protein</th>
         <th>Tumor</th>
         <th>HLA</th>
-        <th>HLA Frequency</th>
+        <th>HLA %</th>
         <th>Peptide Sequence</th>
         <th>Position</th>
         <th>Lymphocyte Stimulation Method</th>
@@ -409,6 +449,7 @@
         <th>Type</th>
         <th>Actions</th>
       </tr>
+
       </thead>
       <tbody>
       <% mutations.forEach(function(peptide){ %>
@@ -421,7 +462,7 @@
         </td>
         <td><%= peptide.tumor ? peptide.tumor:''%></td>
         <td><%= peptide.hla ? peptide.hla:'' %></td>
-        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.freq ? peptide.freq:'' %></td>
         <td><%= peptide.leftSequence ? peptide.leftSequence : '' %><span style="color:red"><%= peptide.redPart ? peptide.redPart:''%></span><%= peptide.rightSequence ? peptide.rightSequence:'' %></td>
         <td><%= peptide.pos ? peptide.pos : '' %></td>
         <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
@@ -450,7 +491,7 @@
         </td>
         <td><%= peptide.tumor ? peptide.tumor:''%></td>
         <td><%= peptide.hla ? peptide.hla:'' %></td>
-        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.freq ? peptide.freq:'' %></td>
         <td><%= peptide.leftSequence%></td>
         <td><%= peptide.pos ? peptide.pos : '' %></td>
         <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
@@ -479,7 +520,7 @@
         </td>
         <td><%= peptide.tumor ? peptide.tumor:''%></td>
         <td><%= peptide.hla ? peptide.hla:'' %></td>
-        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.freq ? peptide.freq:'' %></td>
         <td><%= peptide.leftSequence%></td>
         <td><%= peptide.pos ? peptide.pos : '' %></td>
         <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
@@ -508,7 +549,7 @@
         </td>
         <td><%= peptide.tumor ? peptide.tumor:''%></td>
         <td><%= peptide.hla ? peptide.hla:'' %></td>
-        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.freq ? peptide.freq:'' %></td>
         <td><%= peptide.leftSequence%></td>
         <td><%= peptide.pos ? peptide.pos : '' %></td>
         <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
@@ -539,7 +580,7 @@
         <th>Gene/Protein</th>
         <th>Tumor</th>
         <th>HLA</th>
-        <th>HLA Frequency</th>
+        <th>HLA %</th>
         <th>Peptide Sequence</th>
         <th>Position</th>
         <th>Lymphocyte Stimulation Method</th>
@@ -561,7 +602,7 @@
         </td>
         <td><%= peptide.tumor ? peptide.tumor:''%></td>
         <td><%= peptide.hla ? peptide.hla:'' %></td>
-        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.freq ? peptide.freq:'' %></td>
         <td><%= peptide.leftSequence ? peptide.leftSequence : '' %><span style="color:red"><%= peptide.redPart ? peptide.redPart:''%></span><%= peptide.rightSequence ? peptide.rightSequence:'' %></td>
         <td><%= peptide.pos ? peptide.pos : '' %></td>
         <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
@@ -591,7 +632,7 @@
         <th>Gene/Protein</th>
         <th></th>
         <th>HLA</th>
-        <th>HLA Frequency</th>
+        <th>HLA %</th>
         <th>Peptide Sequence</th>
         <th>Position</th>
         <th>Lymphocyte Stimulation Method</th>
@@ -613,7 +654,7 @@
         </td>
         <td></td>
         <td><%= peptide.hla ? peptide.hla:'' %></td>
-        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.freq ? peptide.freq :'' %></td>
         <td><%= peptide.leftSequence ? peptide.leftSequence : '' %></td>
         <td><%= peptide.pos ? peptide.pos : '' %></td>
         <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
@@ -642,7 +683,7 @@
         <th>Gene/Protein</th>
         <th>Tumor</th>
         <th>HLA</th>
-        <th>HLA Frequency</th>
+        <th>HLA %</th>
         <th>Peptide Sequence</th>
         <th>Position</th>
         <th>Lymphocyte Stimulation Method</th>
@@ -664,7 +705,7 @@
         </td>
         <td><%= peptide.tumor ? peptide.tumor:''%></td>
         <td><%= peptide.hla ? peptide.hla:'' %></td>
-        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.freq ? peptide.freq:'' %></td>
         <td><%= peptide.leftSequence ? peptide.leftSequence : '' %></td>
         <td><%= peptide.pos ? peptide.pos : '' %></td>
         <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
@@ -693,7 +734,7 @@
         <th>Gene/Protein</th>
         <th>Tumor</th>
         <th>HLA</th>
-        <th>HLA Frequency</th>
+        <th>HLA %</th>
         <th>Peptide Sequence</th>
         <th>Position</th>
         <th>Lymphocyte Stimulation Method</th>
@@ -715,7 +756,7 @@
         </td>
         <td><%= peptide.tumor ? peptide.tumor:''%></td>
         <td><%= peptide.hla ? peptide.hla:'' %></td>
-        <td><%= peptide.freq ? peptide.freq + '%':'' %></td>
+        <td><%= peptide.freq ? peptide.freq:'' %></td>
         <td><%= peptide.leftSequence ? peptide.leftSequence : '' %></td>
         <td><%= peptide.pos ? peptide.pos : '' %></td>
         <td><%= peptide.stimulation ? peptide.stimulation:'' %></td>
