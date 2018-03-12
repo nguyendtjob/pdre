@@ -23,25 +23,22 @@ jQuery.fn.dataTableExt.afnFiltering.push(
     var iColumn = 4;
     var iMin = document.getElementById('min').value * 1;
     var iMax = document.getElementById('max').value * 1;
-
-
     var iVersion = aData[iColumn].length;
-
 
     if ( iMin === 0 && iMax === 0 )
     {
       return true;
     }
 
-    else if ( iMin === 0 && iVersion < iMax )
+    else if ( iMin === 0 && iVersion <= iMax )
     {
       return true;
     }
-    else if ( iMin < iVersion && 0 === iMax )
+    else if ( iMin <= iVersion && 0 === iMax )
     {
       return true;
     }
-    else if ( iMin < iVersion && iVersion < iMax )
+    else if ( iMin <= iVersion && iVersion <= iMax )
     {
       return true;
     }
