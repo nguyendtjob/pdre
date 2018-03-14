@@ -34,7 +34,11 @@ module.exports.routes = {
 
   '/': {
     view: "index"
-  }
+  },
+
+  'get /login': { view: 'login' },
+  'post /login': 'UserController.login',
+  '/logout': 'UserController.logout'
 
   /***************************************************************************
   *                                                                          *

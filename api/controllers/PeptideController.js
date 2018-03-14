@@ -131,6 +131,9 @@ module.exports = {
 
 
   add: function(req, res) {
+    if (req.session.me == null){
+      res.view('403');
+    }
     res.view('add');
   },
 
@@ -139,6 +142,9 @@ module.exports = {
    * `PeptideController.edit()`
    */
   edit: function (req, res) {
+    if (req.session.me == null){
+      res.view('403');
+    }
     Peptide.findOne({id:req.params.id}).exec(function(err, peptide){
         if(err){
           res.send(500, {error: 'Database Error'});
