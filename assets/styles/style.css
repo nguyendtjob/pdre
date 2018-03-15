@@ -6,6 +6,36 @@
   display:none;
 }
 
+.hla_filter {
+  width: 40px !important;
+}
+
+.freq_filter {
+  width: 40px !important;
+}
+
+.pos_filter {
+  width: 60px !important;
+}
+
+.min_range {
+  width: 20px !important;
+}
+
+.max_range {
+  width: 20px !important;
+}
+
+
+.comment-cell {
+  text-align: center;
+}
+
+.yadcf-filter {
+  width: 150px !important;
+  max-width: 150px !important;
+}
+
 body {
   padding: 0px;
   margin-bottom: 100px;
@@ -52,6 +82,10 @@ body {
   top: 5px;
 }
 
-th { font-size: 12px; }
+th {
+  font-size: 12px;
+  text-align: center;
+
+}
 
 td { font-size: 12px; }

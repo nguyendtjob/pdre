@@ -35,7 +35,11 @@
           <li class="nav-item">
             <a class="nav-link" href="/Peptide/reglist">REG</a>
           </li>
-
+          <li class="nav-item">
+            <% if (req.session.me) { %>
+            <a class="nav-link" href="/Peptide/adminlist">Edit/Remove Peptide</a>
+            <% } %>
+          </li>
           <li class="nav-item">
             <% if (req.session.me) { %>
             <a class="nav-link" href="/Peptide/add">Add Peptide</a>

@@ -16,7 +16,7 @@ module.exports = {
     return res.login({
       email: req.param('email'),
       password: req.param('password'),
-      successRedirect: '/Peptide/list',
+      successRedirect: '/Peptide/adminlist',
       invalidRedirect: '/login'
     });
   },
@@ -39,7 +39,7 @@ module.exports = {
     }
 
     // Otherwise if this is an HTML-wanting browser, do a redirect.
-    return res.redirect('/');
+    return res.redirect('/Peptide/list');
   },
 
 
