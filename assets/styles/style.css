@@ -41,6 +41,36 @@ body {
   margin-bottom: 100px;
 }
 
+#generalTable {
+  position: relative;
+}
+
+#navbar-tables {
+  padding: 10px 16px;
+}
+
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.sticky + .content {
+  padding-top: 102px;
+}
+
+.nav-item {
+  padding:5px;
+}
+
+#main_container {
+  position: relative;
+}
+
 #return-to-top {
   position: fixed;
   bottom: 20px;
