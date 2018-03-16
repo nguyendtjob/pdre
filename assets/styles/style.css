@@ -19,11 +19,11 @@
 }
 
 .min_range {
-  width: 20px !important;
+  width: 30px !important;
 }
 
 .max_range {
-  width: 20px !important;
+  width: 30px !important;
 }
 
 
@@ -31,14 +31,9 @@
   text-align: center;
 }
 
-.yadcf-filter {
-  width: 150px !important;
-  max-width: 150px !important;
-}
-
 body {
   padding: 0px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 #generalTable {
@@ -47,20 +42,6 @@ body {
 
 #navbar-tables {
   padding: 10px 16px;
-}
-
-.content {
-  padding: 16px;
-}
-
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%
-}
-
-.sticky + .content {
-  padding-top: 102px;
 }
 
 .nav-item {

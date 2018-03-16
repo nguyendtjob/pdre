@@ -7,6 +7,22 @@
 <script src="/js/jquery.dataTables.yadcf.js"></script>
 
 <script>
+  //Hide the page while Datatable is treating the information
+  document.write('<style>body { visibility: hidden; } </style>');
+
+  //Delay function to display the page
+  function delay() {
+    var secs = 0;
+    setTimeout('initFadeIn()', secs);
+  }
+
+  //Turn the page visible
+  function initFadeIn() {
+    jQuery("body").css("visibility","visible");
+    jQuery("body").css("display","none");
+    jQuery("body").fadeIn(700);
+  }
+
   function filterColumn (table, i, colid ) {
     $(table).DataTable().column( i ).search(
       $(colid).val()).draw();
@@ -21,7 +37,7 @@
 
 
   $(document).ready(function(){
-
+    delay();
     //setting the general table
     var generalTable = $('#generalTable').DataTable({
       "sDom": '<"top"bl>rt<"bottom"ip><"clear">',

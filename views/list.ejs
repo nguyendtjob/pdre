@@ -8,6 +8,23 @@
 
 
 <script>
+  //Hide the page while Datatable is treating the information
+  document.write('<style>body { visibility: hidden; } </style>');
+
+  //Delay function to display the page
+  function delay() {
+    var secs = 0;
+    setTimeout('initFadeIn()', secs);
+  }
+
+  //Turn the page visible
+  function initFadeIn() {
+    jQuery("body").css("visibility","visible");
+    jQuery("body").css("display","none");
+    jQuery("body").fadeIn(700);
+  }
+
+
   //Redraw the table based on the filter value
   function filterColumn (table, i, colid ) {
     $(table).DataTable().column( i ).search(
@@ -20,8 +37,8 @@
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;"><tr><td><i>Comment:</i></td><td>'+com+'</td></tr></table>';
   }
 
-
   $(document).ready(function(){
+    delay();
     //setting the general table
     var generalTable = $('#generalTable').DataTable({
       "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
@@ -161,46 +178,45 @@
     $(".sectionbtn").click( function() {
       var selection;
       if (this.id == "section0btn"){
-        $('.sectionbtn').removeClass("active")
-        $('#section0btn').addClass("active")
+        $('.sectionbtn').removeClass("active");
+        $('#section0btn').addClass("active");
         selection = $( "#section0" );
       } else if (this.id == "section1btn"){
-        $('.sectionbtn').removeClass("active")
-        $('#section1btn').addClass("active")
+        $('.sectionbtn').removeClass("active");
+        $('#section1btn').addClass("active");
         selection = $( "#section1" );
       } else if (this.id == "section2btn"){
-        $('.sectionbtn').removeClass("active")
-        $('#section2btn').addClass("active")
+        $('.sectionbtn').removeClass("active");
+        $('#section2btn').addClass("active");
         selection = $( "#section2" );
       } else {
-        $('.sectionbtn').removeClass("active")
-        $('#section3btn').addClass("active")
+        $('.sectionbtn').removeClass("active");
+        $('#section3btn').addClass("active");
         selection = $( "#section3" );
       }
       $(".dataTables_scrollBody").scrollTo(selection);
     });
 
-    //Event listener: change category button highlight depending on scroll
+    //Event listener: change category button highlight depending on the ctaegory header position
     $(".dataTables_scrollBody").on('scroll', function() {
       $('.group').each(function(){
         var sectionDistance = $(this).offset().top;
-        if (sectionDistance < 250 && sectionDistance > -2200){
-          $('.sectionbtn').removeClass("active")
-          $('#'+this.id+'btn').addClass("active")
+        if (sectionDistance < 550){
+          $('.sectionbtn').removeClass("active");
+          $('#'+this.id+'btn').addClass("active");
+        } else{
+          $('#'+this.id+'btn').removeClass("active");
+          var previous = this.id - 1 ;
+          $('#'+previous+'btn').addClass("active");
         }
       });
     });
-
-
-
-
   });
 
 </script>
 
 <!-- Category navigation bar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <span class="navbar-brand"> Peptide Category</span>
   <div class="collapse navbar-collapse" id="navbar_category">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
