@@ -106,7 +106,7 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-<script type="text/javascript">
+<script>
 
   //Function that hide or show form fields based on the peptide type chosen in the select field
   function showHide(select_item) {
@@ -165,7 +165,6 @@
       document.getElementById("preMutationDiv").style.display = 'none';
       document.getElementById("mutationDiv").style.display = 'none';
       document.getElementById("postMutationDiv").style.display = 'none';
-      document.getElementById("seqText").textContent="Peptide sequence";
     }
   };
   var sel = document.getElementById("selType");

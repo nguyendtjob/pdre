@@ -1,8 +1,5 @@
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="/js/datatables.js"></script>
-<script src="/js/DataTables-1.10.16/js/dataTables.bootstrap4.js"></script>
-<script src="/js/FixedHeader-3.1.3/js/dataTables.fixedHeader.js"></script>
-<script src="/js/table-section.js"></script>
+<script src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.5.1/b-html5-1.5.1/b-print-1.5.1/fh-3.1.3/r-2.2.1/rg-1.0.2/sc-1.4.4/sl-1.2.5/datatables.min.js"></script>
 <script src="/js/afnFiltering.js"></script>
 <script src="/js/jquery.dataTables.yadcf.js"></script>
 
@@ -49,6 +46,7 @@
       "orderFixed": [ 11, 'asc' ],
 
       "order": [[ 11, "asc" ], [ 0, "asc" ]],
+
       "columnDefs": [
         {
           "targets":[10],
@@ -90,19 +88,13 @@
         api.column(11, {page:'current'} ).data().each( function ( group, i ) {
           if ( last !== group && colorCount < 4) {
             $(rows).eq( i ).before(
-              '<tr class="group ts-row-section fh-fixedHeader" section="'+colorCount+'"><td colspan="10"><span style='+colors[colorCount]+'>'+group+'</td></tr>'
+              '<tr class="group" section="'+colorCount+'"><td colspan="10"><span style='+colors[colorCount]+'>'+group+'</td></tr>'
             );
             last = group;
             colorCount += 1;
           }
         });
       }
-    });
-
-
-    //Reapply table section when sort is used
-    $('.sorting').on( 'click', function() {
-      $(document).tableSection();
     });
 
 
@@ -354,7 +346,6 @@
       for (var i = 0; i <inputs.length;i++){
         inputs[i].value = this.value;
       }
-      $(document).tableSection();
     } );
 
     //Event listener: any key input in the column filter
@@ -367,7 +358,6 @@
       filterColumn( $('#differentationTable'), $(this).attr('data-column'), $(this));
       filterColumn( $('#overexpressedTable'), $(this).attr('data-column'), $(this) );
       filterColumn( $('#potentialTable'), $(this).attr('data-column'), $(this));
-      $(document).tableSection();
     } );
 
 
@@ -380,7 +370,6 @@
       tumorTable.draw();
       differentiationTable.draw();
       overexpressedTable.draw();
-      $(document).tableSection();
     } );
 
     $('#max').keyup( function() {
@@ -389,7 +378,6 @@
       tumorTable.draw();
       differentiationTable.draw();
       overexpressedTable.draw();
-      $(document).tableSection();
     } );
 
 
@@ -412,25 +400,6 @@
       e.stopPropagation();
     });
 
-    $(document).tableSection();
-
-    //Function that makes the table scroll to the section header
-    $('.ts-row-fixed').on( 'click', function() {
-      var sectionNumb = $(this).attr('section');
-      console.log(sectionNumb);
-      var section = $("[section="+sectionNumb+"]");
-      console.log(section);
-      var tableTop = $('#generalTable').scrollTop();
-      var tableBottom = tableTop + $('#generalTable').height();
-      var sectionTop = section.offsetTop;
-      var sectionBottom = sectionTop + $(section).height();
-      if (sectionTop < tableTop) {
-        $('#generalTable').scrollTop(sectionTop);
-      } else if (sectionBottom > tableBottom) {
-        $('#generalTable').scrollTop(sectionBottom - $('#generalTable').height());
-      }
-
-    });
   });
 
 </script>

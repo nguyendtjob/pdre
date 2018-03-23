@@ -8,16 +8,20 @@
 module.exports = {
 
   /**
-   * `UserController.login()`
+   * `UserController.loginform()`
    */
   login: function (req, res) {
+    res.view('login',{error:null});
+  },
 
+  /**
+   * `UserController.login()`
+   */
+  loginaction: function (req, res) {
     // See `api/responses/login.js`
     return res.login({
       email: req.param('email'),
-      password: req.param('password'),
-      successRedirect: '/Peptide/adminlist',
-      invalidRedirect: '/login'
+      password: req.param('password')
     });
   },
 
@@ -26,19 +30,10 @@ module.exports = {
    * `UserController.logout()`
    */
   logout: function (req, res) {
-
     // "Forget" the user from the session.
     // Subsequent requests from this user agent will NOT have `req.session.me`.
     req.session.me = null;
 
-    // If this is not an HTML-wanting browser, e.g. AJAX/sockets/cURL/etc.,
-    // send a simple response letting the user agent know they were logged out
-    // successfully.
-    if (req.wantsJSON) {
-      return res.ok('Logged out successfully!');
-    }
-
-    // Otherwise if this is an HTML-wanting browser, do a redirect.
     return res.redirect('/Peptide/list');
   },
 

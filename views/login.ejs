@@ -1,13 +1,17 @@
 <h1>Login</h1>
 <form action="/login" method="post">
-
-  <label for="email">Your email address?</label>
-  <input name="email" type="text"/>
+  <% if (error != null) {%>
+  <span style="color:red">Wrong Email or Password.</span><br/>
+  <% } %>
+  <label for="email">E-mail</label>
   <br/>
-
-  <label for="password">Your safe word?</label>
-  <input name="password" type="password"/>
+  <input name="email" type="text" required/>
   <br/>
-
-  <input type="submit"/>
+  <br/>
+  <label for="password">Password</label>
+  <br/>
+  <input name="password" type="password" required/>
+  <br/>
+  <br/>
+  <input class="btn btn-primary" type="submit"/>
 </form>

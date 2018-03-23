@@ -37,11 +37,9 @@ module.exports.routes = {
     view: "index"
   },
 
-  'get /Peptide': 'PeptideController.list',
 
-  'get /login': { view: 'login' },
-  'post /login': 'UserController.login',
-  '/logout': 'UserController.logout'
+  'get /login': 'UserController.login',
+  'post /login': 'UserController.loginaction'
 
   /***************************************************************************
   *                                                                          *

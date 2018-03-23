@@ -63,36 +63,55 @@ module.exports = {
    * `PeptideController.list()`
    */
   list: function (req, res) {
-      Peptide.find().where({type:"mutation"}).exec(function (err, mutations){
+    Peptide.find().where({type: "mutation"}).exec(function (err, mutations) {
+      if (err) {
+        res.send(500, {error: 'Database Error'});
+      }
+
+      Peptide.find().where({type: "tumor"}).exec(function (err, tumors) {
         if (err) {
           res.send(500, {error: 'Database Error'});
         }
 
-        Peptide.find().where({type:"tumor"}).exec(function (err,tumors){
+        Peptide.find().where({type: "differentiation"}).exec(function (err, differentiations) {
           if (err) {
             res.send(500, {error: 'Database Error'});
           }
 
-          Peptide.find().where({type:"differentiation"}).exec(function(err,differentiations){
+          Peptide.find().where({type: "overexpressed"}).exec(function (err, overs) {
             if (err) {
               res.send(500, {error: 'Database Error'});
             }
 
-            Peptide.find().where({type:"overexpressed"}).exec(function(err,overs){
+            Peptide.find().where({type: "potential"}).exec(function (err, potentials) {
               if (err) {
                 res.send(500, {error: 'Database Error'});
               }
-
-              Peptide.find().where({type:"potential"}).exec(function(err,potentials){
-                if (err) {
-                  res.send(500, {error: 'Database Error'});
-                }
-                res.view('list', {mutations:mutations, tumors:tumors, differentiations: differentiations, overs:overs, potentials:potentials});
+              res.view('list', {
+                mutations: mutations,
+                tumors: tumors,
+                differentiations: differentiations,
+                overs: overs,
+                potentials: potentials
               });
             });
           });
         });
       });
+    });
+  },
+
+  /**
+   * `PeptideController.search()`
+   */
+  search: function (req, res) {
+    Peptide.find().exec(function (err, peptides){
+      if (err) {
+        res.send(500, {error: 'Database Error'});
+      }
+      res.view('search', {peptides:peptides});
+
+    });
   },
 
 
