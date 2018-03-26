@@ -31,36 +31,40 @@
 
   //Create the child row for comments
   function commentRow ( data ) {
-    var com = '<i>'+data[9]+'</i>';
+    var com = '<i>'+data[10]+'</i>';
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;"><tr><td><i>Comment:</i></td><td>'+com+'</td></tr></table>';
   }
 
   function refRow (data){
-    if (data[8] != ''){
-      return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;"><tr><td><i>Full reference:</i></td><td>'+data[8]+'</td></tr></table>';
-    } else {
-
-    }
-
+      return '<a href="'+data[9]+'" target="_blank"><i>'+data[8]+'</i></a>';
   }
 
 
   $(document).ready(function(){
+    /*
     $('#generalTable thead th').each( function() {
-      var sTitle;
 
+      var sTitle;
       if ( $(this).attr('id') == "gene_th" ) {
-        sTitle =  'Link to the Gene Card';
+        sTitle =  'Link to the Gene Card for the encoding gene and/or the parent protein';
       } else if ( $(this).attr('id') == "hla_th" ) {
         sTitle =  'Human leukocyte antigen \nClass II HLA are shown in blue';
       } else if ( $(this).attr('id') == "freq_th" ){
         sTitle =  'Frequency in Caucasians, based on \n(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and DR\n(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR';
       } else if ( $(this).attr('id') == "seq_th" ){
-        sTitle =  'The residues modified by the mutation are indicated in red';
+        sTitle =  'The residues modified by the mutation are indicated in red\nYou can select a specific range of peptide sequences with a minimum and maximum length';
+      }  else if ( $(this).attr('id') == "pos_th" ){
+        sTitle =  'Position of the peptide sequence in the protein sequence';
+      } else if ( $(this).attr('id') == "stim_th" ){
+        sTitle =  'Method used to isolate the CTL recognizing the antigen';
+      }  else if ( $(this).attr('id') == "ref_th" ){
+        sTitle =  'PubMed link to the relevant reference';
       } else
         sTitle = '';
       this.setAttribute( 'title', sTitle );
     } );
+    */
+
 
 
     delay();
@@ -75,47 +79,47 @@
       headerOffset: 102,
 
 
-      "orderFixed": [ 11, 'asc' ],
+      "orderFixed": [ 12, 'asc' ],
 
-      "order": [[ 11, "asc" ], [ 0, "asc" ]],
+      "order": [[ 12, "asc" ], [ 0, "asc" ]],
       "columnDefs": [
         {
-          "targets":[10],
+          "targets":[11],
           "sortable": false
         },
 
         { "type": "num", "targets": 3 },
 
         {
-          "targets": [ 8,9, 11 ],
+          "targets": [ 8,9,10, 12 ],
           "visible": false,
           "searchable": true
         },
-        { "orderData": [ 11, 0 ],    "targets": 0 },
-        { "orderData": [ 11, 1 ],    "targets": 1 },
-        { "orderData": [ 11, 2 ],    "targets": 2 },
-        { "orderData": [ 11, 3 ],    "targets": 3 },
-        { "orderData": [ 11, 4 ],    "targets": 4 },
-        { "orderData": [ 11, 5 ],    "targets": 5 },
-        { "orderData": [ 11, 6 ],    "targets": 6 },
-        { "orderData": [ 11, 7 ],    "targets": 7 },
-        { "orderData": [ 11, 10 ],    "targets": 10 },
+        { "orderData": [ 12, 0 ],    "targets": 0 },
+        { "orderData": [ 12, 1 ],    "targets": 1 },
+        { "orderData": [ 12, 2 ],    "targets": 2 },
+        { "orderData": [ 12, 3 ],    "targets": 3 },
+        { "orderData": [ 12, 4 ],    "targets": 4 },
+        { "orderData": [ 12, 5 ],    "targets": 5 },
+        { "orderData": [ 12, 6 ],    "targets": 6 },
+        { "orderData": [ 12, 7 ],    "targets": 7 },
+
 
         { "width": "10%", "targets": 0 },
         { "width": "20%", "targets": 1 },
         { "width": "5%", "targets": [2,3,5]},
-        { "width": "3%", "targets": 10},
+        { "width": "3%", "targets": 11},
         { "width": "15%", "targets": [4,6] }
 
       ],
 
       //Add category class for the row
       "createdRow": function( row, data, dataIndex ) {
-        if ( data[11] == 0 ) {
+        if ( data[12] == 0 ) {
           $(row).addClass( 'mutarion_row' );
-        } else if ( data[11] == 1 ) {
+        } else if ( data[12] == 1 ) {
           $(row).addClass( 'tumor_row' );
-        } else if ( data[11] == 2 ) {
+        } else if ( data[12] == 2 ) {
           $(row).addClass( 'diff_row' );
         } else {
           $(row).addClass( 'over_row' );
@@ -124,7 +128,7 @@
 
       //change row color based on the peptide type. Striped style.
       "rowCallback": function( nRow, aData, index ) {
-        if ( aData[11] == 0 )
+        if ( aData[12] == 0 )
         {
           if (index%2 == 0){
             $('td', nRow).css('background-color', '#FFF4F4');
@@ -132,7 +136,7 @@
             $('td', nRow).css('background-color', '#FFECEC');
           }
         }
-        else if ( aData[11] == 1 )
+        else if ( aData[12] == 1 )
         {
           if (index%2 == 0){
             $('td', nRow).css('background-color', '#FDFFE9');
@@ -140,7 +144,7 @@
             $('td', nRow).css('background-color', '#FEF8CB');
           }
         }
-        else if ( aData[11] == 2 )
+        else if ( aData[12] == 2 )
         {
           if (index%2 == 0){
             $('td', nRow).css('background-color', '#F0F8FF');
@@ -148,7 +152,7 @@
             $('td', nRow).css('background-color', '#DCEEFF');
           }
         }
-        else if ( aData[11] == 3 )
+        else if ( aData[12] == 3 )
         {
           if (index%2 == 0){
             $('td', nRow).css('background-color', '#F7FFE1');
@@ -166,7 +170,7 @@
         var colors = ["color:red","color:orange","color:blue","color:green"];
         var group_label = ["1. Mutation","2. Tumor-Specific","3. Differentiation","4. Overexpressed"];
 
-        api.column(11, {page:'current'} ).data().each( function ( group, i ) {
+        api.column(12, {page:'current'} ).data().each( function ( group, i ) {
           if ( last !== group) {
             $(rows).eq( i ).before(
               '<tr class="group" id="section'+(group)+'"><td colspan="10"><span style='+colors[group]+'>'+group_label[group]+'</td></tr>'
@@ -195,6 +199,23 @@
       }
     } );
 
+    //Event listener: reference button
+    $('.ref_button').on('click', function () {
+      var tr = $(this).closest('tr');
+      var row = generalTable.row( tr );
+
+      if ( row.child.isShown() ) {
+        // This row is already open - close it
+        row.child.hide();
+        tr.removeClass('shown');
+      }
+      else {
+        // Open this row
+        row.child( refRow(row.data()) ).show();
+        tr.addClass('shown');
+      }
+    } );
+
     //Prevents sorting when clicking on the input fields
     $('.filter').on('click', function(e){
       e.stopPropagation();
@@ -202,7 +223,17 @@
 
     //Event listener: any key input in the column filter
     $('input.column_filter').on( 'keyup', function () {
-      filterColumn( $('#generalTable'), $(this).attr('data-column'), $(this));
+      //filterColumn( $('#generalTable'), $(this).attr('data-column'), $(this));
+
+      var string = $(this).val().replace(/\*/g,'.').replace(/\[/g,'^').replace(/\]/g,'$');
+
+      console.log("result: "+ string);
+
+      generalTable
+        .columns($(this).attr('data-column'))
+        .search(string,true,false,true)
+        .draw();
+
     } );
 
 
@@ -239,7 +270,7 @@
       $(".dataTables_scrollBody").scrollTo(selection);
     });
 
-    //Event listener: change category button highlight depending on the ctaegory header position
+    //Event listener: change category button highlight depending on the category header position
     $(".dataTables_scrollBody").on('scroll', function() {
       $('.group').each(function(){
         var sectionDistance = $(this).offset().top;
@@ -258,7 +289,7 @@
 </script>
 
 <!-- Category navigation bar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light">
   <div class="collapse navbar-collapse" id="navbar_category">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
@@ -282,17 +313,18 @@
     <table id="generalTable" class="table-bordered" width="100%">
       <thead>
       <tr>
-        <th id="gene_th">Gene/Protein<br><input class="filter column_filter gene_filter" type="text" data-column="0" /></th>
+        <th id="gene_th">Gene/Protein<sup title="Link to the Gene Card for the encoding gene and/or the parent protein">?</sup><br><input class="filter column_filter gene_filter" type="text" data-column="0" /></th>
         <th id="tumor_th">Tumor<br><input class="filter column_filter tumor_filter" type="text" data-column="1" /></th>
-        <th id="hla_th">HLA<br><input class="filter column_filter hla_filter" type="text" data-column="2" /></th>
-        <th id="freq_th">HLA %<br><input class="filter column_filter freq_filter" type="text" data-column="3" /></th>
-        <th id="seq_th">Peptide Sequence<br><input class="filter column_filter seq_filter" type="text" data-column="4" /><br>Peptide Length: <input class="filter min_range" id="min"> to <input class="filter max_range" id="max"></th>
-        <th id="pos_th">Position<br><input class="filter column_filter pos_filter" type="text" data-column="5" /></th>
-        <th id="stim_th">Lymphocyte Stimulation Method<br><input class="filter column_filter sim_filter" type="text" data-column="6" /></th>
-        <th id="ref_th">Reference<br><input class="filter column_filter ref_filter" type="text" data-column="7" /></th>
+        <th id="hla_th">HLA<sup title="Human leukocyte antigen &#13Class II HLA are shown in blue">?</sup><br><input class="filter column_filter hla_filter" type="text" data-column="2" /></th>
+        <th id="freq_th">HLA %<sup title="Frequency in Caucasians, based on &#13(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and DR&#13(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">?</sup><br><input class="filter column_filter freq_filter" type="text" data-column="3" /></th>
+        <th id="seq_th"><table id="seq_table" class="borderless"><th width="65%">Peptide Sequence<sup title="The residues modified by the mutation are indicated in red">?</sup><input class="filter column_filter seq_filter" type="text" data-column="4" /></th><th>Length<sup title="You can select a specific range of peptide sequences with a minimum and maximum length">?</sup> <br><input class="filter min_range" id="min"> to <input class="filter max_range" id="max"></th></table></th>
+        <th id="pos_th">Position<sup title="Position of the peptide sequence in the protein sequence">?</sup><br><input class="filter column_filter pos_filter" type="text" data-column="5" /></th>
+        <th id="stim_th">Lymphocyte Stimulation Method<sup title="Method used to isolate the CTL recognizing the antigen">?</sup><br><input class="filter column_filter sim_filter" type="text" data-column="6" /></th>
+        <th id="ref_th">Reference<sup title="PubMed link to the relevant reference">?</sup><br><input class="filter column_filter ref_filter" type="text" data-column="7" /></th>
         <th>Full Reference</th>
+        <th>URL</th>
         <th>Comment content</th>
-        <th id="com_th">Comment</th>
+        <th id="com_th">Comment<sup title="Click on the icon to display specific comment if there is any">?</sup></th>
         <th>Type</th>
       </tr>
       </thead>
@@ -315,8 +347,13 @@
         <td><%= peptide.leftSequence %><span style="color:red"><%= peptide.redPart %></span><%= peptide.rightSequence %></td>
         <td><%= peptide.pos %></td>
         <td><%= peptide.stimulation %></td>
-        <td><a href="<%= peptide.url %>" target="_blank"><%= peptide.reference %></a></td>
+        <% if (peptide.fullReference) { %>
+        <td><button class="ref_button btn btn-light"><span style="color:blue"><%= peptide.reference %></span></button></td>
+        <% } else { %>
+        <td><a href="<%= peptide.url %>" target="_blank"><button class="btn btn-light"><span style="color:blue"><%= peptide.reference %></span></button></a></td>
+        <% } %>
         <td><%= peptide.fullReference %></td>
+        <td><%= peptide.url %></td>
         <td><%= peptide.comment %></td>
         <td class="comment-cell"><% if(peptide.comment) {%>
           <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>

@@ -239,7 +239,6 @@ module.exports = {
       var url = req.body.url;
       var comment = req.body.comment;
 
-      console.log("leftseq in update: " + leftSequence);
 
       Peptide.update({id: req.params.id}, {
         gene: gene,

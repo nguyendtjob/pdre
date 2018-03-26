@@ -19,7 +19,6 @@
     jQuery("body").fadeIn(700);
   }
   function format ( d ) {
-    // `d` is the original data object for the row
     var com = '<i>'+d[9]+'</i>';
 
     return '<i>Comment: '+com+'</i>';
@@ -28,7 +27,6 @@
 
   $(document).ready(function(){
     $('.table-striped thead th').each( function() {
-      console.log("test OK");
       var sTitle;
 
       if ( $(this).attr('thname') == "gene_th" ) {

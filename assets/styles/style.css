@@ -31,11 +31,6 @@
   text-align: center;
 }
 
-body {
-  padding: 0px;
-  margin-bottom: 50px;
-}
-
 #generalTable {
   position: relative;
 }
@@ -93,11 +88,66 @@ body {
   top: 5px;
 }
 
+#logo-footer {
+  display: block;
+  margin: 0 auto;
+}
+
 th {
-  font-size: 12px;
+  font-size: 11px;
   text-align: center;
 
 }
 
-td { font-size: 16px; border-color: black;}
+
+td {
+  font-size: 16px;
+  border-color: black;}
+
+.btn-default-outline {
+  border-color: #ccc;
+}
+
+.borderless td, .borderless th {
+  border: thick;
+}
+
+#seq_table th {
+  text-align: center;
+  padding:0;
+  margin:0;
+}
+
+.nav_page {
+  font-weight: bold;
+}
+
+.nav_page.active {
+  color:#E53C29 !important;
+  pointer-events: none;
+  cursor: default;
+}
+
+.nav_page:hover:not(.active) {
+  text-decoration: underline;
+
+}
+
+.main_content{
+  margin-bottom: 100px;
+}
+
+.footer-container {
+  margin-top:100px;
+  left: 0;
+  bottom: 0;
+  height: 150px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+.navbar{
+  border-color: black;}
 
