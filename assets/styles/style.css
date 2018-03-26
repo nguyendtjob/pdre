@@ -19,11 +19,11 @@
 }
 
 .min_range {
-  width: 30px !important;
+  width: 20px !important;
 }
 
 .max_range {
-  width: 30px !important;
+  width: 20px !important;
 }
 
 
@@ -94,14 +94,14 @@
 }
 
 th {
-  font-size: 11px;
+  font-size: 12px;
   text-align: center;
 
 }
 
 
 td {
-  font-size: 16px;
+  font-size: 14px;
   border-color: black;}
 
 .btn-default-outline {
@@ -149,5 +149,9 @@ td {
 }
 
 .navbar{
-  border-color: black;}
+  border-color: black;
+}
 
+.freq {
+  text-align: center;
+}

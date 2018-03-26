@@ -41,6 +41,7 @@
 
 
   $(document).ready(function(){
+    document.getElementById("main_container").style.borderLeft = "thick solid #D40000";
     /*
     $('#generalTable thead th').each( function() {
 
@@ -106,8 +107,9 @@
 
 
         { "width": "10%", "targets": 0 },
+        { "width": "6%", "targets": 3 },
         { "width": "20%", "targets": 1 },
-        { "width": "5%", "targets": [2,3,5]},
+        { "width": "5%", "targets": [2,5]},
         { "width": "3%", "targets": 11},
         { "width": "15%", "targets": [4,6] }
 
@@ -125,7 +127,7 @@
           $(row).addClass( 'over_row' );
         }
       },
-
+      /*
       //change row color based on the peptide type. Striped style.
       "rowCallback": function( nRow, aData, index ) {
         if ( aData[12] == 0 )
@@ -160,20 +162,21 @@
             $('td', nRow).css('background-color', '#EAFFD6');
           }
         }
-      },
+      },*/
 
       //Create the category row, done every time the datatable is drawn
       "drawCallback": function () {
         var api = this.api();
         var rows = api.rows( {page:'current'} ).nodes();
         var last= null;
-        var colors = ["color:red","color:orange","color:blue","color:green"];
+        var colors = ["color:red","color:orange","color:green","color:blue"];
         var group_label = ["1. Mutation","2. Tumor-Specific","3. Differentiation","4. Overexpressed"];
+        var color_attr = ["#DC3546","#FEC107","#27A844","#007AFF"];
 
         api.column(12, {page:'current'} ).data().each( function ( group, i ) {
           if ( last !== group) {
             $(rows).eq( i ).before(
-              '<tr class="group" id="section'+(group)+'"><td colspan="10"><span style='+colors[group]+'>'+group_label[group]+'</td></tr>'
+              '<tr class="group" id="section'+(group)+'" color_attr='+color_attr[group]+'><td colspan="10"><span style='+colors[group]+'>'+group_label[group]+'</td></tr>'
             );
             last = group;
           }
@@ -254,18 +257,22 @@
         $('.sectionbtn').removeClass("active");
         $('#section0btn').addClass("active");
         selection = $( "#section0" );
+        document.getElementById("main_container").style.borderLeft = "thick solid #DC3546";
       } else if (this.id == "section1btn"){
         $('.sectionbtn').removeClass("active");
         $('#section1btn').addClass("active");
         selection = $( "#section1" );
+        document.getElementById("main_container").style.borderLeft = "thick solid #FEC107";
       } else if (this.id == "section2btn"){
         $('.sectionbtn').removeClass("active");
         $('#section2btn').addClass("active");
         selection = $( "#section2" );
+        document.getElementById("main_container").style.borderLeft = "thick solid #27A844";
       } else {
         $('.sectionbtn').removeClass("active");
         $('#section3btn').addClass("active");
         selection = $( "#section3" );
+        document.getElementById("main_container").style.borderLeft = "thick solid #007AFF";
       }
       $(".dataTables_scrollBody").scrollTo(selection);
     });
@@ -277,10 +284,9 @@
         if (sectionDistance < 550){
           $('.sectionbtn').removeClass("active");
           $('#'+this.id+'btn').addClass("active");
+          document.getElementById("main_container").style.borderLeft = "thick solid "+$(this).attr('color_attr');
         } else{
-          $('#'+this.id+'btn').removeClass("active");
-          var previous = this.id - 1 ;
-          $('#'+previous+'btn').addClass("active");
+
         }
       });
     });
@@ -299,17 +305,17 @@
         <a id="section1btn" class="btn btn-sm btn-outline-warning sectionbtn">Tumor Specific</a>
       </li>
       <li class="nav-item">
-        <a id="section2btn" class="btn btn-sm btn-outline-primary sectionbtn">Differentiation</a>
+        <a id="section2btn" class="btn btn-sm btn-outline-success sectionbtn">Differentiation</a>
       </li>
       <li class="nav-item">
-        <a id="section3btn" class="btn btn-sm btn-outline-success sectionbtn">Overexpressed</a>
+        <a id="section3btn" class="btn btn-sm btn-outline-primary sectionbtn">Overexpressed</a>
       </li>
     </ul>
   </div>
 </nav>
 
 <!-- Table -->
-<div id="main_container" data-spy="scroll" data-target="#navbar-tables" data-offset='50' >
+<div id="main_container">
     <table id="generalTable" class="table-bordered" width="100%">
       <thead>
       <tr>
@@ -319,7 +325,7 @@
         <th id="freq_th">HLA %<sup title="Frequency in Caucasians, based on &#13(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and DR&#13(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">?</sup><br><input class="filter column_filter freq_filter" type="text" data-column="3" /></th>
         <th id="seq_th"><table id="seq_table" class="borderless"><th width="65%">Peptide Sequence<sup title="The residues modified by the mutation are indicated in red">?</sup><input class="filter column_filter seq_filter" type="text" data-column="4" /></th><th>Length<sup title="You can select a specific range of peptide sequences with a minimum and maximum length">?</sup> <br><input class="filter min_range" id="min"> to <input class="filter max_range" id="max"></th></table></th>
         <th id="pos_th">Position<sup title="Position of the peptide sequence in the protein sequence">?</sup><br><input class="filter column_filter pos_filter" type="text" data-column="5" /></th>
-        <th id="stim_th">Lymphocyte Stimulation Method<sup title="Method used to isolate the CTL recognizing the antigen">?</sup><br><input class="filter column_filter sim_filter" type="text" data-column="6" /></th>
+        <th id="stim_th">Lymphocyte Stimulation<sup title="Method used to isolate the CTL recognizing the antigen">?</sup><br><input class="filter column_filter sim_filter" type="text" data-column="6" /></th>
         <th id="ref_th">Reference<sup title="PubMed link to the relevant reference">?</sup><br><input class="filter column_filter ref_filter" type="text" data-column="7" /></th>
         <th>Full Reference</th>
         <th>URL</th>
@@ -343,15 +349,11 @@
         <% } else { %>
         <td><%= peptide.hla %></td>
         <% } %>
-        <td><%= peptide.freq %></td>
+        <td class="freq"><%= peptide.freq %></td>
         <td><%= peptide.leftSequence %><span style="color:red"><%= peptide.redPart %></span><%= peptide.rightSequence %></td>
         <td><%= peptide.pos %></td>
         <td><%= peptide.stimulation %></td>
-        <% if (peptide.fullReference) { %>
-        <td><button class="ref_button btn btn-light"><span style="color:blue"><%= peptide.reference %></span></button></td>
-        <% } else { %>
-        <td><a href="<%= peptide.url %>" target="_blank"><button class="btn btn-light"><span style="color:blue"><%= peptide.reference %></span></button></a></td>
-        <% } %>
+        <td><%= peptide.reference %> <a href="<%= peptide.url %>" target="_blank"><img src="/images/lock-icon.png"/></a></td>
         <td><%= peptide.fullReference %></td>
         <td><%= peptide.url %></td>
         <td><%= peptide.comment %></td>
