@@ -1,6 +1,7 @@
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.5.1/b-html5-1.5.1/b-print-1.5.1/fh-3.1.3/r-2.2.1/rg-1.0.2/sc-1.4.4/sl-1.2.5/datatables.min.js"></script>
-<script src="/js/jquery.dataTables.yadcf.js"></script>
+<script src="/js/dataTables.rowsGroup.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
 <script>
   //Hide the page while Datatable is treating the information
@@ -26,21 +27,6 @@
 
 
   $(document).ready(function(){
-    $('.table-striped thead th').each( function() {
-      var sTitle;
-
-      if ( $(this).attr('thname') == "gene_th" ) {
-        sTitle =  'Link to the Gene Card';
-      } else if ( $(this).attr('thname') == "hla_th" ) {
-        sTitle =  'Human leukocyte antigen \nClass II HLA are shown in blue';
-      } else if ( $(this).attr('thname') == "freq_th" ){
-        sTitle =  'Frequency in Caucasians, based on \n(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and DR\n(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR';
-      } else if ( $(this).attr('thname') == "seq_th" ){
-        sTitle =  'The residues modified by the mutation are indicated in red';
-      } else
-        sTitle = '';
-      this.setAttribute( 'title', sTitle );
-    } );
 
     delay();
     //setting the mutation datable
@@ -66,13 +52,19 @@
           "visible": false,
           "searchable": true
         },
-        { "width": "16%", "targets": [0,1,4,6,7] },
-        { "width": "5%", "targets": [2,3,5,10]},
+        { "width": "10%", "targets": 0 },
+        { "width": "20%", "targets": 1 },
+        { "width": "5%", "targets": [2]},
+        { "width": "6%", "targets": [3,5]},
+        { "width": "15%", "targets": [4] },
+        { "width": "20%", "targets": [6] },
+        { "width": "5%", "targets": 10},
+
       ]
       }
     );
 
-    $('#mutationTable .oi-chevron-bottom').on('click', function () {
+    $('#mutationTable .oi-document').on('click', function () {
       var tr = $(this).closest('tr');
       var row = mutationTable.row( tr );
 
@@ -110,14 +102,18 @@
           "visible": false,
           "searchable": true
         },
+
         { "width": "24%", "targets": [0,4]},
-        { "width": "16%", "targets": [6,7]},
-        { "width": "5%", "targets": [2,3,5,10]},
+        { "width": "20%", "targets": 1 },
+        { "width": "5%", "targets": [2]},
+        { "width": "6%", "targets": [3,5]},
+        { "width": "20%", "targets": [6] },
+        { "width": "5%", "targets": 10},
       ]
       }
     );
 
-    $('#tumorTable .oi-chevron-bottom').on('click', function () {
+    $('#tumorTable .oi-document').on('click', function () {
       var tr = $(this).closest('tr');
       var row = tumorTable.row( tr );
 
@@ -154,13 +150,18 @@
           "visible": false,
           "searchable": true
         },
-        { "width": "16%", "targets": [0,1,4,6,7] },
-        { "width": "5%", "targets": [2,3,5,10]},
+        { "width": "10%", "targets": 0 },
+        { "width": "20%", "targets": 1 },
+        { "width": "5%", "targets": [2]},
+        { "width": "6%", "targets": [3,5]},
+        { "width": "15%", "targets": [4] },
+        { "width": "20%", "targets": [6] },
+        { "width": "5%", "targets": 10},
         ]
       }
     );
 
-    $('#differentationTable .oi-chevron-bottom').on('click', function () {
+    $('#differentationTable .oi-document').on('click', function () {
       var tr = $(this).closest('tr');
       var row = differentiationTable.row( tr );
 
@@ -197,13 +198,18 @@
           "visible": false,
           "searchable": true
         },
-        { "width": "16%", "targets": [0,1,4,6,7] },
-        { "width": "5%", "targets": [2,3,5,10]},
+        { "width": "10%", "targets": 0 },
+        { "width": "20%", "targets": 1 },
+        { "width": "5%", "targets": [2]},
+        { "width": "6%", "targets": [3,5]},
+        { "width": "15%", "targets": [4] },
+        { "width": "20%", "targets": [6] },
+        { "width": "5%", "targets": 10},
       ]
       }
     );
 
-    $('#overexpressedTable .oi-chevron-bottom').on('click', function () {
+    $('#overexpressedTable .oi-document').on('click', function () {
       var tr = $(this).closest('tr');
       var row = overexpressedTable.row( tr );
 
@@ -245,7 +251,7 @@
     );
 
 
-    $('#potentialTable .oi-chevron-bottom').on('click', function () {
+    $('#potentialTable .oi-document').on('click', function () {
       var tr = $(this).closest('tr');
       var row = potentialTable.row( tr );
 
@@ -276,6 +282,20 @@
       potentialTable.fixedHeader.adjust();
     } );
 
+    // read hash from page load and change tab
+    var hash = document.location.hash;
+    var prefix = "tab_";
+    if (hash) {
+      $('.nav-tabs a[href="'+hash.replace(prefix,"")+'"]').tab('show');
+      setTimeout(function() {
+
+        window.scrollTo(0, 0);
+      }, 1);
+    }
+
+    $('[data-toggle="tooltip"]').tooltip();
+
+
   });
 
 </script>
@@ -290,7 +310,7 @@
     <a class="nav-link" href="#tumorTab" role="tab" data-toggle="tab">Tumor-specific</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#differentationTab" role="tab" data-toggle="tab">Differentiation</a>
+    <a class="nav-link" href="#differentiationTab" role="tab" data-toggle="tab">Differentiation</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#overexpressedTab" role="tab" data-toggle="tab">Overexpressed</a>
@@ -305,43 +325,43 @@
     <table id="mutationTable" class="table cell-border" width="100%">
       <thead>
       <tr>
-        <th thname="gene_th">Gene/Protein</th>
-        <th thname="tumor_th">Tumor</th>
-        <th thname="hla_th">HLA</th>
-        <th thname="freq_th">HLA %</th>
-        <th thname="seq_th">Peptide Sequence</th>
-        <th thname="pos_th">Position</th>
-        <th thname="stim_th">Lymphocyte Stimulation Method</th>
-        <th thname="ref_th">Reference</th>
+        <th data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein">Gene/Protein ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="">Tumor ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in blue">HLA ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="The residues modified by the mutation are indicated in red">Peptide Sequence ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="Position of the peptide sequence in the protein sequence">Position ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="Method used to isolate the CTL recognizing the antigen">Lymphocyte Stimulation ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="PubMed link to the relevant reference">Reference ⓘ</th>
         <th>Full Reference</th>
         <th>Comment content</th>
-        <th>Comment</th>
+        <th data-toggle="tooltip" data-placement="top" title="Hover on the icon to display the comments specific to the gene if there is any of them">Note ⓘ</th>
       </tr>
       </thead>
       <tbody>
       <% mutations.forEach(function(peptide){ %>
       <tr>
         <td><% if(peptide.geneCard) {%>
-          <b><a href="<%= peptide.geneCard %>" target="_blank"><%= peptide.gene %></a></b>
+          <b><a href="<%= peptide.geneCard %>" target="_blank"><%= peptide.gene%></a></b>
           <% } else {%>
           <i><b><%= peptide.gene %></b></i>
           <% } %>
         </td>
         <td><%= peptide.tumor %></td>
         <% if (peptide.hla.charAt(0) == 'D') {%>
-        <td><span style="color:blue"><%= peptide.hla %></span></td>
+        <td class="center_td"><span style="color:blue"><%= peptide.hla %></span></td>
         <% } else { %>
-        <td><%= peptide.hla %></td>
+        <td class="center_td"><%= peptide.hla %></td>
         <% } %>
-        <td><%= peptide.freq %></td>
+        <td class="center_td"><%= peptide.freq %></td>
         <td><%= peptide.leftSequence %><span style="color:red"><%= peptide.redPart %></span><%= peptide.rightSequence %></td>
-        <td><%= peptide.pos %></td>
+        <td class="center_td"><%= peptide.pos %></td>
         <td><%= peptide.stimulation %></td>
-        <td><a href="<%= peptide.url %>" target="_blank"><%= peptide.reference %></a></td>
+        <td class="ref_text"><%= peptide.reference %> <a href="<%= peptide.url %>" target="_blank"><img src="https://i.imgur.com/2bITRIZ.png"/></a></td>
         <td><%= peptide.fullReference %></td>
         <td><%= peptide.comment %></td>
         <td class="comment-cell"><% if(peptide.comment) {%>
-          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
+          <button class="btn btn-outline-secondary btn-sm oi oi-document" data-toggle="tooltip" data-placement="left" title='<%= peptide.comment %>'></button>
           <% } %>
         </td>
       </tr>
@@ -354,43 +374,43 @@
     <table id="tumorTable" class="table cell-border" width="100%">
       <thead>
       <tr>
-        <th thname="gene_th">Gene/Protein</th>
-        <th thname="tumor_th">Tumor</th>
-        <th thname="hla_th">HLA</th>
-        <th thname="freq_th">HLA %</th>
-        <th thname="seq_th">Peptide Sequence</th>
-        <th thname="pos_th">Position</th>
-        <th thname="stim_th">Lymphocyte Stimulation Method</th>
-        <th thname="ref_th">Reference</th>
+        <th data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein">Gene/Protein ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="">Tumor ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in blue">HLA ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="The residues modified by the mutation are indicated in red">Peptide Sequence ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="Position of the peptide sequence in the protein sequence">Position ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="Method used to isolate the CTL recognizing the antigen">Lymphocyte Stimulation ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="PubMed link to the relevant reference">Reference ⓘ</th>
         <th>Full Reference</th>
         <th>Comment content</th>
-        <th>Comment</th>
+        <th data-toggle="tooltip" data-placement="top" title="Hover on the icon to display the comments specific to the gene if there is any of them">Note ⓘ</th>
       </tr>
       </thead>
       <tbody>
       <% tumors.forEach(function(peptide){ %>
       <tr>
         <td><% if(peptide.geneCard) {%>
-          <b><a href="<%= peptide.geneCard %>" target="_blank"><%= peptide.gene %></a></b>
+          <b><a href="<%= peptide.geneCard %>" target="_blank"><%= peptide.gene%></a></b>
           <% } else {%>
           <i><b><%= peptide.gene %></b></i>
           <% } %>
         </td>
         <td></td>
         <% if (peptide.hla.charAt(0) == 'D') {%>
-        <td><span style="color:blue"><%= peptide.hla %></span></td>
+        <td class="center_td"><span style="color:blue"><%= peptide.hla %></span></td>
         <% } else { %>
-        <td><%= peptide.hla %></td>
+        <td class="center_td"><%= peptide.hla %></td>
         <% } %>
-        <td><%= peptide.freq %></td>
+        <td class="center_td"><%= peptide.freq %></td>
         <td><%= peptide.leftSequence %></td>
-        <td><%= peptide.pos %></td>
+        <td class="center_td"><%= peptide.pos %></td>
         <td><%= peptide.stimulation %></td>
-        <td><a href="<%= peptide.url %>" target="_blank"><%= peptide.reference %></a></td>
+        <td class="ref_text"><%= peptide.reference %> <a href="<%= peptide.url %>" target="_blank"><img src="https://i.imgur.com/2bITRIZ.png"/></a></td>
         <td><%= peptide.fullReference %></td>
         <td><%= peptide.comment %></td>
         <td class="comment-cell"><% if(peptide.comment) {%>
-          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
+          <button class="btn btn-outline-secondary btn-sm oi oi-document" data-toggle="tooltip" data-placement="left" title='<%= peptide.comment %>'></button>
           <% } %>
         </td>
       </tr>
@@ -398,47 +418,47 @@
       </tbody>
     </table>
   </div>
-  <div role="tabpanel" class="tab-pane" id="differentationTab">
+  <div role="tabpanel" class="tab-pane" id="differentiationTab">
     <table id="differentationTable" class="table cell-border" width="100%">
       <thead>
       <tr>
-        <th thname="gene_th">Gene/Protein</th>
-        <th thname="tumor_th">Tumor</th>
-        <th thname="hla_th">HLA</th>
-        <th thname="freq_th">HLA %</th>
-        <th thname="seq_th">Peptide Sequence</th>
-        <th thname="pos_th">Position</th>
-        <th thname="stim_th">Lymphocyte Stimulation Method</th>
-        <th thname="ref_th">Reference</th>
+        <th data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein">Gene/Protein ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="">Tumor ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in blue">HLA ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="The residues modified by the mutation are indicated in red">Peptide Sequence ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="Position of the peptide sequence in the protein sequence">Position ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="Method used to isolate the CTL recognizing the antigen">Lymphocyte Stimulation ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="PubMed link to the relevant reference">Reference ⓘ</th>
         <th>Full Reference</th>
         <th>Comment content</th>
-        <th>Comment</th>
+        <th data-toggle="tooltip" data-placement="top" title="Hover on the icon to display the comments specific to the gene if there is any of them">Note ⓘ</th>
       </tr>
       </thead>
       <tbody>
       <% differentiations.forEach(function(peptide){ %>
       <tr>
         <td><% if(peptide.geneCard) {%>
-          <b><a href="<%= peptide.geneCard %>" target="_blank"><%= peptide.gene %></a></b>
+          <b><a href="<%= peptide.geneCard %>" target="_blank"><%= peptide.gene%></a></b>
           <% } else {%>
           <i><b><%= peptide.gene %></b></i>
           <% } %>
         </td>
         <td><%= peptide.tumor %></td>
         <% if (peptide.hla.charAt(0) == 'D') {%>
-        <td><span style="color:blue"><%= peptide.hla %></span></td>
+        <td class="center_td"><span style="color:blue"><%= peptide.hla %></span></td>
         <% } else { %>
-        <td><%= peptide.hla %></td>
+        <td class="center_td"><%= peptide.hla %></td>
         <% } %>
-        <td><%= peptide.freq %></td>
+        <td class="center_td"><%= peptide.freq %></td>
         <td><%= peptide.leftSequence %></td>
-        <td><%= peptide.pos %></td>
+        <td class="center_td"><%= peptide.pos %></td>
         <td><%= peptide.stimulation %></td>
-        <td><a href="<%= peptide.url %>" target="_blank"><%= peptide.reference %></a></td>
+        <td class="ref_text"><%= peptide.reference %> <a href="<%= peptide.url %>" target="_blank"><img src="https://i.imgur.com/2bITRIZ.png"/></a></td>
         <td><%= peptide.fullReference %></td>
         <td><%= peptide.comment %></td>
         <td class="comment-cell"><% if(peptide.comment) {%>
-          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
+          <button class="btn btn-outline-secondary btn-sm oi oi-document" data-toggle="tooltip" data-placement="left" title='<%= peptide.comment %>'></button>
           <% } %>
         </td>
       </tr>
@@ -447,46 +467,46 @@
     </table>
   </div>
   <div role="tabpanel" class="tab-pane" id="overexpressedTab">
-    <table id="overexpressedTable" class="table-striped cell-border" width="100%">
+    <table id="overexpressedTable" class="table cell-border" width="100%">
       <thead>
       <tr>
-        <th thname="gene_th">Gene/Protein</th>
-        <th thname="tumor_th">Tumor</th>
-        <th thname="hla_th">HLA</th>
-        <th thname="freq_th">HLA %</th>
-        <th thname="seq_th">Peptide Sequence</th>
-        <th thname="pos_th">Position</th>
-        <th thname="stim_th">Lymphocyte Stimulation Method</th>
-        <th thname="ref_th">Reference</th>
+        <th data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein">Gene/Protein ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="">Tumor ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in blue">HLA ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="The residues modified by the mutation are indicated in red">Peptide Sequence ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="Position of the peptide sequence in the protein sequence">Position ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="Method used to isolate the CTL recognizing the antigen">Lymphocyte Stimulation ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="PubMed link to the relevant reference">Reference ⓘ</th>
         <th>Full Reference</th>
         <th>Comment content</th>
-        <th>Comment</th>
+        <th data-toggle="tooltip" data-placement="top" title="Hover on the icon to display the comments specific to the gene if there is any of them">Note ⓘ</th>
       </tr>
       </thead>
       <tbody>
       <% overs.forEach(function(peptide){ %>
       <tr>
         <td><% if(peptide.geneCard) {%>
-          <b><a href="<%= peptide.geneCard %>" target="_blank"><%= peptide.gene %></a></b>
+          <b><a href="<%= peptide.geneCard %>" target="_blank"><%= peptide.gene%></a></b>
           <% } else {%>
           <i><b><%= peptide.gene %></b></i>
           <% } %>
         </td>
         <td><%= peptide.tumor %></td>
         <% if (peptide.hla.charAt(0) == 'D') {%>
-        <td><span style="color:blue"><%= peptide.hla %></span></td>
+        <td class="center_td"><span style="color:blue"><%= peptide.hla %></span></td>
         <% } else { %>
-        <td><%= peptide.hla %></td>
+        <td class="center_td"><%= peptide.hla %></td>
         <% } %>
-        <td><%= peptide.freq %></td>
+        <td class="center_td"><%= peptide.freq %></td>
         <td><%= peptide.leftSequence %></td>
-        <td><%= peptide.pos %></td>
+        <td class="center_td"><%= peptide.pos %></td>
         <td><%= peptide.stimulation %></td>
-        <td><a href="<%= peptide.url %>" target="_blank"><%= peptide.reference %></a></td>
+        <td class="ref_text"><%= peptide.reference %> <a href="<%= peptide.url %>" target="_blank"><img src="https://i.imgur.com/2bITRIZ.png"/></a></td>
         <td><%= peptide.fullReference %></td>
         <td><%= peptide.comment %></td>
         <td class="comment-cell"><% if(peptide.comment) {%>
-          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
+          <button class="btn btn-outline-secondary btn-sm oi oi-document" data-toggle="tooltip" data-placement="left" title='<%= peptide.comment %>'></button>
           <% } %>
         </td>
       </tr>
@@ -495,20 +515,20 @@
     </table>
   </div>
   <div role="tabpanel" class="tab-pane" id="potentialTab">
-    <table id="potentialTable" class="table-striped cell-border" width="100%">
+    <table id="potentialTable" class="table cell-border" width="100%">
       <thead>
       <tr>
-        <th thname="gene_th">Gene/Protein</th>
-        <th thname="tumor_th">Tumor</th>
-        <th thname="hla_th">HLA</th>
-        <th thname="freq_th">HLA %</th>
-        <th thname="seq_th">Peptide Sequence</th>
-        <th thname="pos_th">Position</th>
-        <th thname="stim_th">Lymphocyte Stimulation Method</th>
-        <th thname="ref_th">Reference</th>
+        <th data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein">Gene/Protein ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="">Tumor ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in blue">HLA ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="The residues modified by the mutation are indicated in red">Peptide Sequence ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="Position of the peptide sequence in the protein sequence">Position ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="Method used to isolate the CTL recognizing the antigen">Lymphocyte Stimulation ⓘ</th>
+        <th data-toggle="tooltip" data-placement="top" title="PubMed link to the relevant reference">Reference ⓘ</th>
         <th>Full Reference</th>
         <th>Comment content</th>
-        <th>Comment</th>
+        <th data-toggle="tooltip" data-placement="top" title="Hover on the icon to display the comments specific to the gene if there is any of them">Note ⓘ</th>
       </tr>
       </thead>
       <tbody>
@@ -525,7 +545,7 @@
         <td></td>
         <td><%= peptide.comment? peptide.comment:''%></td>
         <td class="comment-cell"><% if(peptide.comment) {%>
-          <span class="btn btn-outline-secondary btn-sm oi oi-chevron-bottom"></span>
+          <span class="btn btn-outline-secondary btn-sm oi oi-document"></span>
           <% } %>
         </td>
       </tr>
@@ -535,8 +555,6 @@
   </div>
 </div>
 
-
-<input id="min" style="display:none"><input id="max" style="display:none">
-
+<input id="min" style="display:none"><input id="max" style="display:none"><input id="freq_limit" style="display:none">
 
 

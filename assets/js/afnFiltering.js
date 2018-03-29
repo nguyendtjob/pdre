@@ -20,28 +20,51 @@
 
 jQuery.fn.dataTableExt.afnFiltering.push(
   function( oSettings, aData, iDataIndex ) {
-    var iColumn = 4;
+
+    //Value of min and max for the peptide sequence
     var iMin = document.getElementById('min').value * 1;
     var iMax = document.getElementById('max').value * 1;
-    var iVersion = aData[iColumn].length;
 
-    if ( iMin === 0 && iMax === 0 )
-    {
-      return true;
+    //Limit value for the HLA frequency
+    var iLimit = document.getElementById('freq_limit').value *1;
+
+    //Length of the sequence
+    var iLength = aData[4].length;
+
+    //Check if the frequence is indeed a number or set it to 0
+    if (isNaN(aData[3])){
+      var iFreq = 0;
+      console.log(iFreq);
+    } else {
+      var iFreq = aData[3];
     }
 
-    else if ( iMin === 0 && iVersion <= iMax )
-    {
-      return true;
+
+
+    if (iLimit === 0 || iFreq >= iLimit){
+
+      if ( iMin === 0 && iMax === 0 )
+      {
+        return true;
+      }
+
+      else if ( iMin === 0 && iLength <= iMax )
+      {
+        return true;
+      }
+      else if ( iMin <= iLength && 0 === iMax )
+      {
+        return true;
+      }
+      else if ( iMin <= iLength && iLength <= iMax )
+      {
+        return true;
+      }
+      return false;
+
+    } else {
+      return false;
     }
-    else if ( iMin <= iVersion && 0 === iMax )
-    {
-      return true;
-    }
-    else if ( iMin <= iVersion && iVersion <= iMax )
-    {
-      return true;
-    }
-    return false;
+
   }
 );
