@@ -43,7 +43,7 @@
   padding:5px;
 }
 
-#main_container {
+#table-container {
   position: relative;
 }
 
@@ -88,10 +88,7 @@
   top: 5px;
 }
 
-#logo-footer {
-  display: block;
-  margin: 0 auto;
-}
+
 
 th {
   font-size: 11px;
@@ -140,14 +137,12 @@ td {
   margin-bottom: 100px;
 }
 
-.footer-container {
+#footer-container {
   margin-top:100px;
   left: 0;
   bottom: 0;
   height: 150px;
   width: 100%;
-  background-color: black;
-  color: white;
   text-align: center;
 }
 
@@ -163,3 +158,24 @@ td {
   max-width: 350px;
   text-align: left;
 }
+#wrapper {
+  min-height: 100%;
+  position: relative;
+}
+
+#header-container{
+  text-align: center;
+  height: 90px;
+}
+
+#body-container{
+  min-height: calc(100vh - 130px);
+}
+
+#footer-container{
+  height: 40px;
+  width: 100%;
+  text-align: left;
+}
+
+

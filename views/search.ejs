@@ -4,7 +4,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="/js/afnFiltering.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.scrollto/2.1.2/jquery.scrollTo.min.js"></script>
-
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
 <script>
   //Hide the page while Datatable is treating the information
@@ -24,12 +30,12 @@
 
   $(document).ready(function(){
     //Create the color bar for the navigation cue
-    document.getElementById("main_container").style.borderLeft = "thick solid #D40000";
+    document.getElementById("table-container").style.borderLeft = "thick solid #D40000";
 
     delay();
     //setting the general table
     var generalTable = $('#generalTable').DataTable({
-      "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
+      dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-6'><'col-sm-1'B>>",
       "scrollX": true,
       "orderCellsTop": true,
       scrollY: '65vh',
@@ -41,6 +47,22 @@
       "orderFixed": [ 11, 'asc' ],
 
       "order": [[ 11, "asc" ], [ 0, "asc" ]],
+
+      buttons: [
+        {
+          extend: 'pdf',
+          text: 'Save as PDF',
+          exportOptions: {
+            modifier: {
+              page: 'current'
+            },
+
+            columns: [0,1,2,3,4,5,6,7,9]
+          },
+          orientation: 'landscape'
+        }
+      ],
+
       "columnDefs": [
         {
           "targets":[10],
@@ -50,7 +72,7 @@
         { "type": "num", "targets": 3 },
 
         {
-          "targets": [ 8,9,11 ],
+          "targets": [ 8,9, 11 ],
           "visible": false,
           "searchable": true
         },
@@ -228,22 +250,22 @@
         $('.sectionbtn').removeClass("active");
         $('#section0btn').addClass("active");
         selection = $( "#section0" );
-        document.getElementById("main_container").style.borderLeft = "thick solid #DC3546";
+        document.getElementById("table-container").style.borderLeft = "thick solid #DC3546";
       } else if (this.id == "section1btn"){
         $('.sectionbtn').removeClass("active");
         $('#section1btn').addClass("active");
         selection = $( "#section1" );
-        document.getElementById("main_container").style.borderLeft = "thick solid #FEC107";
+        document.getElementById("table-container").style.borderLeft = "thick solid #FEC107";
       } else if (this.id == "section2btn"){
         $('.sectionbtn').removeClass("active");
         $('#section2btn').addClass("active");
         selection = $( "#section2" );
-        document.getElementById("main_container").style.borderLeft = "thick solid #27A844";
+        document.getElementById("table-container").style.borderLeft = "thick solid #27A844";
       } else if (this.id == "section3btn"){
         $('.sectionbtn').removeClass("active");
         $('#section3btn').addClass("active");
         selection = $( "#section3" );
-        document.getElementById("main_container").style.borderLeft = "thick solid #007AFF";
+        document.getElementById("table-container").style.borderLeft = "thick solid #007AFF";
       }
       $(".dataTables_scrollBody").scrollTo(selection);
     });
@@ -256,7 +278,7 @@
         if (sectionDistance < 550){
           $('.sectionbtn').removeClass("active");
           $('#'+this.id+'btn').addClass("active");
-          document.getElementById("main_container").style.borderLeft = "thick solid "+$(this).attr('color_attr');
+          document.getElementById("table-container").style.borderLeft = "thick solid "+$(this).attr('color_attr');
         }
       });
     });
@@ -290,7 +312,7 @@
 </nav>
 
 <!-- Table -->
-<div id="main_container">
+<div id="table-container">
     <table id="generalTable" class="table-bordered" width="100%">
       <thead>
       <tr>
@@ -303,7 +325,7 @@
         <th data-toggle="tooltip" data-placement="top" title="Method used to isolate the CTL recognizing the antigen">Lymphocyte Stimulation ⓘ<br><input class="filter column_filter sim_filter" type="text" data-column="6" /></th>
         <th data-toggle="tooltip" data-placement="top" title="PubMed link to the relevant reference">Reference ⓘ <br><input class="filter column_filter ref_filter" type="text" data-column="7" /></th>
         <th>Full Reference</th>
-        <th>Comment content</th>
+        <th>Comment</th>
         <th data-toggle="tooltip" data-placement="top" title="Hover on the icon to display the comments specific to the gene if there is any of them">Note ⓘ</th>
         <th>Type</th>
       </tr>
@@ -327,7 +349,7 @@
         <td><%= peptide.leftSequence %><span style="color:red"><%= peptide.redPart %></span><%= peptide.rightSequence %></td>
         <td class="center_td"><%= peptide.pos %></td>
         <td><%= peptide.stimulation %></td>
-        <td class="ref_text"><%= peptide.reference %> <a href="<%= peptide.url %>" target="_blank"><img src="https://i.imgur.com/2bITRIZ.png"/></a></td>
+        <td class="ref_text"><%= peptide.reference %> <a href="<%= peptide.url %>" target="_blank"><img src="/images/ext_link.png"/></a></td>
         <td><%= peptide.fullReference %></td>
         <td><%= peptide.comment %></td>
         <td class="comment-cell"><% if(peptide.comment) {%>
