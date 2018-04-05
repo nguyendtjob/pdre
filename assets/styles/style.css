@@ -18,11 +18,7 @@
   width: 60px !important;
 }
 
-.min_range {
-  width: 20px !important;
-}
-
-.max_range {
+.range {
   width: 20px !important;
 }
 
@@ -178,4 +174,9 @@ td {
   text-align: left;
 }
 
+
+.padded-multiline {
+  border-left: 1em solid #FFFFFF;
+  display:inline-block;
+}
 

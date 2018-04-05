@@ -29,12 +29,14 @@ jQuery.fn.dataTableExt.afnFiltering.push(
     var iLimit = document.getElementById('freq_limit').value *1;
 
     //Length of the sequence
-    var iLength = aData[4].length;
+    if (aData[4] != undefined){
+      var iLength = aData[4].length;
+    }else {
+      var iLength = 0;
+    }
 
     //Check if the frequence is indeed a number or set it to 0
     if (isNaN(aData[3])){
-      var iFreq = 0;
-      console.log(iFreq);
     } else {
       var iFreq = aData[3];
     }

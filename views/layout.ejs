@@ -11,10 +11,8 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
   <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/styles/jquery.dataTables.yadcf.css">
   <!--STYLES-->
   <link rel="stylesheet" href="/styles/importer.css">
-  <link rel="stylesheet" href="/styles/jquery.dataTables.yadcf.css">
   <link rel="stylesheet" href="/styles/style.css">
   <!--STYLES END-->
 </head>
@@ -22,7 +20,7 @@
 <div id="wrapper">
     <div id="header-container">
       <nav class="navbar navbar-expand-sm navbar-light mb-4 border" >
-        <a class="navbar-brand"><img src="/images/logoDDUVsm.png"/>Cancer Antigenic Peptide Database</a>
+        <a class="navbar-brand"><img src="/images/logoDDUVsm.png"/>&emsp;<b>Cancer Antigenic Peptide Database</b></a>
 
 
         <!--
@@ -37,24 +35,22 @@
           <li class="nav-item">
             <a class="nav-link nav_page" href="/Peptide/search">Search</a>
           </li>
+          <% if (req.session.me) { %>
           <li class="nav-item">
-            <% if (req.session.me) { %>
             <a class="nav-link nav_page" href="/Peptide/adminlist">Edit/Remove Peptide</a>
-            <% } %>
           </li>
           <li class="nav-item">
-            <% if (req.session.me) { %>
             <a class="nav-link nav_page" href="/Peptide/add">Add Peptide</a>
-            <% } %>
           </li>
+          <% } %>
           <li class="nav-item">
             <a class="nav-link nav_page" href="/">About</a>
           </li>
+          <% if (req.session.me) { %>
           <li class="nav-item">
-            <% if (req.session.me) { %>
             <a class="nav-link" href="/User/logout"><b>Logout</b></a>
-            <% } %>
           </li>
+          <% } %>
         </ul>
       </nav>
     </div>
@@ -66,7 +62,7 @@
       <table align="center">
         <tr>
           <td><a id="logo-footer" href="https://www.deduveinstitute.be/"><img src="/images/logoDDUV.PNG"/></a></td>
-          <td valign="top">© 2012-2018 Pierre van der Bruggen <br>&emsp;All rights reserved <% if (!req.session.me) { %><br>&emsp;<a href="/User/login"><img src="/images/lock-icon.png"/> Login</a><% } %></td>
+          <td valign="top"><br/>&emsp;© 2012-2018 Pierre van der Bruggen <br> <% if (!req.session.me) { %><br>&emsp;<a href="/User/login"><img src="/images/lock-icon.png"/> Login</a><% } %></td>
         </tr>
       </table>
     </div>

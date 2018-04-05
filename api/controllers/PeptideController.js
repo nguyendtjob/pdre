@@ -87,6 +87,7 @@ module.exports = {
               if (err) {
                 res.send(500, {error: 'Database Error'});
               }
+              console.log(potentials);
               res.view('list', {
                 mutations: mutations,
                 tumors: tumors,
@@ -105,12 +106,21 @@ module.exports = {
    * `PeptideController.search()`
    */
   search: function (req, res) {
-    Peptide.find().exec(function (err, peptides){
+    Peptide.find().where({type: {'!' : ["potential"]}}).exec(function (err, peptides){
       if (err) {
         res.send(500, {error: 'Database Error'});
       }
-      res.view('search', {peptides:peptides});
+        Peptide.find().where({type: "potential"}).exec(function (err, potentials) {
+          if (err) {
+            res.send(500, {error: 'Database Error'});
+          }
 
+          console.log(potentials);
+          res.view('search', {
+            peptides: peptides,
+            potentials: potentials
+          });
+        });
     });
   },
 
@@ -119,77 +129,23 @@ module.exports = {
     if (req.session.me == null){
       res.view('403');
     }else {
-      Peptide.find().where({type: "mutation"}).exec(function (err, mutations) {
+      Peptide.find().where({type: {'!' : ["potential"]}}).exec(function (err, peptides){
         if (err) {
           res.send(500, {error: 'Database Error'});
         }
-
-        Peptide.find().where({type: "tumor"}).exec(function (err, tumors) {
+        Peptide.find().where({type: "potential"}).exec(function (err, potentials) {
           if (err) {
             res.send(500, {error: 'Database Error'});
           }
 
-          Peptide.find().where({type: "differentiation"}).exec(function (err, differentiations) {
-            if (err) {
-              res.send(500, {error: 'Database Error'});
-            }
-
-            Peptide.find().where({type: "overexpressed"}).exec(function (err, overs) {
-              if (err) {
-                res.send(500, {error: 'Database Error'});
-              }
-
-              Peptide.find().where({type: "potential"}).exec(function (err, potentials) {
-                if (err) {
-                  res.send(500, {error: 'Database Error'});
-                }
-                res.view('adminlist', {
-                  mutations: mutations,
-                  tumors: tumors,
-                  differentiations: differentiations,
-                  overs: overs,
-                  potentials: potentials
-                });
-              });
-            });
+          console.log(potentials);
+          res.view('adminlist', {
+            peptides: peptides,
+            potentials: potentials
           });
         });
       });
     }
-  },
-
-  reglist: function(req,res){
-
-    Peptide.find().where({type:"mutation"}).exec(function (err, mutations){
-      if (err) {
-        res.send(500, {error: 'Database Error'});
-      }
-
-      Peptide.find().where({type:"tumor"}).exec(function (err,tumors){
-        if (err) {
-          res.send(500, {error: 'Database Error'});
-        }
-
-        Peptide.find().where({type:"differentiation"}).exec(function(err,differentiations){
-          if (err) {
-            res.send(500, {error: 'Database Error'});
-          }
-
-          Peptide.find().where({type:"overexpressed"}).exec(function(err,overs){
-            if (err) {
-              res.send(500, {error: 'Database Error'});
-            }
-
-            Peptide.find().where({type:"potential"}).exec(function(err,potentials){
-              if (err) {
-                res.send(500, {error: 'Database Error'});
-              }
-              res.view('reglist', {mutations:mutations, tumors:tumors, differentiations: differentiations, overs:overs, potentials:potentials});
-            });
-          });
-        });
-      });
-    });
   },
 
 
