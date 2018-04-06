@@ -277,7 +277,7 @@
 
 <br/>
 <div id="loading">
-  <p style="text-align:center">The tables are loading. Please wait.</p>
+  <p style="text-align:center">Loading... Please wait.</p>
 </div>
 <div id="div_body" style="visibility: hidden">
   <ul class="nav nav-tabs" role="tablist">
@@ -310,7 +310,7 @@
           <th data-toggle="tooltip" data-placement="top" title="The residues modified by the mutation are indicated in red">Peptide Sequence ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" title="Position of the peptide sequence in the protein sequence">Position ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" title="Method used to isolate the CTL recognizing the antigen">Lymphocyte Stimulation ⓘ</th>
-          <th data-toggle="tooltip" data-placement="top" title="PubMed link to the relevant reference">Reference ⓘ</th>
+          <th data-toggle="tooltip" data-placement="top" title="URL to the relevant reference">Reference ⓘ</th>
           <th>Full Reference</th>
           <th>Comment content</th>
           <th data-toggle="tooltip" data-placement="top" title="Hover on the icon to display the comments specific to the gene if there is any of them">Note ⓘ</th>
@@ -505,7 +505,7 @@
         <% potentials.forEach(function(peptide){ %>
         <tr>
           <% if (peptide.url) {%>
-          <td><a href="<%= peptide.url %>" target="_blank"><%= peptide.fullReference %></a></td>
+          <td><a href="<%= peptide.url %>" target="_blank"><%= peptide.fullReference ? peptide.fullReference:'URL of the article' %></a></td>
           <% } else { %>
           <td><%= peptide.fullReference %></td>
           <% } %>

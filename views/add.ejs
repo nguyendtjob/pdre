@@ -6,7 +6,9 @@
 
   <h1 class="display-5">Add Peptide</h1>
   <form method="post" action="/Peptide/create" id="addForm">
-    <div class="form-group">
+    <p><i>Fields in <b><span style="color:red">red</span></b> are mandatory.</i></p>
+    <div class="form-row">
+      <div class="form-group col-md-2" id="typeDiv">
       <label><b>Peptide Category</b></label>
       <select class="form-control" name="type" onchange="showHide(this.options[this.selectedIndex].value)">
         <option value="mutation" selected>Mutation</option>
@@ -16,66 +18,82 @@
         <option value="potential">Potential</option>
       </select>
     </div>
-    <div class="form-group" id="geneDiv">
+    <div class="col-md-5" id="geneDiv">
       <label><b>Gene</b></label>
-      <input type="text" name="gene" class="form-control" placeholder="Gene">
+      <input type="text" name="gene" class="form-control">
     </div>
-    <div class="form-group" id="geneCardDiv">
+    <div class="col-md-5" id="geneCardDiv">
       <label><b>URL of the Gene Card</b></label>
-      <input type="text" name="geneCard" class="form-control" placeholder="URL of the Gene Card">
+      <input type="text" name="geneCard" class="form-control">
     </div>
-    <div class="form-group" id="tumorDiv">
-      <label><b>Tumor</b></label>
-      <input type="text" name="tumor" class="form-control" placeholder="Tumor">
+
     </div>
-    <div class="form-group" id="hlaDiv">
-      <label><b>HLA</b></label>
-      <input type="text" name="hla" class="form-control" placeholder="HLA">
+
+    <hr/>
+    <div class="form-row">
+      <div class="col-md-4" id="tumorDiv">
+        <label><b>Tumor</b></label>
+        <input type="text" name="tumor" class="form-control">
+      </div>
+      <div class="col-md-4" id="hlaDiv">
+        <label><b>HLA</b></label>
+        <input type="text" name="hla" class="form-control">
+      </div>
+      <div class="col-md-4" id="freqDiv">
+        <label><b>HLA Frequency</b></label>
+        <input type="text" name="freq" class="form-control">
+      </div>
     </div>
-    <div class="form-group" id="freqDiv">
-      <label><b>HLA Frequency</b></label>
-      <input type="text" name="freq" class="form-control" placeholder="HLA frequency">
+    <hr class="upper_hr">
+    <div class="form-row">
+      <div class="col-md-4" id="preMutationDiv">
+        <label><b id="seqText">Peptide sequence before the mutated part</b></label>
+        <input type="text" name="leftSequence" class="form-control">
+      </div>
+      <div class="col-md-4" id="mutationDiv">
+        <label><b>Mutated part of the sequence</b></label>
+        <input type="text" name="redPart" class="form-control">
+      </div>
+      <div class="col-md-4" id="postMutationDiv">
+        <label><b>Peptide sequence after the mutated part</b></label>
+        <input type="text" name="rightSequence" class="form-control">
+      </div>
     </div>
-    <div class="form-group" id="sequence">
-      <label><b>Peptide sequence</b></label>
-      <input type="text" name="leftSequence" class="form-control" placeholder="Sequence">
+    <hr class="upper_hr">
+    <div class="form-row">
+      <div class="col-md-4" id="posDiv">
+        <label><b>Position</b></label>
+        <input type="text" name="pos" class="form-control">
+      </div>
+      <div class="col-md-4" id="stimDiv">
+        <label><b>Lymphocyte Stimulation Method</b></label>
+        <input type="text" name="stimulation" class="form-control" >
+      </div>
+      <div class="col-md-4">
+        <label><b>Reference: Name and Year</b></label>
+        <input type="text" name="reference" class="form-control">
+      </div>
     </div>
-    <div class="form-group" id="preMutationDiv">
-      <label><b>Peptide sequence before the mutated part</b></label>
-      <input type="text" name="leftSequence" class="form-control" placeholder="Sequence before the mutated part">
+    <hr>
+    <div class="form-row">
+      <div class="col-md-12">
+        <label><b>Full Reference</b></label>
+        <input type="text" name="fullReference" class="form-control">
+      </div>
     </div>
-    <div class="form-group" id="mutationDiv">
-      <label><b>Mutated part of the sequence</b></label>
-      <input type="text" name="redPart" class="form-control" placeholder="Mutated part of the sequence">
+    <hr>
+    <div class="form-row">
+      <div class="col-md-6">
+        <label><span style="color:red"><b>URL of the article</b></span></label>
+        <input type="text" name="url" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label><b>Comment</b></label>
+        <input type="text" name="comment" class="form-control">
+      </div>
+
     </div>
-    <div class="form-group" id="postMutationDiv">
-      <label><b>Peptide sequence after the mutated part</b></label>
-      <input type="text" name="rightSequence" class="form-control" placeholder="Sequence after the mutated part">
-    </div>
-    <div class="form-group" id="posDiv">
-      <label><b>Position</b></label>
-      <input type="text" name="pos" class="form-control" placeholder="Position">
-    </div>
-    <div class="form-group" id="stimDiv">
-      <label><b>Lymphocyte Stimulation Method</b></label>
-      <input type="text" name="stimulation" class="form-control" placeholder="Lymphocyte Stimulation Method">
-    </div>
-    <div class="form-group">
-      <label><b>Reference: Name and Year</b></label>
-      <input type="text" name="reference" class="form-control" placeholder="Reference: Name and Year" required>
-    </div>
-    <div class="form-group">
-      <label><b>Full Reference</b></label>
-      <input type="text" name="fullReference" class="form-control" placeholder="Full reference">
-    </div>
-    <div class="form-group">
-      <label><b>URL of the article</b></label>
-      <input type="text" name="url" class="form-control" placeholder="URL of the article">
-    </div>
-      <label><b>Comment</b></label>
-      <div class="form-group">
-    <input type="text" name="comment" class="form-control" placeholder="Comment">
-    </div>
+    <hr>
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
@@ -83,50 +101,77 @@
 
 <script type="text/javascript">
 
+  //Function that hide or show form fields/hr based on the peptide type chosen in the select field. Also change field size
   function showHide(select_item) {
+    var hr_group = document.getElementsByClassName("upper_hr");
+    var i;
     if (select_item == "mutation"){
+      document.getElementById("geneDiv").style.display = 'block';
+      document.getElementById("geneCardDiv").style.display = 'block';
       document.getElementById("tumorDiv").style.display = 'block';
-      document.getElementById("sequence").style.display = 'none';
+      document.getElementById("hlaDiv").style.display = 'block';
+      document.getElementById("freqDiv").style.display = 'block';
       document.getElementById("preMutationDiv").style.display = 'block';
       document.getElementById("mutationDiv").style.display = 'block';
       document.getElementById("postMutationDiv").style.display = 'block';
-
-      document.getElementById("geneDiv").style.display = 'block';
-      document.getElementById("geneCardDiv").style.display = 'block';
-      document.getElementById("hlaDiv").style.display = 'block';
-      document.getElementById("freqDiv").style.display = 'block';
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
+      for (i = 0; i < hr_group.length; i++) {
+        hr_group[i].style.display = 'block';
+      }
+
+      document.getElementById("hlaDiv").className = "col-md-4";
+      document.getElementById("freqDiv").className = "col-md-4";
+      document.getElementById("preMutationDiv").className = "col-md-4";
+
+      document.getElementById("seqText").textContent="Peptide sequence before the mutated part";
     }
 
     if (select_item =="tumor"){
       document.getElementById("tumorDiv").style.display = 'none';
-      document.getElementById("sequence").style.display = 'block';
-      document.getElementById("preMutationDiv").style.display = 'none';
       document.getElementById("mutationDiv").style.display = 'none';
       document.getElementById("postMutationDiv").style.display = 'none';
 
       document.getElementById("geneDiv").style.display = 'block';
       document.getElementById("geneCardDiv").style.display = 'block';
+      document.getElementById("preMutationDiv").style.display = 'block';
       document.getElementById("hlaDiv").style.display = 'block';
       document.getElementById("freqDiv").style.display = 'block';
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
+      for (i = 0; i < hr_group.length; i++) {
+        hr_group[i].style.display = 'block';
+      }
+
+      document.getElementById("hlaDiv").className = "col-md-6";
+      document.getElementById("freqDiv").className = "col-md-6";
+      document.getElementById("preMutationDiv").className = "col-md-12";
+
+      document.getElementById("seqText").textContent="Peptide sequence";
     }
 
     if (select_item == "differentiation" || select_item == "overexpressed"){
-      document.getElementById("tumorDiv").style.display = 'block';
-      document.getElementById("sequence").style.display = 'block';
-      document.getElementById("preMutationDiv").style.display = 'none';
       document.getElementById("mutationDiv").style.display = 'none';
       document.getElementById("postMutationDiv").style.display = 'none';
 
+      document.getElementById("tumorDiv").style.display = 'block';
+      document.getElementById("preMutationDiv").style.display = 'block';
+      document.getElementById("preMutationDiv").className = "col-md-12";
       document.getElementById("geneDiv").style.display = 'block';
       document.getElementById("geneCardDiv").style.display = 'block';
       document.getElementById("hlaDiv").style.display = 'block';
       document.getElementById("freqDiv").style.display = 'block';
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
+      for (i = 0; i < hr_group.length; i++) {
+        hr_group[i].style.display = 'block';
+      }
+
+      document.getElementById("hlaDiv").className = "col-md-4";
+      document.getElementById("freqDiv").className = "col-md-4";
+      document.getElementById("preMutationDiv").className = "col-md-12";
+
+      document.getElementById("seqText").textContent="Peptide sequence";
     }
 
     if (select_item == "potential"){
@@ -136,17 +181,14 @@
       document.getElementById("freqDiv").style.display = 'none';
       document.getElementById("posDiv").style.display = 'none';
       document.getElementById("stimDiv").style.display = 'none';
-
       document.getElementById("tumorDiv").style.display = 'none';
-      document.getElementById("sequence").style.display = 'none';
       document.getElementById("preMutationDiv").style.display = 'none';
       document.getElementById("mutationDiv").style.display = 'none';
       document.getElementById("postMutationDiv").style.display = 'none';
+      for (i = 0; i < hr_group.length; i++) {
+        hr_group[i].style.display = 'none';
+      }
     }
-  }
-
-  window.onload = function() {
-    document.getElementById("sequence").style.display = 'none';
   };
 
 </script>
