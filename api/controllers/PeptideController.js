@@ -87,7 +87,6 @@ module.exports = {
               if (err) {
                 res.send(500, {error: 'Database Error'});
               }
-              console.log(potentials);
               res.view('list', {
                 mutations: mutations,
                 tumors: tumors,
@@ -114,8 +113,6 @@ module.exports = {
           if (err) {
             res.send(500, {error: 'Database Error'});
           }
-
-          console.log(potentials);
           res.view('search', {
             peptides: peptides,
             potentials: potentials
@@ -138,7 +135,6 @@ module.exports = {
             res.send(500, {error: 'Database Error'});
           }
 
-          console.log(potentials);
           res.view('adminlist', {
             peptides: peptides,
             potentials: potentials
@@ -147,6 +143,76 @@ module.exports = {
       });
     }
   },
+
+  submit: function(req, res) {
+      res.view('submit');
+  },
+
+  send: function(req,res) {
+    //Use the build-in skipper
+    req.file('pdf').upload(function whenDone(err,uploadedFiles){
+      if (err) {
+        return res.serverError(err);
+      }
+
+      //Nodemailer module used to send the mail
+      var nodemailer = require('nodemailer');
+
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'caped.pdre@gmail.com',
+          pass: 'seacats86'
+        }
+      });
+
+      var mailOptions;
+
+      //Different mailoptions if they left a comment or not in the submit form
+      if (req.body.comment !== ""){
+        mailOptions = {
+          from: 'caped.pdre@gmail.com',
+          to: 'caped.pdre@gmail.com',
+          subject: 'CAPeD: A new file has been submitted to you',
+          html: '<html><p>Greetings</p><p>Here is new article suggestion from ' + req.body.email + '.</p><p>Here is their comment: </p><p><i>' + req.body.comment + '</i></p></html>',
+          attachments: [{
+            filename: uploadedFiles[0].filename,
+            path: uploadedFiles[0].fd
+          }]
+        };
+      } else {
+        mailOptions = {
+          from: 'caped.pdre@gmail.com',
+          to: 'caped.pdre@gmail.com',
+          subject: 'CAPeD: A new file has been submitted to you',
+          html: '<html><p>Greetings</p><p>Here is new article suggestion from ' + req.body.email + '.</p><p>They did not leave any comment.</p></html>',
+          attachments: [{
+            filename: uploadedFiles[0].filename,
+            path: uploadedFiles[0].fd
+          }]
+        };
+
+      }
+
+      transporter.sendMail(mailOptions, function(error, info){
+        if (err) {
+          return res.serverError(err);
+        }
+          console.log('Email sent: ' + info.response);
+
+          //Deleting the temporary file after the mail has been sent.
+          var fs = require('fs');
+          fs.unlink(uploadedFiles[0].fd, function(err) {
+            if (err) return console.log(err);
+            return res.view('submit', {message:"success"});
+          });
+
+      });
+    });
+
+
+  },
+
 
 
   add: function(req, res) {

@@ -9,23 +9,23 @@
  */
 
 module.exports = function login(inputs) {
-  inputs = inputs || {};
+  //inputs = inputs || {};
 
   // Get access to `req` and `res`
   var req = this.req;
   var res = this.res;
 
   // Look up the user
-  User.attemptLogin({
+  User.findOne({
     email: inputs.email,
     password: inputs.password
-  }, function (err, user) {
+  }).exec(function (err, user) {
     if (err) return res.negotiate(err);
 
     // Redirect to the login page if there wasn't any user matching the email and password
     if (!user) {
-      res.view('login',{error:"error"});
-      return;
+
+      return res.view('login',{error:"error"});
     }
 
     // "Remember" the user in the session
@@ -37,3 +37,4 @@ module.exports = function login(inputs) {
   });
 
 };
+

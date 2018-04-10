@@ -32,14 +32,17 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-
+  //Route for the main page of the website
   '/': {
     view: "index"
   },
 
-
+  //Routes for login
   'get /login': 'UserController.login',
-  'post /login': 'UserController.loginaction'
+  'post /login': 'UserController.loginaction',
+
+  //Route in case someone tries to access to /Peptide/send outside of the form
+  'get /Peptide/send': { view: "submit"}
 
   /***************************************************************************
   *                                                                          *

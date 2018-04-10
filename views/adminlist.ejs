@@ -187,7 +187,6 @@
       var selection = $( "#"+$(this).attr('section'));
       $('.sectionbtn').removeClass("active");
       $(this).addClass("active");
-      document.getElementById("table-container").style.borderLeft = "thick solid "+$(this).attr('color_attr');
 
       $(".dataTables_scrollBody").scrollTo(selection);
     });

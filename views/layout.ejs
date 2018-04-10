@@ -18,54 +18,53 @@
 </head>
 <body>
 <div id="wrapper">
-    <div id="header-container">
-      <nav class="navbar navbar-expand-sm navbar-light mb-4 border" >
-        <a class="navbar-brand"><img src="/images/logoDDUVsm.png"/>&emsp;<b>Cancer Antigenic Peptide Database</b></a>
+  <div id="header-container">
+    <nav class="navbar navbar-expand-sm navbar-light mb-4 border" >
+      <a class="navbar-brand"><img src="/images/logoDDUVsm.png"/>&emsp;<b>Cancer Antigenic Peptide Database</b></a>
 
 
-        <!--
+      <!--
+      <li class="nav-item">
+        <a class="nav-link" href="/Peptide/reglist">Prototype</a>
+      </li>
+      -->
+      <ul class="nav navbar-nav ml-auto navbar-right">
         <li class="nav-item">
-          <a class="nav-link" href="/Peptide/reglist">Prototype</a>
+          <a class="nav-link nav_page" href="/Peptide/list">Database</a>
         </li>
-        -->
-        <ul class="nav navbar-nav ml-auto navbar-right">
-          <li class="nav-item">
-            <a class="nav-link nav_page" href="/Peptide/list">Database</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav_page" href="/Peptide/search">Search</a>
-          </li>
-          <% if (req.session.me) { %>
-          <li class="nav-item">
-            <a class="nav-link nav_page" href="/Peptide/adminlist">Edit/Remove Peptide</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav_page" href="/Peptide/add">Add Peptide</a>
-          </li>
-          <% } %>
-          <li class="nav-item">
-            <a class="nav-link nav_page" href="/">About</a>
-          </li>
-          <% if (req.session.me) { %>
-          <li class="nav-item">
-            <a class="nav-link" href="/User/logout"><b>Logout</b></a>
-          </li>
-          <% } %>
-        </ul>
-      </nav>
-    </div>
-    <div id="body-container">
+        <% if (req.session.me) { %>
+        <li class="nav-item">
+          <a class="nav-link nav_page" href="/Peptide/adminlist">Edit/Remove Peptide</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav_page" href="/Peptide/add">Add Peptide</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/User/logout"><b>Logout</b></a>
+        </li>
+        <% } else {%>
+        <li class="nav-item">
+          <a class="nav-link nav_page" href="/Peptide/search">Search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav_page" href="/">About</a>
+        </li>
+        <% } %>
+      </ul>
+    </nav>
+  </div>
+  <div id="body-container">
     <%- body %>
-    </div>
-    <div id="footer-container">
-      <hr>
-      <table align="center">
-        <tr>
-          <td><a id="logo-footer" href="https://www.deduveinstitute.be/"><img src="/images/logoDDUV.PNG"/></a></td>
-          <td valign="top"><br/>&emsp;© 2012-2018 Pierre van der Bruggen <br> <% if (!req.session.me) { %><br>&emsp;<a href="/User/login"><img src="/images/lock-icon.png"/> Login</a><% } %></td>
-        </tr>
-      </table>
-    </div>
+  </div>
+  <div id="footer-container">
+    <hr>
+    <table align="center">
+      <tr>
+        <td><a id="logo-footer" href="https://www.deduveinstitute.be/"><img src="/images/logoDDUV.PNG"/></a></td>
+        <td valign="top"><br/>&emsp;© 2012-2018 Pierre van der Bruggen <br> <% if (!req.session.me) { %><br>&emsp;<a href="/User/login"><img src="/images/lock-icon.png"/> Login</a><% } %></td>
+      </tr>
+    </table>
+  </div>
   <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="oi oi-chevron-top"></span></a>
 </div>
 
