@@ -20,9 +20,11 @@
   }
 
   $(document).ready(function(){
-    //Create the color bar for the navigation cue
+    //Create the color bar for the navigation cue and make the page visible
     document.getElementById("table-container").style.borderLeft = "thick solid #D40000";
     initFadeIn();
+
+
     //setting the general table
     var generalTable = $('#generalTable').DataTable({
       dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-6'i><'col-sm-6'>>",
@@ -40,7 +42,6 @@
           "sortable": false
         },
         { "type": "num", "targets": 3 },
-
         {
           "targets": [ 8,9, 11 ],
           "visible": false,
@@ -54,17 +55,13 @@
         { "orderData": [ 11, 5 ],    "targets": 5 },
         { "orderData": [ 11, 6 ],    "targets": 6 },
         { "orderData": [ 11, 7 ],    "targets": 7 },
-
-
         { "width": "10%", "targets": 0 },
         { "width": "6%", "targets": 3 },
         { "width": "20%", "targets": 1 },
         { "width": "5%", "targets": [2,5]},
         { "width": "5%", "targets": 10},
         { "width": "15%", "targets": [4,6]}
-
       ],
-
 
       //Create the category row, done every time the datatable is drawn
       "drawCallback": function () {
@@ -103,7 +100,6 @@
           "visible": false
         },
         { "width": "5%", "targets": 2 }
-
       ]
     });
 
@@ -136,7 +132,7 @@
         .columns($(this).attr('data-column'))
         .search(string,true,false,true)
         .draw();
-    } );
+    });
 
 
     //Event listener: any key input in HLA filter (HLA must match completely the letters of the search)
@@ -161,7 +157,6 @@
         .columns(0)
         .search(string,true,false,true)
         .draw();
-
     });
 
 
@@ -171,19 +166,39 @@
     });
 
 
-    //Event listener for the navbar buttons: highlight the button color and scroll to that section.
+    //Event listener for the navbar buttons: change the colored nv
     $(".sectionbtn").click( function() {
-      var selection = $( "#"+$(this).attr('section'));
+      var selection;
       $('.sectionbtn').removeClass("active");
-      $(this).addClass("active");
 
+      switch(this.id){
+        case "section0btn":
+          $('#section0btn').addClass("active");
+          selection = $( "#section0" );
+          break;
+
+        case "section1btn":
+          $('#section1btn').addClass("active");
+          selection = $( "#section1" );
+          break;
+
+        case "section2btn":
+          $('#section2btn').addClass("active");
+          selection = $( "#section2" );
+          break;
+
+        case "section3btn":
+          $('#section3btn').addClass("active");
+          selection = $( "#section3" );
+      }
       $(".dataTables_scrollBody").scrollTo(selection);
     });
+
 
     //Event listener: scroll to the potential table
     $('#section4btn').click(function () {
       $('html, body').animate({
-        scrollTop: $("#potentialTable").offset().top
+        scrollTop: $("#potentialSection").offset().top
       }, 200);
     });
 
