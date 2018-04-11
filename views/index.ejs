@@ -1,93 +1,93 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%=typeof title == 'undefined' ? 'New Sails App' : title%></title>
+<head>
+  <title><%=typeof title == 'undefined' ? 'New Sails App' : title%></title>
 
-    <!-- Viewport mobile tag for sensible mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-
-    <!--
-        Stylesheets and Preprocessors
-        ==============================
-
-        You can always bring in CSS files manually with `<link>` tags, or asynchronously
-        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
-        of Sails' conventional asset pipeline (boilerplate Gruntfile).
-
-        By default, stylesheets from your `assets/styles` folder are included
-        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
-        are supported. In production, your styles will be minified and concatenated into
-        a single file.
-
-        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
-        For example, here are a few things you could do:
-
-            + Change the order of your CSS files
-            + Import stylesheets from other directories
-            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
-    -->
-
-    <!--STYLES-->
-    <link rel="stylesheet" href="/styles/importer.css">
-    <link rel="stylesheet" href="/styles/style.css">
-    <!--STYLES END-->
-  </head>
-
-  <body>
-        <div class="container-fluid">
-          <h1 class="display-4">About Cancer Antigenic Peptide Database</h1>
-          <p>The immune system can participate in the elimination of tumor cells. This is possible because tumors expose specific markers on their surface, known as tumor antigens. Tumor antigens are composed of an HLA molecule bound to a peptide, which is generally derived from the degradation of a larger protein. These tumor antigens are recognized by a specific subset of white blood cells called T lymphocytes or T cells, which are able to kill tumor cells bearing these antigens. However, because spontaneous T cell responses to tumors are rarely efficient at eliminating tumors, researchers and clinicians are trying to develop immunotherapies, such as anti-tumor vaccines and adoptive T cell transfer, which aim at helping the immune system of cancer patients to destroy their tumors. Better understanding of the nature and the expression profile of the targeted antigens is one key for the success of such therapies. Since the discovery in 1991 of the first human T cell defined-tumor antigen, a growing number of tumor antigens are described at a regular pace, with dozens of them reported in the literature every year.</p>
-          <p>In 2001, we have started compiling what we thought were the most relevant human tumor antigens, and created a database. We have classified them into four major groups on the basis of their expression pattern. This classification may appear arbitrary and indeed reflects the biases derived from our own studies, which have mostly dealt with melanoma. The interest of such a classification is practical, as the expression pattern of the antigens is the critical factor determining their potential usefulness for cancer immunotherapy. Although we have tried to incorporate most tumor antigens identified so far, we have certainly missed some. We will try to update the data regularly and we encourage investigators to submit additional information to be included in the database.</p>
-          <p>The tables provide the following information for each antigen:</p>
-            <ol type="a">
-              <li>a GeneCard link for the encoding gene and/or the parent protein,</li>
-              <li>the HLA presenting molecule and its frequency in Caucasians,</li>
-              <li>the peptide sequence and its position in the protein sequence,</li>
-              <li>the method used to isolate the CTL recognizing the antigen,</li>
-              <li>a PubMed link to the relevant reference.</li>
-
-            </ol>
-
-          <p>Each line corresponds to a peptide, considered to be a tumor antigen given that it is recognized by T lymphocytes that also recognize tumor cells expressing the parent protein. As indicated in the penultimate column, such T lymphocytes have been derived in vitro by stimulating lymphocytes either with autologous tumor cells or with antigen-presenting cells pulsed with peptide or engineered to express the relevant gene. The peptide indicated is usually the shortest synthetic peptide recognized by the T cells.</p>
-
-          <p>We only included in the database those antigenic peptides that fulfill the following requirements:</p>
-          <ol type="a">
-            <li>isolation of stable human T lymphocytes clones or lines recognizing the peptide,</li>
-            <li>identification of the peptide recognized by the T cells,</li>
-            <li>identification of the HLA presenting molecule,</li>
-            <li>evidence of the peptide is processed and presented by tumor cells <i>(This implies showing recognition of tumor cells expressing the relevant gene and HLA molecule by the T cells. When a polyclonal T cell line is used rather than a clone, it is essential to demonstrate that the CTLs that lyse the tumor cells are the same as those that recognize the peptide. This can be done by "cold target inhibition" experiments using peptide-pulsed cold targets. Other means of proof are also possible, such as the testing of stable transfectants of tumor cells with the sequence encoding the parental protein. In the case of CD4 T lymphocytes that do not recognize tumor cells directly, the fact that the peptide is processed can be shown by testing antigen-presenting cell loaded with the recombinant protein or a control protein produced in the same organism, or loaded with lysates of cells transfected or not with the relevant coding sequence)</i>,</li>
-            <li>the characterization of peptides recognized by CD8 T cells should include the identification of the shortest peptide recognized and a titration showing a clear recognition of this peptide at doses below 1µM <i>(When this is not the case, the actual peptide recognized by the CTLs on the tumor cells may be different due, for example, to a post-translational modification or a cross reaction of the CTLs with irrelevant peptide)</i>,</li>
-            <li>a certain level of tumor- or tissue-specificity should be documented, as ubiquitous antigens do not qualify as tumor antigens <i>(This can be done with gene expression, protein expression or lymphocyte recognition data, which should be ideally be corroborative)</i>.</li>
-          </ol>
-
-          <p>Among the antigen described in the database, a first distinction can be made between <b>unique antigens</b> (<a href="/Peptide/list#mutationTab">Table 1</a>) and shared antigens. The shared antigens can be further divided into <b>tumor-specific antigens</b> (<a href="/Peptide/list#tumorTab">Table 2</a>), <b>differentiation antigens</b> (<a href="/Peptide/list#differentiationTab">Table 3</a>) and <b>overexpressed antigens</b> (<a href="/Peptide/list#overexpressedTab">Table 4</a>).</p>
-
-          <p><b>Unique antigens</b> result from point mutations in genes that are expressed ubiquitously (<a href="/Peptide/list#mutationTab">Mutation</a>). The mutation usually affects the coding region of the gene and is unique to the tumor of an individual patient or restricted to very few patients. Some of these mutations may be implicated in tumoral transformation. Such antigens, which are strictly tumor-specific, may play an important role in the natural anti-tumor immune response of individuals patients, but most of them cannot be easily used as immunotherapeutic targets because they are not shared by tumors from different patients.</p>
-
-          <p>On the other hand, shared antigens are present on many independent tumors. We divided them  into three groups:  <b>shared tumor-specific</b>, <b>differentiation</b> and <b>overexpressed antigens</b>.</p>
-
-          <p>One group corresponds to peptides encoded by "cancer-germline" genes, such as MAGES, which are expressed in many tumors but not in normal tissues (<a href="/Peptide/list#tumorTab">Shared Tumor-specific</a>). The only normal cells in which significant expression of such genes has been detected are placental trophoblasts and testicular germ cells. Because of these cells do not express MHC class I molecules, gene expression should not result in expression of the antigenic peptides and such antigens can be therefore be considered as strictly tumor-specific. The genes encoding such antigens have also been referred to as "cancer-testis" (CT) genes.</p>
-
-          <p>A second group of shared tumor antigens, named differentiation antigens, are also expressed in the normal tissue of origin of the malignancy (<a href="/Peptide/list#differentiationTab">Differentiation</a>). The prototype of such antigens is tyrosinase, which is expressed in normal melanocytes and in most melanomas. Antigens of this group are not tumor-specific, and their use as targets for cancer immunotherapy may result in autoimmunity towards the corresponding normal tissue. In the case of melanocytes, the risk of inducing severe side effects appears minimal, and could be limited to the appearance of vitiligo. More serious concerns about autoimmune side effects apply to carcinoembryonic antigen (CEA), an oncofetal protein expressed in normal colon epithelium and in most gut carninomas. Autoimmune toxicity should not be an issue, however, in situations where the tissue expressing the antigen is dispensable or even resected by the surgeon in the course of cancer therapy, as it would be the case for prostate specific antigen (PSA).</p>
-
-          <p>It is much more difficult to make predictions regarding the safety of targeting shared antigens of the third group, which are expressed in a wide variety of normal tissues and overexpressed in tumors (<a href="/Peptide/list#overexpressedTab">Overexpressed</a>). Because a basal amount of peptide is required for CTL recognition, the low level of expression in normal tissues, one may infer that autoimmune damage would not be incurred. However, this threshold is difficult to define, as is the normal level of expression of those genes for each cell type.</p>
-
-          <p>A number of viruses, such as the Epstein-Barr (EBV) and human papilloma virus (HPV), are associated with human malignancies. The antigenic peptides encoded by viral genes have not been included in the database, despite their high potential as targets for immunotherapy.</p>
-
-          <p>A large series of additional peptides have been described which have not (yet) been included in the tables because formal evidence to fulfill one or several of the aforementioned criteria has not been provided. The relevant references are listed (<a href="/Peptide/list#potentialTab">Potential</a>). </p>
-
-          <p>If you think that we have missed one relevant publication, please send us a message and the reference of the publication.</p>
-          <br/>
-          <br/>
-          <p style="text-align:right"><i>Drs. Pierre van der Bruggen, Vincent Stroobant, Nathalie Vigneron, and Benoit Van Den Eynde, <br/>scientists at the Brussels branch of Ludwig Cancer Research and/or at the de Duve Institute</i></p>
-        </div>
+  <!-- Viewport mobile tag for sensible mobile support -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.5.1/b-html5-1.5.1/b-print-1.5.1/fh-3.1.3/r-2.2.1/rg-1.0.2/sc-1.4.4/sl-1.2.5/datatables.min.js"></script>
-    <!--SCRIPTS-->
-    <script src="/js/dependencies/sails.io.js"></script>
-    <!--SCRIPTS END-->
-  </body>
+  <!--
+      Stylesheets and Preprocessors
+      ==============================
+
+      You can always bring in CSS files manually with `<link>` tags, or asynchronously
+      using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+      of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+      By default, stylesheets from your `assets/styles` folder are included
+      here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+      are supported. In production, your styles will be minified and concatenated into
+      a single file.
+
+      To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+      For example, here are a few things you could do:
+
+          + Change the order of your CSS files
+          + Import stylesheets from other directories
+          + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+  -->
+
+  <!--STYLES-->
+  <link rel="stylesheet" href="/styles/importer.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <!--STYLES END-->
+</head>
+
+<body>
+<div class="container-fluid">
+  <h1 class="display-4">About Cancer Antigenic Peptide Database</h1>
+  <p>The immune system can participate in the elimination of tumor cells. This is possible because tumors expose specific markers on their surface, known as tumor antigens. Tumor antigens are composed of an HLA molecule bound to a peptide, which is generally derived from the degradation of a larger protein. These tumor antigens are recognized by a specific subset of white blood cells called T lymphocytes or T cells, which are able to kill tumor cells bearing these antigens. However, because spontaneous T cell responses to tumors are rarely efficient at eliminating tumors, researchers and clinicians are trying to develop immunotherapies, such as anti-tumor vaccines and adoptive T cell transfer, which aim at helping the immune system of cancer patients to destroy their tumors. Better understanding of the nature and the expression profile of the targeted antigens is one key for the success of such therapies. Since the discovery in 1991 of the first human T cell defined-tumor antigen, a growing number of tumor antigens are described at a regular pace, with dozens of them reported in the literature every year.</p>
+  <p>In 2001, we have started compiling what we thought were the most relevant human tumor antigens, and created a database. We have classified them into four major groups on the basis of their expression pattern. This classification may appear arbitrary and indeed reflects the biases derived from our own studies, which have mostly dealt with melanoma. The interest of such a classification is practical, as the expression pattern of the antigens is the critical factor determining their potential usefulness for cancer immunotherapy. Although we have tried to incorporate most tumor antigens identified so far, we have certainly missed some. We will try to update the data regularly and we encourage investigators to submit additional information to be included in the database.</p>
+  <p>The tables provide the following information for each antigen:</p>
+  <ol type="a">
+    <li>a GeneCard link for the encoding gene and/or the parent protein,</li>
+    <li>the HLA presenting molecule and its frequency in Caucasians,</li>
+    <li>the peptide sequence and its position in the protein sequence,</li>
+    <li>the method used to isolate the CTL recognizing the antigen,</li>
+    <li>a PubMed link to the relevant reference.</li>
+
+  </ol>
+
+  <p>Each line corresponds to a peptide, considered to be a tumor antigen given that it is recognized by T lymphocytes that also recognize tumor cells expressing the parent protein. As indicated in the penultimate column, such T lymphocytes have been derived in vitro by stimulating lymphocytes either with autologous tumor cells or with antigen-presenting cells pulsed with peptide or engineered to express the relevant gene. The peptide indicated is usually the shortest synthetic peptide recognized by the T cells.</p>
+
+  <p>We only included in the database those antigenic peptides that fulfill the following requirements:</p>
+  <ol type="a">
+    <li>isolation of stable human T lymphocytes clones or lines recognizing the peptide,</li>
+    <li>identification of the peptide recognized by the T cells,</li>
+    <li>identification of the HLA presenting molecule,</li>
+    <li>evidence of the peptide is processed and presented by tumor cells <i>(This implies showing recognition of tumor cells expressing the relevant gene and HLA molecule by the T cells. When a polyclonal T cell line is used rather than a clone, it is essential to demonstrate that the CTLs that lyse the tumor cells are the same as those that recognize the peptide. This can be done by "cold target inhibition" experiments using peptide-pulsed cold targets. Other means of proof are also possible, such as the testing of stable transfectants of tumor cells with the sequence encoding the parental protein. In the case of CD4 T lymphocytes that do not recognize tumor cells directly, the fact that the peptide is processed can be shown by testing antigen-presenting cell loaded with the recombinant protein or a control protein produced in the same organism, or loaded with lysates of cells transfected or not with the relevant coding sequence)</i>,</li>
+    <li>the characterization of peptides recognized by CD8 T cells should include the identification of the shortest peptide recognized and a titration showing a clear recognition of this peptide at doses below 1µM <i>(When this is not the case, the actual peptide recognized by the CTLs on the tumor cells may be different due, for example, to a post-translational modification or a cross reaction of the CTLs with irrelevant peptide)</i>,</li>
+    <li>a certain level of tumor- or tissue-specificity should be documented, as ubiquitous antigens do not qualify as tumor antigens <i>(This can be done with gene expression, protein expression or lymphocyte recognition data, which should be ideally be corroborative)</i>.</li>
+  </ol>
+
+  <p>Among the antigen described in the database, a first distinction can be made between <b>unique antigens</b> (<a href="/Peptide/list#mutationTab">Table 1</a>) and shared antigens. The shared antigens can be further divided into <b>tumor-specific antigens</b> (<a href="/Peptide/list#tumorTab">Table 2</a>), <b>differentiation antigens</b> (<a href="/Peptide/list#differentiationTab">Table 3</a>) and <b>overexpressed antigens</b> (<a href="/Peptide/list#overexpressedTab">Table 4</a>).</p>
+
+  <p><b>Unique antigens</b> result from point mutations in genes that are expressed ubiquitously (<a href="/Peptide/list#mutationTab">Mutation</a>). The mutation usually affects the coding region of the gene and is unique to the tumor of an individual patient or restricted to very few patients. Some of these mutations may be implicated in tumoral transformation. Such antigens, which are strictly tumor-specific, may play an important role in the natural anti-tumor immune response of individuals patients, but most of them cannot be easily used as immunotherapeutic targets because they are not shared by tumors from different patients.</p>
+
+  <p>On the other hand, shared antigens are present on many independent tumors. We divided them  into three groups:  <b>shared tumor-specific</b>, <b>differentiation</b> and <b>overexpressed antigens</b>.</p>
+
+  <p>One group corresponds to peptides encoded by "cancer-germline" genes, such as MAGES, which are expressed in many tumors but not in normal tissues (<a href="/Peptide/list#tumorTab">Shared Tumor-specific</a>). The only normal cells in which significant expression of such genes has been detected are placental trophoblasts and testicular germ cells. Because of these cells do not express MHC class I molecules, gene expression should not result in expression of the antigenic peptides and such antigens can be therefore be considered as strictly tumor-specific. The genes encoding such antigens have also been referred to as "cancer-testis" (CT) genes.</p>
+
+  <p>A second group of shared tumor antigens, named differentiation antigens, are also expressed in the normal tissue of origin of the malignancy (<a href="/Peptide/list#differentiationTab">Differentiation</a>). The prototype of such antigens is tyrosinase, which is expressed in normal melanocytes and in most melanomas. Antigens of this group are not tumor-specific, and their use as targets for cancer immunotherapy may result in autoimmunity towards the corresponding normal tissue. In the case of melanocytes, the risk of inducing severe side effects appears minimal, and could be limited to the appearance of vitiligo. More serious concerns about autoimmune side effects apply to carcinoembryonic antigen (CEA), an oncofetal protein expressed in normal colon epithelium and in most gut carninomas. Autoimmune toxicity should not be an issue, however, in situations where the tissue expressing the antigen is dispensable or even resected by the surgeon in the course of cancer therapy, as it would be the case for prostate specific antigen (PSA).</p>
+
+  <p>It is much more difficult to make predictions regarding the safety of targeting shared antigens of the third group, which are expressed in a wide variety of normal tissues and overexpressed in tumors (<a href="/Peptide/list#overexpressedTab">Overexpressed</a>). Because a basal amount of peptide is required for CTL recognition, the low level of expression in normal tissues, one may infer that autoimmune damage would not be incurred. However, this threshold is difficult to define, as is the normal level of expression of those genes for each cell type.</p>
+
+  <p>A number of viruses, such as the Epstein-Barr (EBV) and human papilloma virus (HPV), are associated with human malignancies. The antigenic peptides encoded by viral genes have not been included in the database, despite their high potential as targets for immunotherapy.</p>
+
+  <p>A large series of additional peptides have been described which have not (yet) been included in the tables because formal evidence to fulfill one or several of the aforementioned criteria has not been provided. The relevant references are listed (<a href="/Peptide/list#potentialTab">Potential</a>). </p>
+
+  <p>If you think that we have missed one relevant publication, <a href="/Peptide/submit">please send us a message and the reference of the publication.</a></p>
+  <br/>
+  <br/>
+  <p style="text-align:right"><i>Drs. Pierre van der Bruggen, Vincent Stroobant, Nathalie Vigneron, and Benoit Van Den Eynde, <br/>scientists at the Brussels branch of Ludwig Cancer Research and/or at the de Duve Institute</i></p>
+</div>
+
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.datatables.net/v/bs4/dt-1.10.16/b-1.5.1/b-html5-1.5.1/b-print-1.5.1/fh-3.1.3/r-2.2.1/rg-1.0.2/sc-1.4.4/sl-1.2.5/datatables.min.js"></script>
+<!--SCRIPTS-->
+<script src="/js/dependencies/sails.io.js"></script>
+<!--SCRIPTS END-->
+</body>
 </html>

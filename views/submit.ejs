@@ -1,27 +1,9 @@
-<div class="container-fluid">
-  <p>You've found an article about an antigenic peptide that isn't present in the database? Feel free to let us know by submitting a pdf file!</p>
-  <form method="post" action="/Peptide/send" enctype="multipart/form-data" onsubmit="return Validate(this);">
-    <% if (typeof message != 'undefined') { %>
-    <% if (message == "success") { %>
-    <span style="color:green">The file has been successfully submitted.</span><br/>
-    <% } else if (message == "error") { %>
-    <span style="color:red">An error has occurred. Please try again.</span><br/>
-    <% }} %>
-    <label><b>E-mail </b><i>(required)</i></label><br/>
-    <input type="text" name="email" required><br><br>
-    <label><b>Comment </b><i>(optional)</i></label><br/>
-    <textarea id="submit_comment" name="comment"></textarea><br><br>
-    <input type="file" name="pdf" accept="application/pdf" /><br><br>
-    <input type="submit" class="btn btn-primary">
-  </form>
-</div>
-
-
 <script>
   var _validFileExtensions = [".pdf"];
 
   function Validate(oForm) {
     var arrInputs = oForm.getElementsByTagName("input");
+    console.log(oForm.getElementById("submit_file"));
     for (var i = 0; i < arrInputs.length; i++) {
       var oInput = arrInputs[i];
       if (oInput.type == "file") {
@@ -37,12 +19,27 @@
           }
           if (!blnValid) {
             alert("Sorry, " + sFileName + " is invalid. Only " + _validFileExtensions.join(", ") + " files are allowed for upload.");
-            return false;
           }
         }
       }
     }
-
-    return true;
   }
 </script>
+
+<div class="container-fluid">
+  <p>You've found an article about an antigenic peptide that isn't present in the database? Feel free to let us know by submitting a pdf file!</p>
+  <form method="post" action="/Peptide/send" enctype="multipart/form-data" onsubmit="return Validate(this);">
+    <% if (typeof message != 'undefined') { %>
+    <% if (message == "success") { %>
+    <span style="color:green">The file has been successfully submitted.</span><br/>
+    <% } else if (message == "error") { %>
+    <span style="color:red">An error has occurred. Please try again.</span><br/>
+    <% }} %>
+    <label><b>E-mail </b><i>(required)</i></label><br/>
+    <input type="text" name="email" required><br><br>
+    <label><b>Comment </b><i>(optional)</i></label><br/>
+    <textarea id="submit_comment" name="comment"></textarea><br><br>
+    <input id ="submit_file" type="file" name="pdf" accept="application/pdf" required/><br><br>
+    <input type="submit" class="btn btn-primary">
+  </form>
+</div>

@@ -131,7 +131,7 @@
   function showHide(select_item) {
     var hr_group = document.getElementsByClassName("upper_hr");
     var i;
-    if (select_item == "mutation"){
+    if (select_item === "mutation"){
       document.getElementById("geneDiv").style.display = 'block';
       document.getElementById("geneCardDiv").style.display = 'block';
       document.getElementById("tumorDiv").style.display = 'block';
@@ -153,7 +153,7 @@
       document.getElementById("seqText").textContent="Peptide sequence before the mutated part";
     }
 
-    if (select_item =="tumor"){
+    if (select_item ==="tumor"){
       document.getElementById("tumorDiv").style.display = 'none';
       document.getElementById("mutationDiv").style.display = 'none';
       document.getElementById("postMutationDiv").style.display = 'none';
@@ -176,7 +176,7 @@
       document.getElementById("seqText").textContent="Peptide sequence";
     }
 
-    if (select_item == "differentiation" || select_item == "overexpressed"){
+    if (select_item === "differentiation" || select_item === "overexpressed"){
       document.getElementById("mutationDiv").style.display = 'none';
       document.getElementById("postMutationDiv").style.display = 'none';
 
@@ -200,7 +200,7 @@
       document.getElementById("seqText").textContent="Peptide sequence";
     }
 
-    if (select_item == "potential"){
+    if (select_item === "potential"){
       document.getElementById("geneDiv").style.display = 'none';
       document.getElementById("geneCardDiv").style.display = 'none';
       document.getElementById("hlaDiv").style.display = 'none';
@@ -215,7 +215,7 @@
         hr_group[i].style.display = 'none';
       }
     }
-  };
+  }
   var sel = document.getElementById("selType");
 
   //Change the form accordingly based on the peptide to edit

@@ -8,7 +8,6 @@
 module.exports = {
 
 
-
   /**
    * `PeptideController.create()`
    */
@@ -28,8 +27,6 @@ module.exports = {
     var fullReference = req.body.fullReference;
     var url = req.body.url;
     var comment = req.body.comment;
-
-
 
     Peptide.create({
       gene: gene,
@@ -51,12 +48,9 @@ module.exports = {
       if(err){
         res.send(500, {error: 'Database Error'});
       }
-
       res.redirect('Peptide/list');
     });
-
   },
-
 
 
   /**
@@ -121,7 +115,9 @@ module.exports = {
     });
   },
 
-
+  /**
+   * `PeptideController.adminlist()`
+   */
   adminlist: function (req, res) {
     if (req.session.me == null){
       res.view('403');
@@ -144,20 +140,27 @@ module.exports = {
     }
   },
 
+  /**
+   * `PeptideController.submit()`
+   */
   submit: function(req, res) {
       res.view('submit');
   },
 
+  /**
+   * `PeptideController.send()`
+   */
   send: function(req,res) {
     //Use the build-in skipper
     req.file('pdf').upload(function whenDone(err,uploadedFiles){
       if (err) {
-        return res.serverError(err);
+        return res.view('submit', {message:"error"});
       }
 
       //Nodemailer module used to send the mail
       var nodemailer = require('nodemailer');
 
+      //Credentials of the gmail account
       var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -191,12 +194,12 @@ module.exports = {
             path: uploadedFiles[0].fd
           }]
         };
-
       }
 
+      //Sending the mail
       transporter.sendMail(mailOptions, function(error, info){
         if (err) {
-          return res.serverError(err);
+          return res.view('submit', {message:"error"});
         }
           console.log('Email sent: ' + info.response);
 
@@ -209,12 +212,11 @@ module.exports = {
 
       });
     });
-
-
   },
 
-
-
+  /**
+   * `PeptideController.add()`
+   */
   add: function(req, res) {
     if (req.session.me == null){
       res.view('403');
@@ -222,7 +224,6 @@ module.exports = {
       res.view('add');
     }
   },
-
 
   /**
    * `PeptideController.edit()`
@@ -235,12 +236,14 @@ module.exports = {
         if (err) {
           res.send(500, {error: 'Database Error'});
         }
-
         res.view('edit', {peptide: peptide});
       })
     }
   },
 
+  /**
+   * `PeptideController.update()`
+   */
   update: function(req, res){
     if (req.session.me == null){
       res.view('403');
@@ -260,7 +263,6 @@ module.exports = {
       var fullReference = req.body.fullReference;
       var url = req.body.url;
       var comment = req.body.comment;
-
 
       Peptide.update({id: req.params.id}, {
         gene: gene,
@@ -282,13 +284,11 @@ module.exports = {
         if (err) {
           res.send(500, {error: 'Database Error'});
         }
-
-        res.redirect('Peptide/list');
+        res.redirect('Peptide/adminlist');
       });
     }
 
     },
-
 
   /**
    * `PeptideController.delete()`
@@ -301,10 +301,8 @@ module.exports = {
         if (err) {
           res.send(500, {error: 'Database Error'});
         }
-
-        res.redirect('Peptide/list');
+        res.redirect('Peptide/adminlist');
       });
-
       return false;
     }
   }

@@ -9,23 +9,23 @@
     <p><i>Fields in <b><span style="color:red">red</span></b> are mandatory.</i></p>
     <div class="form-row">
       <div class="form-group col-md-2" id="typeDiv">
-      <label><b>Peptide Category</b></label>
-      <select class="form-control" name="type" onchange="showHide(this.options[this.selectedIndex].value)">
-        <option value="mutation" selected>Mutation</option>
-        <option value="tumor">Tumor Specific</option>
-        <option value="differentiation">Differentiation</option>
-        <option value="overexpressed">Overexpressed</option>
-        <option value="potential">Potential</option>
-      </select>
-    </div>
-    <div class="col-md-5" id="geneDiv">
-      <label><b>Gene</b></label>
-      <input type="text" name="gene" class="form-control">
-    </div>
-    <div class="col-md-5" id="geneCardDiv">
-      <label><b>URL of the Gene Card</b></label>
-      <input type="text" name="geneCard" class="form-control">
-    </div>
+        <label><b>Peptide Category</b></label>
+        <select class="form-control" name="type" onchange="showHide(this.options[this.selectedIndex].value)">
+          <option value="mutation" selected>Mutation</option>
+          <option value="tumor">Tumor Specific</option>
+          <option value="differentiation">Differentiation</option>
+          <option value="overexpressed">Overexpressed</option>
+          <option value="potential">Potential</option>
+        </select>
+      </div>
+      <div class="col-md-5" id="geneDiv">
+        <label><b>Gene</b></label>
+        <input type="text" name="gene" class="form-control">
+      </div>
+      <div class="col-md-5" id="geneCardDiv">
+        <label><b>URL of the Gene Card</b></label>
+        <input type="text" name="geneCard" class="form-control">
+      </div>
 
     </div>
 
@@ -105,7 +105,7 @@
   function showHide(select_item) {
     var hr_group = document.getElementsByClassName("upper_hr");
     var i;
-    if (select_item == "mutation"){
+    if (select_item === "mutation"){
       document.getElementById("geneDiv").style.display = 'block';
       document.getElementById("geneCardDiv").style.display = 'block';
       document.getElementById("tumorDiv").style.display = 'block';
@@ -127,7 +127,7 @@
       document.getElementById("seqText").textContent="Peptide sequence before the mutated part";
     }
 
-    if (select_item =="tumor"){
+    if (select_item === "tumor"){
       document.getElementById("tumorDiv").style.display = 'none';
       document.getElementById("mutationDiv").style.display = 'none';
       document.getElementById("postMutationDiv").style.display = 'none';
@@ -150,7 +150,7 @@
       document.getElementById("seqText").textContent="Peptide sequence";
     }
 
-    if (select_item == "differentiation" || select_item == "overexpressed"){
+    if (select_item === "differentiation" || select_item === "overexpressed"){
       document.getElementById("mutationDiv").style.display = 'none';
       document.getElementById("postMutationDiv").style.display = 'none';
 
@@ -174,7 +174,7 @@
       document.getElementById("seqText").textContent="Peptide sequence";
     }
 
-    if (select_item == "potential"){
+    if (select_item === "potential"){
       document.getElementById("geneDiv").style.display = 'none';
       document.getElementById("geneCardDiv").style.display = 'none';
       document.getElementById("hlaDiv").style.display = 'none';
@@ -189,6 +189,6 @@
         hr_group[i].style.display = 'none';
       }
     }
-  };
+  }
 
 </script>

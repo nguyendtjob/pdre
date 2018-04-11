@@ -12,11 +12,6 @@
 <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
 <script>
-  //Delay function to display the page
-  function delay() {
-    setTimeout('initFadeIn()', 0);
-  }
-
   //Turn the page visible
   function initFadeIn() {
     $("#div_body").css("visibility","visible");
@@ -27,8 +22,7 @@
   $(document).ready(function(){
     //Create the color bar for the navigation cue
     document.getElementById("table-container").style.borderLeft = "thick solid #D40000";
-
-    delay();
+    initFadeIn();
     //setting the general table
     var generalTable = $('#generalTable').DataTable({
       dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-6'i><'col-sm-6'>>",
@@ -38,18 +32,13 @@
       paging: false,
       scrollCollapse: true,
       headerOffset: 102,
-
       "orderFixed": [ 11, 'asc' ],
-
       "order": [[ 11, "asc" ], [ 0, "asc" ]],
-
-
       "columnDefs": [
         {
           "targets":[10],
           "sortable": false
         },
-
         { "type": "num", "targets": 3 },
 
         {
@@ -76,6 +65,7 @@
 
       ],
 
+
       //Create the category row, done every time the datatable is drawn
       "drawCallback": function () {
         var api = this.api();
@@ -93,9 +83,9 @@
             last = group;
           }
         });
-
       }
     });
+
 
     //setting the potential table
     var potentialTable = $('#potentialTable').DataTable({
@@ -106,9 +96,7 @@
       paging: false,
       scrollCollapse: true,
       headerOffset: 102,
-
       "order": [ 0, "asc" ],
-
       "columnDefs": [
         {
           "targets": [1],
@@ -119,22 +107,25 @@
       ]
     });
 
+
     //Event listener: display full reference when a reference is clicked by the user
     $('.ref_text').on('click', function () {
       var tr = $(this).closest('tr');
       var row = generalTable.row( tr );
       var data = row.data();
 
-      if (data[8] != ''){
+      if (data[8] !== ''){
         $('#fullref_text').text(data[8]);
         document.getElementById("ref_zone").style.visibility = 'visible';
       }
-    } );
+    });
+
 
     //Prevents sorting when clicking on an input field
     $('.filter').on('click', function(e){
       e.stopPropagation();
     });
+
 
     //Event listener: any key input in the column filter except HLA
     $('input.column_filter').on( 'keyup', function () {
@@ -147,22 +138,19 @@
         .draw();
     } );
 
-    //Event listener: any key input in HLA filter (match case ignoring the lower and upper case)
-    $('input.hla_filter').on( 'keyup', function () {
-      var string;
 
-      if ($(this).val() == ""){
-        string = "";
-      } else {
+    //Event listener: any key input in HLA filter (HLA must match completely the letters of the search)
+    $('input.hla_filter').on( 'keyup', function () {
+      var string = "";
+      if ($(this).val() !== ""){
         string = "^" + $(this).val() + "$"
       }
-
       generalTable
         .columns($(this).attr('data-column'))
         .search(string,true,false,true)
         .draw();
+    });
 
-    } );
 
     //Event listener: any key input in the potential table filter
     $('#potential_column_filter').on( 'keyup', function () {
@@ -182,7 +170,8 @@
       generalTable.draw();
     });
 
-    //Event listener for the navbar buttons
+
+    //Event listener for the navbar buttons: highlight the button color and scroll to that section.
     $(".sectionbtn").click( function() {
       var selection = $( "#"+$(this).attr('section'));
       $('.sectionbtn').removeClass("active");
@@ -197,7 +186,6 @@
         scrollTop: $("#potentialTable").offset().top
       }, 200);
     });
-
 
 
     //Event listener: change category button highlight and navigation bar color depending on the category header position

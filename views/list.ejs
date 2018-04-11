@@ -4,244 +4,164 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
 <script>
-  //Delay function to display the page
-  function delay() {
-    var secs = 0;
-    setTimeout('initFadeIn()', secs);
-  }
-
   //Turn the page visible
   function initFadeIn() {
     $("#div_body").css("visibility","visible");
     $("#div_body").fadeIn(700);
     $("#loading").remove();
   }
-  function format ( d ) {
-    var com = '<i>'+d[9]+'</i>';
-
-    return '<i>Comment: '+com+'</i>';
-  }
-
 
   $(document).ready(function(){
-
-    delay();
+    initFadeIn();
     //setting the mutation datable
     var mutationTable = $('#mutationTable').DataTable({
-      "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
-      "scrollX": true,
-      "orderCellsTop": true,
-      scrollY: '65vh',
-      paging: false,
-      scrollCollapse: true,
-      headerOffset: 102,
-
-      rowsGroup: [0,1],
-
-      "order": [[ 0, "asc" ]],
-      "columnDefs": [
-        {
-          "targets":[0,1,2,3,4,5,6,7,8,9,10],
-          "sortable": false
-        },
-        {
-          "targets": [ 8,9 ],
-          "visible": false,
-          "searchable": true
-        },
-        { "width": "10%", "targets": 0 },
-        { "width": "20%", "targets": 1 },
-        { "width": "5%", "targets": [2]},
-        { "width": "6%", "targets": [3,5]},
-        { "width": "15%", "targets": [4] },
-        { "width": "20%", "targets": [6] },
-        { "width": "5%", "targets": 10},
-
-      ]
-      }
-    );
-
-    $('#mutationTable .oi-document').on('click', function () {
-      var tr = $(this).closest('tr');
-      var row = mutationTable.row( tr );
-
-      if ( row.child.isShown() ) {
-        // This row is already open - close it
-        row.child.hide();
-        tr.removeClass('shown');
-      }
-      else {
-        // Open this row
-        row.child( format(row.data()) ).show();
-        tr.addClass('shown');
-      }
-    } );
-
-    //setting the tumor datatable
-    var tumorTable = $('#tumorTable').DataTable({
-      "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
-      "scrollX": true,
-      "orderCellsTop": true,
-      scrollY: '65vh',
-      paging: false,
-      scrollCollapse: true,
-      headerOffset: 102,
-
-      rowsGroup: [0, 1],
-      "order": [[ 0, "asc" ]],
-      "columnDefs": [
-        {
-          "targets":[0,1,2,3,4,5,6,7,8,9,10],
-          "sortable": false
-        },
-        {
-          "targets": [1,8,9 ],
-          "visible": false,
-          "searchable": true
-        },
-
-        { "width": "24%", "targets": [0,4]},
-        { "width": "20%", "targets": 1 },
-        { "width": "5%", "targets": [2]},
-        { "width": "6%", "targets": [3,5]},
-        { "width": "20%", "targets": [6] },
-        { "width": "5%", "targets": 10},
-      ]
-      }
-    );
-
-    $('#tumorTable .oi-document').on('click', function () {
-      var tr = $(this).closest('tr');
-      var row = tumorTable.row( tr );
-
-      if ( row.child.isShown() ) {
-        // This row is already open - close it
-        row.child.hide();
-        tr.removeClass('shown');
-      }
-      else {
-        // Open this row
-        row.child( format(row.data()) ).show();
-        tr.addClass('shown');
-      }
-    } );
-
-    //setting the differentiation datatable
-    var differentiationTable = $('#differentationTable').DataTable({
-      "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
-      "scrollX": true,
-      "orderCellsTop": true,
-      scrollY: '65vh',
-      paging: false,
-      scrollCollapse: true,
-      headerOffset: 102,
-      rowsGroup: [0, 1],
-      "order": [[ 0, "asc" ]],
-      "columnDefs": [
-        {
-          "targets":[0,1,2,3,4,5,6,7,8,9,10],
-          "sortable": false
-        },
-        {
-          "targets": [8,9 ],
-          "visible": false,
-          "searchable": true
-        },
-        { "width": "10%", "targets": 0 },
-        { "width": "20%", "targets": 1 },
-        { "width": "5%", "targets": [2]},
-        { "width": "6%", "targets": [3,5]},
-        { "width": "15%", "targets": [4] },
-        { "width": "20%", "targets": [6] },
-        { "width": "5%", "targets": 10},
+        "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
+        "scrollX": true,
+        "orderCellsTop": true,
+        scrollY: '65vh',
+        paging: false,
+        scrollCollapse: true,
+        headerOffset: 102,
+        rowsGroup: [0,1],
+        "order": [[ 0, "asc" ]],
+        "columnDefs": [
+          {
+            "targets":[0,1,2,3,4,5,6,7,8,9,10],
+            "sortable": false
+          },
+          {
+            "targets": [ 8,9 ],
+            "visible": false,
+            "searchable": true
+          },
+          { "width": "10%", "targets": 0 },
+          { "width": "20%", "targets": 1 },
+          { "width": "5%", "targets": [2]},
+          { "width": "6%", "targets": [3,5]},
+          { "width": "15%", "targets": [4] },
+          { "width": "20%", "targets": [6] },
+          { "width": "5%", "targets": 10}
         ]
       }
     );
 
-    $('#differentationTable .oi-document').on('click', function () {
-      var tr = $(this).closest('tr');
-      var row = differentiationTable.row( tr );
+    //setting the tumor datatable
+    var tumorTable = $('#tumorTable').DataTable({
+        "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
+        "scrollX": true,
+        "orderCellsTop": true,
+        scrollY: '65vh',
+        paging: false,
+        scrollCollapse: true,
+        headerOffset: 102,
 
-      if ( row.child.isShown() ) {
-        // This row is already open - close it
-        row.child.hide();
-        tr.removeClass('shown');
-      }
-      else {
-        // Open this row
-        row.child( format(row.data()) ).show();
-        tr.addClass('shown');
-      }
-    } );
-
-    //setting the overexpressed datatable
-    var overexpressedTable = $('#overexpressedTable').DataTable({
-      "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
-      "scrollX": true,
-      "orderCellsTop": true,
-      scrollY: '65vh',
-      paging: false,
-      scrollCollapse: true,
-      headerOffset: 102,
-      rowsGroup: [0, 1],
-      "order": [[ 0, "asc" ]],
-      "columnDefs": [
-        {
-          "targets":[0,1,2,3,4,5,6,7,8,9,10],
-          "sortable": false
-        },
-        {
-          "targets": [8,9 ],
-          "visible": false,
-          "searchable": true
-        },
-        { "width": "10%", "targets": 0 },
-        { "width": "20%", "targets": 1 },
-        { "width": "5%", "targets": [2]},
-        { "width": "6%", "targets": [3,5]},
-        { "width": "15%", "targets": [4] },
-        { "width": "20%", "targets": [6] },
-        { "width": "5%", "targets": 10},
-      ]
+        rowsGroup: [0, 1],
+        "order": [[ 0, "asc" ]],
+        "columnDefs": [
+          {
+            "targets":[0,1,2,3,4,5,6,7,8,9,10],
+            "sortable": false
+          },
+          {
+            "targets": [1,8,9 ],
+            "visible": false,
+            "searchable": true
+          },
+          { "width": "24%", "targets": [0,4]},
+          { "width": "20%", "targets": 1 },
+          { "width": "5%", "targets": [2]},
+          { "width": "6%", "targets": [3,5]},
+          { "width": "20%", "targets": [6] },
+          { "width": "5%", "targets": 10},
+        ]
       }
     );
 
-    $('#overexpressedTable .oi-document').on('click', function () {
-      var tr = $(this).closest('tr');
-      var row = overexpressedTable.row( tr );
+    //setting the differentiation datatable
+    var differentiationTable = $('#differentationTable').DataTable({
+        "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
+        "scrollX": true,
+        "orderCellsTop": true,
+        scrollY: '65vh',
+        paging: false,
+        scrollCollapse: true,
+        headerOffset: 102,
+        rowsGroup: [0, 1],
+        "order": [[ 0, "asc" ]],
+        "columnDefs": [
+          {
+            "targets":[0,1,2,3,4,5,6,7,8,9,10],
+            "sortable": false
+          },
+          {
+            "targets": [8,9 ],
+            "visible": false,
+            "searchable": true
+          },
+          { "width": "10%", "targets": 0 },
+          { "width": "20%", "targets": 1 },
+          { "width": "5%", "targets": [2]},
+          { "width": "6%", "targets": [3,5]},
+          { "width": "15%", "targets": [4] },
+          { "width": "20%", "targets": [6] },
+          { "width": "5%", "targets": 10},
+        ]
+      }
+    );
 
-      if ( row.child.isShown() ) {
-        // This row is already open - close it
-        row.child.hide();
-        tr.removeClass('shown');
+    //setting the overexpressed datatable
+    var overexpressedTable = $('#overexpressedTable').DataTable({
+        "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
+        "scrollX": true,
+        "orderCellsTop": true,
+        scrollY: '65vh',
+        paging: false,
+        scrollCollapse: true,
+        headerOffset: 102,
+        rowsGroup: [0, 1],
+        "order": [[ 0, "asc" ]],
+        "columnDefs": [
+          {
+            "targets":[0,1,2,3,4,5,6,7,8,9,10],
+            "sortable": false
+          },
+          {
+            "targets": [8,9 ],
+            "visible": false,
+            "searchable": true
+          },
+          { "width": "10%", "targets": 0 },
+          { "width": "20%", "targets": 1 },
+          { "width": "5%", "targets": [2]},
+          { "width": "6%", "targets": [3,5]},
+          { "width": "15%", "targets": [4] },
+          { "width": "20%", "targets": [6] },
+          { "width": "5%", "targets": 10},
+        ]
       }
-      else {
-        // Open this row
-        row.child( format(row.data()) ).show();
-        tr.addClass('shown');
-      }
-    } );
+    );
+
 
     //Setting the potential datatable
     var potentialTable = $('#potentialTable').DataTable({
-      "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
-      "scrollX": true,
-      "orderCellsTop": true,
-      scrollY: '65vh',
-      paging: false,
-      scrollCollapse: true,
-      "order": [[ 0, "asc" ]],
-      "columnDefs": [
-        {
-          "targets":[2],
-          "sortable": false
-        },
-        {
-          "targets": [1],
-          "visible": false,
-        },
-        { "width": "5%", "targets": [2] },
-      ]
+        "sDom": '<"top"bl>rt<"bottom"ip><"clear">',
+        "scrollX": true,
+        "orderCellsTop": true,
+        scrollY: '65vh',
+        paging: false,
+        scrollCollapse: true,
+        "order": [[ 0, "asc" ]],
+        "columnDefs": [
+          {
+            "targets":[2],
+            "sortable": false
+          },
+          {
+            "targets": [1],
+            "visible": false,
+          },
+          { "width": "5%", "targets": [2]},
+        ]
       }
     );
 
@@ -258,7 +178,7 @@
       potentialTable.fixedHeader.adjust();
     } );
 
-    // read hash from page load and change tab
+    //Read hash from page load and change tab if necessary
     var hash = document.location.hash;
     var prefix = "tab_";
     if (hash) {
@@ -268,9 +188,7 @@
         window.scrollTo(0, 0);
       }, 1);
     }
-
     $('[data-toggle="tooltip"]').tooltip();
-
 
   });
 </script>
@@ -519,6 +437,10 @@
         </tbody>
       </table>
     </div>
+    <br/>
+    <hr>
+    <br/>
+    <p style="text-align:center">Did you find an article that isn't present in the database? <a href="/Peptide/submit"><b>Please let us know.</b></a></p>
   </div>
 </div>
 <input id="min" style="display:none"><input id="max" style="display:none"><input id="freq_limit" style="display:none"><input id="length" style="display:none">
