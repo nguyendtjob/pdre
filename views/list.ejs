@@ -438,9 +438,11 @@
       </table>
     </div>
     <br/>
+    <% if (!req.session.me) { %>
     <hr>
     <br/>
     <p style="text-align:center">Did you find an article that isn't present in the database? <a href="/Peptide/submit"><b>Please let us know.</b></a></p>
+    <% } %>
   </div>
 </div>
 <input id="min" style="display:none"><input id="max" style="display:none"><input id="freq_limit" style="display:none"><input id="length" style="display:none">

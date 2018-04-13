@@ -17,7 +17,12 @@ module.exports = {
     var type = req.body.type;
     var tumor = req.body.tumor;
     var hla = req.body.hla;
-    var freq = req.body.freq;
+    var freq;
+    if (isNaN(req.body.freq)){
+      freq = 0;
+    }else {
+      freq = req.body.freq;
+    }
     var leftSequence = req.body.leftSequence;
     var redPart = req.body.redPart;
     var rightSequence = req.body.rightSequence;
@@ -48,7 +53,7 @@ module.exports = {
       if(err){
         res.send(500, {error: 'Database Error'});
       }
-      res.redirect('Peptide/list');
+      res.redirect('Peptide/adminlist');
     });
   },
 
