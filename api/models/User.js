@@ -16,29 +16,6 @@ module.exports = {
       type: 'string',
       required: true
     }
-  },
-
-
-  /**
-   * Create a new user using the provided inputs,
-   * but encrypt the password first.
-   *
-   * @param  {Object}   inputs
-   *                     • name     {String}
-   *                     • email    {String}
-   *                     • password {String}
-   * @param  {Function} cb
-   */
-
-  signup: function (inputs, cb) {
-    // Create a user
-    User.create({
-      name: inputs.name,
-      email: inputs.email,
-      // TODO: But encrypt the password first
-      password: inputs.password
-    })
-      .exec(cb);
-  },
+  }
 
 };

@@ -1,45 +1,34 @@
 <script>
-  var _validFileExtensions = [".pdf"];
-
-  function Validate(oForm) {
-    var arrInputs = oForm.getElementsByTagName("input");
-    console.log(oForm.getElementById("submit_file"));
-    for (var i = 0; i < arrInputs.length; i++) {
-      var oInput = arrInputs[i];
-      if (oInput.type == "file") {
-        var sFileName = oInput.value;
-        if (sFileName.length > 0) {
-          var blnValid = false;
-          for (var j = 0; j < _validFileExtensions.length; j++) {
-            var sCurExtension = _validFileExtensions[j];
-            if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
-              blnValid = true;
-              break;
-            }
-          }
-          if (!blnValid) {
-            alert("Sorry, " + sFileName + " is invalid. Only " + _validFileExtensions.join(", ") + " files are allowed for upload.");
-          }
-        }
-      }
+  function ValidateExtension() {
+    var allowedFiles = [".pdf"];
+    var fileUpload = document.getElementById("submit_file");
+    var lblError = document.getElementById("lblError");
+    var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+    if (!regex.test(fileUpload.value.toLowerCase())) {
+      lblError.innerHTML = "Only <b>" + allowedFiles.join(', ') + "</b> files are allowed.";
+      return false;
     }
+    lblError.innerHTML = "";
+    return true;
   }
 </script>
 
 <div class="container-fluid">
   <p>You've found an article about an antigenic peptide that isn't present in the database? Feel free to let us know by submitting a pdf file!</p>
-  <form method="post" action="/Peptide/send" enctype="multipart/form-data" onsubmit="return Validate(this);">
+  <form method="post" action="/Peptide/send" enctype="multipart/form-data">
+    <span id="lblError" style="color: red;"></span>
     <% if (typeof message != 'undefined') { %>
     <% if (message == "success") { %>
-    <span style="color:green">The file has been successfully submitted.</span><br/>
+    <span style="color:green">The file has been successfully submitted.</span>
     <% } else if (message == "error") { %>
-    <span style="color:red">An error has occurred. Please try again.</span><br/>
+    <span style="color:red">An error has occurred. Please try again.</span>
     <% }} %>
+    <br>
     <label><b>E-mail </b><i>(required)</i></label><br/>
     <input type="text" name="email" required><br><br>
     <label><b>Comment </b><i>(optional)</i></label><br/>
     <textarea id="submit_comment" name="comment"></textarea><br><br>
     <input id ="submit_file" type="file" name="pdf" accept="application/pdf" required/><br><br>
-    <input type="submit" class="btn btn-primary">
+    <input type="submit" class="btn btn-primary" onclick="return ValidateExtension()">
   </form>
 </div>
