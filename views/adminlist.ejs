@@ -43,6 +43,9 @@
           },
           orientation: 'landscape',
           customize: function ( win ) {
+            //Add title
+            $(win.document.body).prepend('<p><h1>Antigenic peptides search results</h1></p>')
+
             //Remove the input fields of the headers
             $(win.document.body).find("input").each(function(){
               $(this).remove();
@@ -53,16 +56,37 @@
               var string = $(this).text();
               var change = string.replace(/ ⓘ/g,'').replace(/min/g,'').replace(/Length/g,'').replace(/-/g,'');
               $(this).text(change);
+              if ($(this).index() === 9){
+                $(this).addClass('delete');
+              }
             });
 
+            //Change type value into text and Extract the references and append them at the end of the document
+            var counter = 1;
+            $(win.document.body).append('<p><h4>References</h4></p>')
+
             $(win.document.body).find("td").each(function(){
-              if ($(this).index() === 1){
+              if ($(this).index() === 8){
+                $(this).append('<sup><b>'+counter+'</b></sup>');
+              }
+
+              else if ($(this).index() === 1){
                 var string = $(this).text();
                 var change = string.replace(0,'Mutation').replace(1,'Tumor-Specific').replace(2,'Differentiation').replace(3,'Overexpressed');
                 $(this).text(change);
               }
 
-            });
+              else if ($(this).index() === 9){
+                var reference = $(this).text();
+                $(win.document.body).append('<p><b>' + counter + '</b>: ' + reference + '</p><br>');
+                counter = counter +1;
+                $(this).addClass('delete');
+              }
+            })
+
+            //Remove the full reference column
+            $(win.document.body).find(".delete").remove();
+
           }
         }
       ],

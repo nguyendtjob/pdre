@@ -39,10 +39,12 @@
           title: '',
           exportOptions: {
             stripHtml: false,
-            columns: [0,1,2,3,4,5,6,7,9,10]
+            columns: [0,1,2,3,4,5,6,7,8,9,10]
           },
-          orientation: 'landscape',
           customize: function ( win ) {
+            //Add title
+            $(win.document.body).prepend('<p><h1>Antigenic peptides search results</h1></p>')
+
             //Remove the input fields of the headers
             $(win.document.body).find("input").each(function(){
               $(this).remove();
@@ -53,16 +55,37 @@
               var string = $(this).text();
               var change = string.replace(/ ⓘ/g,'').replace(/min/g,'').replace(/Length/g,'').replace(/-/g,'');
               $(this).text(change);
+              if ($(this).index() === 9){
+                $(this).addClass('delete');
+              }
             });
 
+            //Change type value into text and Extract the references and append them at the end of the document
+            var counter = 1;
+            $(win.document.body).append('<p><h4>References</h4></p>')
+
             $(win.document.body).find("td").each(function(){
-              if ($(this).index() === 1){
+              if ($(this).index() === 8){
+                $(this).append('<sup><b>'+counter+'</b></sup>');
+              }
+
+              else if ($(this).index() === 1){
                 var string = $(this).text();
                 var change = string.replace(0,'Mutation').replace(1,'Tumor-Specific').replace(2,'Differentiation').replace(3,'Overexpressed');
                 $(this).text(change);
               }
 
-            });
+              else if ($(this).index() === 9){
+                var reference = $(this).text();
+                $(win.document.body).append('<p><b>' + counter + '</b>: ' + reference + '</p><br>');
+                counter = counter +1;
+                $(this).addClass('delete');
+              }
+            })
+
+            //Remove the full reference column
+            $(win.document.body).find(".delete").remove();
+
           }
         }
       ],
@@ -329,12 +352,12 @@
     <table id="generalTable" class="table-bordered" width="100%">
       <thead>
       <tr>
-        <th id="gene_th" data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein"><span id="geneTH">Gene/Protein ⓘ</span><br><input class="filter column_filter gene_filter" type="text" data-column="0" /></th>
+        <th id="gene_th" data-toggle="tooltip" data-placement="top" data-html="true" title="Link to the Gene Card for the encoding gene <br>and/or the parent protein"><span id="geneTH">Gene/Protein ⓘ</span><br><input class="filter column_filter gene_filter" type="text" data-column="0" /></th>
         <th>Type</th>
-        <th data-toggle="tooltip" data-placement="top" title="">Tumor ⓘ<br><input class="filter column_filter tumor_filter" type="text" data-column="2" /></th>
-        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in blue">HLA ⓘ<br><input class="filter hla_filter" type="text" data-column="3" /></th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="">Tumor ⓘ<br><input class="filter column_filter tumor_filter" type="text" data-column="2" /></th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen<br/>Class II HLA are shown in blue<br/>*Filter for this column is strict">HLA ⓘ<br><input class="filter hla_filter" type="text" data-column="3" /></th>
         <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ<br>min <input id="freq_limit" class="filter freq_filter range" type="text" data-column="4" /></th>
-        <th><table id="seq_table" class="borderless"><th width="65%"><span data-toggle="tooltip" data-placement="top" title="The residues modified by the mutation are indicated in red">Peptide Sequence ⓘ</span><input class="filter column_filter seq_filter" type="text" data-column="5" /></th><th><span id="lengthTH"data-toggle="tooltip" data-placement="top" title="Select a specific range of peptide sequences with a minimum and maximum length">Length ⓘ</span> <br><input class="filter range" id="min"> - <input class="filter range" id="max"></th></table></th>
+        <th><table id="seq_table" class="borderless"><th width="65%"><span data-toggle="tooltip" data-placement="top" data-html="true" title="The residues modified by the mutation are indicated in red<br/>*You can use a * as a wildcard instead of any 1 letter.<br/>*You can delimit the start of the sequence with ^ or [<br/>*You can delimit the end of the sequence with $ or ]">Peptide Sequence ⓘ</span><input class="filter column_filter seq_filter" type="text" data-column="5" /></th><th><span id="lengthTH"data-toggle="tooltip" data-placement="top" title="Select a specific range of peptide sequences with a minimum and maximum length">Length ⓘ</span> <br><input class="filter range" id="min"> - <input class="filter range" id="max"></th></table></th>
         <th data-toggle="tooltip" data-placement="top" title="Position of the peptide sequence in the protein sequence">Position ⓘ<br><input class="filter column_filter pos_filter" type="text" data-column="6" /></th>
         <th data-toggle="tooltip" data-placement="top" title="Method used to isolate the CTL recognizing the antigen">Lymphocyte Stimulation ⓘ<br><input class="filter column_filter sim_filter" type="text" data-column="7" /></th>
         <th data-toggle="tooltip" data-placement="top" title="URL to the relevant reference">Reference ⓘ <br><input class="filter column_filter ref_filter" type="text" data-column="8" /></th>

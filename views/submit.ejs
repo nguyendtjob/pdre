@@ -4,7 +4,7 @@
     var fileUpload = document.getElementById("submit_file");
     var lblError = document.getElementById("lblError");
     var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
-    if (!regex.test(fileUpload.value.toLowerCase())) {
+    if (fileUpload.value !== "" && !regex.test(fileUpload.value.toLowerCase())) {
       lblError.innerHTML = "Only <b>" + allowedFiles.join(', ') + "</b> files are allowed.";
       return false;
     }
