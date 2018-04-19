@@ -61,21 +61,27 @@
               }
             });
 
-            //Change type value into text and Extract the references and append them at the end of the document
+            //Remove link icon
+            $(win.document.body).find("img").remove();
+
+            //Reference related functions
             var counter = 1;
             $(win.document.body).append('<p><h4>References</h4></p>')
 
             $(win.document.body).find("td").each(function(){
+              //Add the annotation for the reference
               if ($(this).index() === 8){
                 $(this).append('<sup><b>'+counter+'</b></sup>');
               }
 
+              //Change type value into text
               else if ($(this).index() === 1){
                 var string = $(this).text();
                 var change = string.replace(0,'Mutation').replace(1,'Tumor-Specific').replace(2,'Differentiation').replace(3,'Overexpressed');
                 $(this).text(change);
               }
 
+              //Append the full reference in the document
               else if ($(this).index() === 9){
                 var reference = $(this).text();
                 $(win.document.body).append('<p><b>' + counter + '</b>: ' + reference + '</p><br>');
@@ -86,7 +92,6 @@
 
             //Remove the full reference column
             $(win.document.body).find(".delete").remove();
-
           }
         }
       ],
@@ -356,7 +361,7 @@
         <td><%= peptide.leftSequence %><span style="color:red"><%= peptide.redPart %></span><%= peptide.rightSequence %></td>
         <td class="center_td"><%= peptide.pos %></td>
         <td><%= peptide.stimulation %></td>
-        <td class="ref_text"><%= peptide.reference %> <a href="<%= peptide.url %>" target="_blank"><img src="/images/ext_link.png"/></a></td>
+        <td class="ref_text"><%= peptide.reference %><a href="<%= peptide.url %>" target="_blank"><img src="/images/ext_link.png"/></a></td>
         <td><%= peptide.fullReference %></td>
         <td><%= peptide.comment %></td>
         <td class="comment-cell"><% if(peptide.comment) {%>
