@@ -184,8 +184,8 @@
 
     //Event listener: any key input in the column filter except HLA
     $('input.column_filter').on( 'keyup', function () {
-      //Allow the use of * as wildcard; [ and ] instead of ^ and $ as delimiters (base ., ^ and $ from regex are still usable)
-      var string = $(this).val().replace(/\*/g,'.').replace(/\[/g,'^').replace(/\]/g,'$');
+      //Allow the use of * as wildcard; ( and ) instead of ^ and $ as delimiters (base ., ^ and $ from regex are still usable)
+      var string = $(this).val().replace(/\*/g,'.').replace(/\(/g,'^').replace(/\)/g,'$');
 
       generalTable
         .columns($(this).attr('data-column'))
@@ -209,8 +209,8 @@
 
     //Event listener: any key input in the potential table filter
     $('#potential_column_filter').on( 'keyup', function () {
-      //Allow the use of * as wildcard; [ and ] instead of ^ and $ as delimiters
-      var string = $(this).val().replace(/\*/g,'.').replace(/\[/g,'^').replace(/\]/g,'$');
+      //Allow the use of * as wildcard; ( and ) instead of ^ and $ as delimiters
+      var string = $(this).val().replace(/\*/g,'.').replace(/\(/g,'^').replace(/\)/g,'$');
 
       potentialTable
         .columns(0)
@@ -319,7 +319,7 @@
         <th data-toggle="tooltip" data-placement="top" data-html="true" title="">Tumor ⓘ<br><input class="filter column_filter tumor_filter" type="text" data-column="2" /></th>
         <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen<br/>Class II HLA are shown in blue<br/>*Filter for this column is strict">HLA ⓘ<br><input class="filter hla_filter" type="text" data-column="3" /></th>
         <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ<br>min <input id="freq_limit" class="filter freq_filter range" type="text" data-column="4" /></th>
-        <th><table id="seq_table" class="borderless"><th width="65%"><span data-toggle="tooltip" data-placement="top" data-html="true" title="The residues modified by the mutation are indicated in red<br/>*You can use a * as a wildcard instead of any 1 letter.<br/>*You can delimit the start of the sequence with ^ or [<br/>*You can delimit the end of the sequence with $ or ]">Peptide Sequence ⓘ</span><input class="filter column_filter seq_filter" type="text" data-column="5" /></th><th><span id="lengthTH"data-toggle="tooltip" data-placement="top" title="Select a specific range of peptide sequences with a minimum and maximum length">Length ⓘ</span> <br><input class="filter range" id="min"> - <input class="filter range" id="max"></th></table></th>
+        <th><table id="seq_table" class="borderless"><th width="65%"><span data-toggle="tooltip" data-placement="top" data-html="true" title="The residues modified by the mutation are indicated in red<br/>*You can use a * as a wildcard instead of any 1 letter.<br/>*You can delimit the start of the sequence with ^ or (<br/>*You can delimit the end of the sequence with $ or )">Peptide Sequence ⓘ</span><input class="filter column_filter seq_filter" type="text" data-column="5" /></th><th><span id="lengthTH"data-toggle="tooltip" data-placement="top" title="Select a specific range of peptide sequences with a minimum and maximum length">Length ⓘ</span> <br><input class="filter range" id="min"> - <input class="filter range" id="max"></th></table></th>
         <th data-toggle="tooltip" data-placement="top" title="Position of the peptide sequence in the protein sequence">Position ⓘ<br><input class="filter column_filter pos_filter" type="text" data-column="6" /></th>
         <th data-toggle="tooltip" data-placement="top" title="Method used to isolate the CTL recognizing the antigen">Lymphocyte Stimulation ⓘ<br><input class="filter column_filter sim_filter" type="text" data-column="7" /></th>
         <th data-toggle="tooltip" data-placement="top" title="URL to the relevant reference">Reference ⓘ <br><input class="filter column_filter ref_filter" type="text" data-column="8" /></th>
