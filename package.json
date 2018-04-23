@@ -2,7 +2,7 @@
   "name": "pdre",
   "private": true,
   "version": "0.0.0",
-  "description": "a Sails application",
+  "description": "Application displaying antigenic peptides and their metadata.",
   "keywords": [],
   "dependencies": {
     "bcrypt": "^1.0.3",
