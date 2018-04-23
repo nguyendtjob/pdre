@@ -63,6 +63,12 @@
             //Remove link icon
             $(win.document.body).find("img").remove();
 
+            //Remove dotted underline of the reference
+            $(win.document.body).find("u").contents().unwrap();
+
+            //Remove dotted underline of the reference
+            $(win.document.body).find("a").contents().unwrap();
+
             //Reference related functions
             var counter = 1;
             $(win.document.body).append('<p><h4>References</h4></p>')
@@ -357,7 +363,7 @@
     <table id="generalTable" class="table-bordered" width="100%">
       <thead>
       <tr>
-        <th id="gene_th" data-toggle="tooltip" data-placement="top" data-html="true" title="Link to the Gene Card for the encoding gene <br>and/or the parent protein"><span id="geneTH">Gene/Protein ⓘ</span><br><input class="filter column_filter gene_filter" type="text" data-column="0" /></th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Link to the Gene Card for the encoding gene <br>and/or the parent protein"><span id="geneTH">Gene/Protein ⓘ</span><br><input class="filter column_filter gene_filter" type="text" data-column="0" /></th>
         <th>Type</th>
         <th data-toggle="tooltip" data-placement="top" data-html="true" title="">Tumor ⓘ<br><input class="filter column_filter tumor_filter" type="text" data-column="2" /></th>
         <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen<br/>Class II HLA are shown in blue<br/>*Filter for this column is strict">HLA ⓘ<br><input class="filter hla_filter" type="text" data-column="3" /></th>
@@ -377,7 +383,7 @@
         <td><% if(peptide.geneCard) {%>
           <b><a href="<%= peptide.geneCard %>" target="_blank"><%= peptide.gene%></a></b>
           <% } else {%>
-          <i><b><%= peptide.gene %></b></i>
+          <b><%= peptide.gene %></b>
           <% } %>
         </td>
         <td>
@@ -403,7 +409,7 @@
         <td><%= peptide.leftSequence %><span style="color:red" class="redPart"><%= peptide.redPart %></span><%= peptide.rightSequence %></td>
         <td class="center_td"><%= peptide.pos %></td>
         <td><%= peptide.stimulation %></td>
-        <td class="ref_text"><%= peptide.reference %><a href="<%= peptide.url %>" target="_blank"><img src="/images/ext_link.png"/></a></td>
+        <td class="ref_text"><u><%= peptide.reference %></u><a href="<%= peptide.url %>" target="_blank"><img src="/images/ext_link.png"/></a></td>
         <td><%= peptide.fullReference %></td>
         <td><%= peptide.comment %></td>
         <td class="comment-cell"><% if(peptide.comment) {%>
@@ -415,12 +421,10 @@
       </tbody>
     </table>
     <div>
-      <p id="ref_zone" style="visibility: hidden;" class="padded-multiline"><b>Full Reference of the selected peptide:</b> <i><span id="fullref_text"></span></i></p>
+      <p id="ref_zone" style="visibility: hidden;" class="padded-multiline"><span style="color:blue"><b>Full Reference of the selected peptide:</b> <i><span id="fullref_text"></span></i></span></p>
     </div>
   </div>
-  <br/>
   <hr>
-  <br/>
   <!-- Potential Table -->
   <div>
     <a id="potentialSection"></a>
@@ -445,9 +449,7 @@
       <% })%>
       </tbody>
     </table>
-    <br/>
     <hr>
-    <br/>
     <p style="text-align:center">Did you find an article that isn't present in the database? <a href="/Peptide/submit"><b>Please let us know.</b></a></p>
   </div>
 </div>
