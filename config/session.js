@@ -57,7 +57,7 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // adapter: 'connect-redis',
+   //adapter: 'connect-redis',
 
   /***************************************************************************
   *                                                                          *
@@ -87,8 +87,8 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // adapter: 'mongo',
-  // url: 'mongodb://user:password@localhost:27017/dbname', // user, password and port optional
+   adapter: 'connect-mongo',
+   url: 'mongodb://localhost:27017/session', // user, password and port optional
 
   /***************************************************************************
   *                                                                          *
@@ -101,13 +101,13 @@ module.exports.session = {
   * available in `mongoOptions`                                              *
   *                                                                          *
   ***************************************************************************/
-
-  // collection: 'sessions',
-  // stringify: true,
-  // mongoOptions: {
-  //   server: {
-  //     ssl: true
-  //   }
-  // }
-
+/*
+   collection: 'sessions',
+   stringify: true,
+   mongoOptions: {
+     server: {
+       ssl: true
+     }
+   }
+*/
 };

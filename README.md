@@ -1,3 +1,3 @@
 # pdre
 
-a [Sails](http://sailsjs.org) application
+Application displaying antigenic peptides and their metadata.
