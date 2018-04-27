@@ -4,27 +4,46 @@ var login = require('./login');
 
 describe('PeptiderController', function() {
   describe('create()', function() {
-    it('Create a peptide genetest', function (done) {
+    describe('Without credential', function() {
+      it('Access to create without credential. Should return status 403', function (done) {
         supertest(sails.hooks.http.app)
           .post('/Peptide/create')
           .send({gene: 'genetest'})
-          .expect('location','/Peptide/adminlist', function(){
-            Peptide.find({gene:'genetest'})
-              .then(function(peptidelist) {
+          .expect(403, done);
+      });
+    });
+
+    describe('with credential. Should find 1 genetest gene', function() {
+      var cookie;
+      before(function(done){
+        login.login(function(loginCookie){
+          cookie = loginCookie;
+          done();
+        });
+      });
+      it('Create a peptide genetest', function (done) {
+        supertest(sails.hooks.http.app)
+          .post('/Peptide/create')
+          .set('Cookie', cookie)
+          .send({gene: 'genetest'})
+          .expect('location', '/Peptide/adminlist', function () {
+            Peptide.find({gene: 'genetest'})
+              .then(function (peptidelist) {
                 if (peptidelist.length !== 1) {
                   return done(new Error(
-                    'There should be only 1 peptide for the test. There is actually: ' + peptidelist.length + " of them."
+                    'There should be 1 peptide with the updated name for the test. There is actually: ' + peptidelist.length + " of them."
                   ));
                 }
                 return done();
               })
               .catch(done);
           });
-    });
+      });
 
-    after(function(){
-      Peptide.destroy({gene:'genetest'}).exec(function (){
-        return false;
+      after(function(){
+        Peptide.destroy({gene:'genetest'}).exec(function (){
+          return false;
+        });
       });
     });
   });
@@ -98,7 +117,6 @@ describe('PeptiderController', function() {
           .get('/Peptide/add')
           .set('Cookie',cookie)
           .expect(200, done);
-
       });
 
     });
