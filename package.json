@@ -25,19 +25,25 @@
     "include-all": "^1.0.0",
     "nodemailer": "^4.6.4",
     "rc": "1.0.1",
-    "sails": "~0.12.14",
+    "sails": "^0.12.14",
     "sails-disk": "~0.10.9",
     "sails-mongo": "^0.12.2"
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "node ./node_modules/mocha/bin/mocha test/lifecycle.test.js test/integration/**/*.test.js"
   },
   "main": "app.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/anonymous node/sails user/pdre.git"
   },
-  "author": "anonymous node/sails user",
-  "license": ""
+  "author": "Dat Toan NGUYEN",
+  "license": "",
+  "devDependencies": {
+    "mocha": "^5.1.1",
+    "superagent": "^3.8.2",
+    "supertest": "^3.0.0"
+  }
 }

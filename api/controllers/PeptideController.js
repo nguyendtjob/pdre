@@ -12,49 +12,54 @@ module.exports = {
    * `PeptideController.create()`
    */
   create: function (req, res) {
-    var gene = req.body.gene;
-    var geneCard = req.body.geneCard;
-    var type = req.body.type;
-    var tumor = req.body.tumor;
-    var hla = req.body.hla;
-    var freq;
-    if (isNaN(req.body.freq)){
-      freq = 0;
+    if (req.session.me == null){
+      res.status(403);
+      res.view('403');
     }else {
-      freq = req.body.freq;
-    }
-    var leftSequence = req.body.leftSequence;
-    var redPart = req.body.redPart;
-    var rightSequence = req.body.rightSequence;
-    var pos = req.body.pos;
-    var stimulation = req.body.stimulation;
-    var reference = req.body.reference;
-    var fullReference = req.body.fullReference;
-    var url = req.body.url;
-    var comment = req.body.comment;
-
-    Peptide.create({
-      gene: gene,
-      geneCard: geneCard,
-      type: type,
-      tumor: tumor,
-      hla: hla,
-      freq: freq,
-      leftSequence: leftSequence,
-      redPart: redPart,
-      rightSequence: rightSequence,
-      pos: pos,
-      stimulation: stimulation,
-      reference: reference,
-      fullReference: fullReference,
-      url: url,
-      comment: comment
-    }).exec(function(err){
-      if(err){
-        res.send(500, {error: 'Database Error'});
+      var gene = req.body.gene;
+      var geneCard = req.body.geneCard;
+      var type = req.body.type;
+      var tumor = req.body.tumor;
+      var hla = req.body.hla;
+      var freq;
+      if (isNaN(req.body.freq)) {
+        freq = 0;
+      } else {
+        freq = req.body.freq;
       }
-      res.redirect('Peptide/adminlist');
-    });
+      var leftSequence = req.body.leftSequence;
+      var redPart = req.body.redPart;
+      var rightSequence = req.body.rightSequence;
+      var pos = req.body.pos;
+      var stimulation = req.body.stimulation;
+      var reference = req.body.reference;
+      var fullReference = req.body.fullReference;
+      var url = req.body.url;
+      var comment = req.body.comment;
+
+      Peptide.create({
+        gene: gene,
+        geneCard: geneCard,
+        type: type,
+        tumor: tumor,
+        hla: hla,
+        freq: freq,
+        leftSequence: leftSequence,
+        redPart: redPart,
+        rightSequence: rightSequence,
+        pos: pos,
+        stimulation: stimulation,
+        reference: reference,
+        fullReference: fullReference,
+        url: url,
+        comment: comment
+      }).exec(function (err) {
+        if (err) {
+          res.send(500, {error: 'Database Error'});
+        }
+        res.redirect('Peptide/adminlist');
+      });
+    }
   },
 
 
@@ -125,6 +130,7 @@ module.exports = {
    */
   adminlist: function (req, res) {
     if (req.session.me == null){
+      res.status(403);
       res.view('403');
     }else {
       Peptide.find().where({type: {'!' : ["potential"]}}).exec(function (err, peptides){
@@ -135,7 +141,7 @@ module.exports = {
           if (err) {
             res.send(500, {error: 'Database Error'});
           }
-
+          res.status(200);
           res.view('adminlist', {
             peptides: peptides,
             potentials: potentials
@@ -224,6 +230,7 @@ module.exports = {
    */
   add: function(req, res) {
     if (req.session.me == null){
+      res.status(403);
       res.view('403');
     }else{
       res.view('add');
@@ -235,6 +242,7 @@ module.exports = {
    */
   edit: function (req, res) {
     if (req.session.me == null){
+      res.status(403);
       res.view('403');
     }else {
       Peptide.findOne({id: req.params.id}).exec(function (err, peptide) {
@@ -251,6 +259,7 @@ module.exports = {
    */
   update: function(req, res){
     if (req.session.me == null){
+      res.status(403);
       res.view('403');
     }else {
       var gene = req.body.gene;
@@ -300,6 +309,7 @@ module.exports = {
    */
   delete: function (req, res) {
     if (req.session.me == null){
+      res.status(403);
       res.view('403');
     }else {
       Peptide.destroy({id: req.params.id}).exec(function (err) {
