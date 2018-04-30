@@ -50,5 +50,5 @@
 * described in the Sails reference documentation (see link above).          *
 *                                                                           *
 ****************************************************************************/
-
+//Important note: has to be turned off for unit tests
  module.exports.csrf = true;

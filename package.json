@@ -1,5 +1,5 @@
 {
-  "name": "pdre",
+  "name": "caped",
   "private": true,
   "version": "0.0.0",
   "description": "Application displaying antigenic peptides and their metadata.",
@@ -43,7 +43,6 @@
   "license": "",
   "devDependencies": {
     "mocha": "^5.1.1",
-    "superagent": "^3.8.2",
     "supertest": "^3.0.0"
   }
 }

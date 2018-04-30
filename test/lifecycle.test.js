@@ -1,5 +1,6 @@
 var sails = require('sails');
 
+//Important note: module.exports.csr in config/csrf.js must be false for the tests
 // Before running any tests...
 before(function(done) {
 

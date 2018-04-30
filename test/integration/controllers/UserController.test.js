@@ -1,3 +1,5 @@
+//Important note: module.exports.csr in config/csrf.js must be false for the tests
+
 var supertest = require('supertest');
 var login = require('./login');
 
