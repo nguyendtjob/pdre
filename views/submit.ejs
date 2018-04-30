@@ -36,6 +36,7 @@
     <input type="text" name="email" required><br><br>
     <label><b>Comment </b><i>(optional)</i></label><br/>
     <textarea id="submit_comment" name="comment"></textarea><br><br>
+    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
     <input id ="submit_file" type="file" name="pdf" onchange="return ValidateExtension()" accept="application/pdf" required/><br><br>
     <input id ="submit_button" type="submit" class="btn btn-primary">
   </form>

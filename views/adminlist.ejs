@@ -39,9 +39,8 @@
           title: '',
           exportOptions: {
             stripHtml: false,
-            columns: [0,1,2,3,4,5,6,7,9,10]
+            columns: [0,1,2,3,4,5,6,7,8,9,10]
           },
-          orientation: 'landscape',
           customize: function ( win ) {
             //Add title
             $(win.document.body).prepend('<p><h1>Antigenic peptides search results</h1></p>')
@@ -63,6 +62,12 @@
 
             //Remove link icon
             $(win.document.body).find("img").remove();
+
+            //Remove dotted underline of the reference
+            $(win.document.body).find("u").contents().unwrap();
+
+            //Remove link
+            $(win.document.body).find("a").contents().unwrap();
 
             //Reference related functions
             var counter = 1;
@@ -97,7 +102,7 @@
       ],
       "columnDefs": [
         {
-          "targets":[11],
+          "targets":[1],
           "sortable": false
         },
         { "type": "num", "targets": 4 },
@@ -358,10 +363,10 @@
         <td class="center_td"><%= peptide.hla %></td>
         <% } %>
         <td class="center_td"><%= peptide.freq %></td>
-        <td><%= peptide.leftSequence %><span style="color:red"><%= peptide.redPart %></span><%= peptide.rightSequence %></td>
+        <td><%= peptide.leftSequence %><span style="color:red" class="redPart"><%= peptide.redPart %></span><%= peptide.rightSequence %></td>
         <td class="center_td"><%= peptide.pos %></td>
         <td><%= peptide.stimulation %></td>
-        <td class="ref_text"><%= peptide.reference %><a href="<%= peptide.url %>" target="_blank"><img src="/images/ext_link.png"/></a></td>
+        <td class="ref_text"><u><%= peptide.reference %></u><a href="<%= peptide.url %>" target="_blank"><img src="/images/ext_link.png"/></a></td>
         <td><%= peptide.fullReference %></td>
         <td><%= peptide.comment %></td>
         <td class="comment-cell"><% if(peptide.comment) {%>
@@ -377,7 +382,7 @@
       </tbody>
     </table>
     <div>
-      <p id="ref_zone" style="visibility: hidden;" class="padded-multiline"><b>Full Reference of the selected peptide:</b> <i><span id="fullref_text"></span></i></p>
+      <p id="ref_zone" style="visibility: hidden;" class="padded-multiline"><span style="color:blue"><b>Full Reference of the selected peptide:</b> <i><span id="fullref_text"></span></i></span></p>
     </div>
   </div>
   <hr>
