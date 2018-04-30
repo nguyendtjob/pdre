@@ -18,10 +18,32 @@ module.exports = {
    * `UserController.login()`
    */
   loginaction: function (req, res) {
-    // See `api/responses/login.js`
-    return res.login({
-      email: req.param('email'),
-      password: req.param('password')
+    const bcrypt = require('bcrypt');
+
+    // Look up the user
+    User.findOne({
+      email: req.body.email
+    }).exec(function (err, user) {
+      if (err)
+        return res.negotiate(err);
+
+      // Redirect to the login page if there wasn't any user matching the email
+      if (!user) {
+        return res.view('login',{error:"error"});
+      }
+
+      //Use bcrypt to compare the password if there was a user found.
+      bcrypt.compare(req.body.password, user.password, function(err, isMatch) {
+        if (err)
+          return res.negotiate(err);
+
+        if(isMatch) {
+          req.session.me = user.id;
+          return res.redirect('/Peptide/adminlist');
+        } else {
+          return res.view('login',{error:"error"});
+        }
+      });
     });
   },
 
