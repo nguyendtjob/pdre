@@ -188,7 +188,7 @@ module.exports = {
         service: 'gmail',
         auth: {
           user: 'caped.pdre@gmail.com',
-          pass: 'seacats86'
+          pass: 'DDUVcaped!'
         }
       });
 
