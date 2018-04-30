@@ -182,13 +182,14 @@ module.exports = {
 
       //Nodemailer module used to send the mail
       var nodemailer = require('nodemailer');
+      var config = require("../../config/secrets");
 
       //Credentials of the gmail account
       var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'caped.pdre@gmail.com',
-          pass: 'DDUVcaped!'
+          user: config.emailsender,
+          pass: config.password
         }
       });
 
@@ -197,8 +198,8 @@ module.exports = {
       //Different mailoptions if they left a comment or not in the submit form
       if (req.body.comment !== ""){
         mailOptions = {
-          from: 'caped.pdre@gmail.com',
-          to: 'caped.pdre@gmail.com',
+          from: config.emailsender,
+          to: config.emailreceiver,
           subject: 'CAPeD: A new file has been submitted to you',
           html: '<html><p>Greetings</p><p>Here is new article suggestion from ' + req.body.email + '.</p><p>Here is their comment: </p><p><i>' + req.body.comment + '</i></p></html>',
           attachments: [{
@@ -208,8 +209,8 @@ module.exports = {
         };
       } else {
         mailOptions = {
-          from: 'caped.pdre@gmail.com',
-          to: 'caped.pdre@gmail.com',
+          from: config.emailsender,
+          to: config.emailreceiver,
           subject: 'CAPeD: A new file has been submitted to you',
           html: '<html><p>Greetings</p><p>Here is new article suggestion from ' + req.body.email + '.</p><p>They did not leave any comment.</p></html>',
           attachments: [{
