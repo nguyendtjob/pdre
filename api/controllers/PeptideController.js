@@ -55,6 +55,7 @@ module.exports = {
         comment: comment
       }).exec(function (err) {
         if (err) {
+          sails.log.error(new Error("500: Database Error (create)"));
           res.send(500, {error: 'Database Error'});
         }
         res.redirect('Peptide/adminlist');
@@ -69,26 +70,31 @@ module.exports = {
   list: function (req, res) {
     Peptide.find().where({type: "mutation"}).exec(function (err, mutations) {
       if (err) {
+        sails.log.error(new Error("500: Database Error (list: fetch mutation)"));
         res.send(500, {error: 'Database Error'});
       }
 
       Peptide.find().where({type: "tumor"}).exec(function (err, tumors) {
         if (err) {
+          sails.log.error(new Error("500: Database Error (list: fetch tumor)"));
           res.send(500, {error: 'Database Error'});
         }
 
         Peptide.find().where({type: "differentiation"}).exec(function (err, differentiations) {
           if (err) {
+            sails.log.error(new Error("500: Database Error (list: fetch differentiation)"));
             res.send(500, {error: 'Database Error'});
           }
 
           Peptide.find().where({type: "overexpressed"}).exec(function (err, overs) {
             if (err) {
+              sails.log.error(new Error("500: Database Error (list: fetch overexpressed)"));
               res.send(500, {error: 'Database Error'});
             }
 
             Peptide.find().where({type: "potential"}).exec(function (err, potentials) {
               if (err) {
+                sails.log.error(new Error("500: Database Error (list: fetch potential)"));
                 res.send(500, {error: 'Database Error'});
               }
               res.view('list', {
@@ -111,10 +117,12 @@ module.exports = {
   search: function (req, res) {
     Peptide.find().where({type: {'!' : ["potential"]}}).exec(function (err, peptides){
       if (err) {
+        sails.log.error(new Error("500: Database Error (search: fetch non-potential)"));
         res.send(500, {error: 'Database Error'});
       }
         Peptide.find().where({type: "potential"}).exec(function (err, potentials) {
           if (err) {
+            sails.log.error(new Error("500: Database Error (search: fetch potential)"));
             res.send(500, {error: 'Database Error'});
           }
           res.view('search', {
@@ -135,10 +143,12 @@ module.exports = {
     }else {
       Peptide.find().where({type: {'!' : ["potential"]}}).exec(function (err, peptides){
         if (err) {
+          sails.log.error(new Error("500: Database Error (adminlist: fetch non-potential)"));
           res.send(500, {error: 'Database Error'});
         }
         Peptide.find().where({type: "potential"}).exec(function (err, potentials) {
           if (err) {
+            sails.log.error(new Error("500: Database Error (adminlist: fetch potential)"));
             res.send(500, {error: 'Database Error'});
           }
           res.status(200);
@@ -165,8 +175,10 @@ module.exports = {
     //Use the build-in skipper
     req.file('pdf').upload(function whenDone(err,uploadedFiles){
       if (err) {
+        sails.log.error(new Error("Send: Error when uploading pdf"));
         return res.view('submit', {message:"error"});
       }
+
 
       //Nodemailer module used to send the mail
       var nodemailer = require('nodemailer');
@@ -210,6 +222,7 @@ module.exports = {
       //Sending the mail
       transporter.sendMail(mailOptions, function(error, info){
         if (err) {
+          sails.log.error(new Error("Send: Error when sending mail"));
           return res.view('submit', {message:"error"});
         }
           console.log('Email sent: ' + info.response);
@@ -217,7 +230,10 @@ module.exports = {
           //Deleting the temporary file after the mail has been sent.
           var fs = require('fs');
           fs.unlink(uploadedFiles[0].fd, function(err) {
-            if (err) return console.log(err);
+            if (err) {
+              sails.log.error(new Error("Send: Error when deleting pdf in the server"));
+              return;
+            }
             return res.view('submit', {message:"success"});
           });
 
@@ -247,6 +263,7 @@ module.exports = {
     }else {
       Peptide.findOne({id: req.params.id}).exec(function (err, peptide) {
         if (err) {
+          sails.log.error(new Error("500: Database Error (edit)"));
           res.send(500, {error: 'Database Error'});
         }
         res.view('edit', {peptide: peptide});
@@ -296,6 +313,7 @@ module.exports = {
         comment: comment
       }).exec(function (err) {
         if (err) {
+          sails.log.error(new Error("500: Database Error (update)"));
           res.send(500, {error: 'Database Error'});
         }
         res.redirect('Peptide/adminlist');
@@ -314,6 +332,7 @@ module.exports = {
     }else {
       Peptide.destroy({id: req.params.id}).exec(function (err) {
         if (err) {
+          sails.log.error(new Error("500: Database Error (delete)"));
           res.send(500, {error: 'Database Error'});
         }
         res.redirect('Peptide/adminlist');

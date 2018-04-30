@@ -1,4 +1,5 @@
 var supertest = require('supertest');
+var login = require('./login');
 
 describe('UserController', function() {
 
@@ -45,10 +46,18 @@ describe('UserController', function() {
 
 
   describe('logout()', function() {
+    var cookie;
+    before(function(done){
+      login.login(function(loginCookie){
+        cookie = loginCookie;
+        done();
+      });
+    });
 
     it('should redirect to general list', function (done) {
       supertest(sails.hooks.http.app)
         .post('/User/logout')
+        .set('Cookie',cookie)
         .expect(302)
         .expect('location','/Peptide/list', done);
     });
