@@ -52,11 +52,13 @@ module.exports = {
    * `UserController.logout()`
    */
   logout: function (req, res) {
-    // "Forget" the user from the session.
-    // Subsequent requests from this user agent won't have `req.session.me`.
-    req.session.me = null;
+    req.session.destroy(function(err){
+      if (err)
+        return res.negotiate(err);
 
-    return res.redirect('/Peptide/list');
+      return res.redirect('/Peptide/list');
+
+    })
   }
 
 
