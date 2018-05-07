@@ -320,6 +320,12 @@
     });
 
 
+    //Add margin to print button
+    $('.buttons-print').each(function() {
+      $(this).css('margin-top','7px');
+    })
+
+
     //Apply Bootstrap tooltip style
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -426,6 +432,7 @@
   <!-- Potential Table -->
   <div>
     <a id="potentialSection"></a>
+    <b>&emsp;Potential antigenic peptide references</b>
     <table id="potentialTable" class="table-bordered" width="100%">
       <thead>
       <tr>
