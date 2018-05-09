@@ -194,11 +194,8 @@ module.exports = {
 
       //Credentials of the gmail account
       var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: config.emailsender,
-          pass: config.password
-        }
+        host: config.emailsmtp,
+        port: config.emailport,
       });
 
       var mailOptions;
@@ -209,7 +206,7 @@ module.exports = {
           from: config.emailsender,
           to: config.emailreceiver,
           subject: 'CAPeD: A new file has been submitted to you',
-          html: '<html><p>Greetings</p><p>Here is new article suggestion from ' + req.body.email + '.</p><p>Here is their comment: </p><p><i>' + req.body.comment + '</i></p></html>',
+          html: '<html><p>Greetings</p><p>Here is a new article suggestion from ' + req.body.email + '.</p><p>Here is their comment: </p><p><i>' + req.body.comment + '</i></p></html>',
           attachments: [{
             filename: uploadedFiles[0].filename,
             path: uploadedFiles[0].fd
@@ -220,7 +217,7 @@ module.exports = {
           from: config.emailsender,
           to: config.emailreceiver,
           subject: 'CAPeD: A new file has been submitted to you',
-          html: '<html><p>Greetings</p><p>Here is new article suggestion from ' + req.body.email + '.</p><p>They did not leave any comment.</p></html>',
+          html: '<html><p>Greetings</p><p>Here is a new article suggestion from ' + req.body.email + '.</p><p>They did not leave any comment.</p></html>',
           attachments: [{
             filename: uploadedFiles[0].filename,
             path: uploadedFiles[0].fd
