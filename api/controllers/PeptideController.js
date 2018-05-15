@@ -350,10 +350,6 @@ module.exports = {
         res.status(403);
         res.view('403');
       } else {
-        if (req.session.me == null){
-          res.status(403);
-          res.view('403');
-        }else {
           Peptide.destroy({id: req.params.id}).exec(function (err) {
             if (err) {
               sails.log.error(new Error("500: Database Error (delete)"));
@@ -362,7 +358,6 @@ module.exports = {
             res.redirect('Peptide/adminlist');
           });
           return false;
-        }
       }
     });
   }
