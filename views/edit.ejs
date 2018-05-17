@@ -1,100 +1,3 @@
-<script>
-
-  //Function that hide or show form fields/hr based on the peptide type chosen in the select field. Also change field size
-  function showHide(select_item) {
-    var hr_group = document.getElementsByClassName("upper_hr");
-    var i;
-    if (select_item === "mutation"){
-      document.getElementById("geneDiv").style.display = 'block';
-      document.getElementById("geneCardDiv").style.display = 'block';
-      document.getElementById("tumorDiv").style.display = 'block';
-      document.getElementById("hlaDiv").style.display = 'block';
-      document.getElementById("freqDiv").style.display = 'block';
-      document.getElementById("preMutationDiv").style.display = 'block';
-      document.getElementById("mutationDiv").style.display = 'block';
-      document.getElementById("postMutationDiv").style.display = 'block';
-      document.getElementById("posDiv").style.display = 'block';
-      document.getElementById("stimDiv").style.display = 'block';
-      for (i = 0; i < hr_group.length; i++) {
-        hr_group[i].style.display = 'block';
-      }
-
-      document.getElementById("hlaDiv").className = "col-md-4";
-      document.getElementById("freqDiv").className = "col-md-4";
-      document.getElementById("preMutationDiv").className = "col-md-4";
-
-      document.getElementById("seqText").textContent="Peptide sequence before the mutated part";
-    }
-
-    else if (select_item ==="tumor"){
-      document.getElementById("tumorDiv").style.display = 'none';
-      document.getElementById("mutationDiv").style.display = 'none';
-      document.getElementById("postMutationDiv").style.display = 'none';
-
-      document.getElementById("geneDiv").style.display = 'block';
-      document.getElementById("geneCardDiv").style.display = 'block';
-      document.getElementById("preMutationDiv").style.display = 'block';
-      document.getElementById("hlaDiv").style.display = 'block';
-      document.getElementById("freqDiv").style.display = 'block';
-      document.getElementById("posDiv").style.display = 'block';
-      document.getElementById("stimDiv").style.display = 'block';
-      for (i = 0; i < hr_group.length; i++) {
-        hr_group[i].style.display = 'block';
-      }
-
-      document.getElementById("hlaDiv").className = "col-md-6";
-      document.getElementById("freqDiv").className = "col-md-6";
-      document.getElementById("preMutationDiv").className = "col-md-12";
-
-      document.getElementById("seqText").textContent="Peptide sequence";
-    }
-
-    else if (select_item === "differentiation" || select_item === "overexpressed"){
-      document.getElementById("mutationDiv").style.display = 'none';
-      document.getElementById("postMutationDiv").style.display = 'none';
-
-      document.getElementById("tumorDiv").style.display = 'block';
-      document.getElementById("preMutationDiv").style.display = 'block';
-      document.getElementById("preMutationDiv").className = "col-md-12";
-      document.getElementById("geneDiv").style.display = 'block';
-      document.getElementById("geneCardDiv").style.display = 'block';
-      document.getElementById("hlaDiv").style.display = 'block';
-      document.getElementById("freqDiv").style.display = 'block';
-      document.getElementById("posDiv").style.display = 'block';
-      document.getElementById("stimDiv").style.display = 'block';
-      for (i = 0; i < hr_group.length; i++) {
-        hr_group[i].style.display = 'block';
-      }
-
-      document.getElementById("hlaDiv").className = "col-md-4";
-      document.getElementById("freqDiv").className = "col-md-4";
-      document.getElementById("preMutationDiv").className = "col-md-12";
-
-      document.getElementById("seqText").textContent="Peptide sequence";
-    }
-
-    else if (select_item === "potential"){
-      document.getElementById("geneDiv").style.display = 'none';
-      document.getElementById("geneCardDiv").style.display = 'none';
-      document.getElementById("hlaDiv").style.display = 'none';
-      document.getElementById("freqDiv").style.display = 'none';
-      document.getElementById("posDiv").style.display = 'none';
-      document.getElementById("stimDiv").style.display = 'none';
-      document.getElementById("tumorDiv").style.display = 'none';
-      document.getElementById("preMutationDiv").style.display = 'none';
-      document.getElementById("mutationDiv").style.display = 'none';
-      document.getElementById("postMutationDiv").style.display = 'none';
-      for (i = 0; i < hr_group.length; i++) {
-        hr_group[i].style.display = 'none';
-      }
-    }
-  }
-  var sel = document.getElementById("selType");
-
-  //Change the form accordingly based on the peptide to edit
-  window.onload = showHide(sel.options[sel.selectedIndex].value);
-
-</script>
 
 <div class="container-fluid">
   <ol class="breadcrumb">
@@ -148,74 +51,74 @@
       </div>
       <div class="col-md-5" id="geneDiv">
         <label><b>Gene</b></label>
-        <input type="text" name="gene" class="form-control" placeholder="Gene" value="<%= peptide.gene %>">
+        <input type="text" name="gene" class="form-control" value="<%= peptide.gene ? peptide.gene : '' %>">
       </div>
       <div class="col-md-5" id="geneCardDiv">
         <label><b>URL of the Gene Card</b></label>
-        <input type="text" name="geneCard" class="form-control" placeholder="URL of the Gene Card" value="<%= peptide.geneCard %>" >
+        <input type="text" name="geneCard" class="form-control" value="<%= peptide.geneCard ? peptide.geneCard : '' %>" >
       </div>
     </div>
     <hr>
     <div class="form-row">
       <div class="col-md-4" id="tumorDiv">
         <label><b>Tumor</b></label>
-        <input type="text" name="tumor" class="form-control" placeholder="Tumor" value="<%= peptide.tumor %>">
+        <input type="text" name="tumor" class="form-control" value="<%= peptide.tumor ? peptide.tumor : '' %>">
       </div>
       <div class="col-md-4" id="hlaDiv">
         <label><b>HLA</b></label>
-        <input type="text" name="hla" class="form-control" placeholder="HLA" value="<%= peptide.hla %>">
+        <input type="text" name="hla" class="form-control" value="<%= peptide.hla ? peptide.hla : '' %>">
       </div>
       <div class="col-md-4" id="freqDiv">
         <label><b>HLA Frequency</b></label>
-        <input type="text" name="freq" class="form-control" placeholder="HLA frequency" value="<%= peptide.freq %>">
+        <input type="text" name="freq" class="form-control" value="<%= peptide.freq ? peptide.freq : 0 %>">
       </div>
     </div>
     <hr class="upper_hr">
     <div class="form-row">
       <div class="col-md-4" id="preMutationDiv">
         <label><b id="seqText">Peptide sequence before the mutated part</b></label>
-        <input type="text" name="leftSequence" class="form-control" placeholder="Sequence" value="<%= peptide.leftSequence %>">
+        <input type="text" name="leftSequence" class="form-control" value="<%= peptide.leftSequence ? peptide.leftSequence : '' %>">
       </div>
       <div class="col-md-4" id="mutationDiv">
         <label><b>Mutated part of the sequence</b></label>
-        <input type="text" name="redPart" class="form-control" placeholder="Mutation" value="<%= peptide.redPart %>">
+        <input type="text" name="redPart" class="form-control" value="<%= peptide.redPart ? peptide.redPart : '' %>">
       </div>
       <div class="col-md-4" id="postMutationDiv">
         <label><b>Peptide sequence after the mutated part</b></label>
-        <input type="text" name="rightSequence" class="form-control" placeholder="Sequence" value="<%= peptide.rightSequence %>">
+        <input type="text" name="rightSequence" class="form-control" value="<%= peptide.rightSequence ? peptide.rightSequence : '' %>">
       </div>
     </div>
     <hr class="upper_hr">
     <div class="form-row">
       <div class="col-md-4" id="posDiv">
         <label><b>Position</b></label>
-        <input type="text" name="pos" class="form-control" placeholder="Position" value="<%= peptide.pos %>">
+        <input type="text" name="pos" class="form-control" value="<%= peptide.pos ? peptide.pos : '' %>">
       </div>
       <div class="col-md-4" id="stimDiv">
         <label><b>Lymphocyte Stimulation Method</b></label>
-        <input type="text" name="stimulation" class="form-control" placeholder="Lymphocyte Stimulation Method" value="<%= peptide.stimulation %>">
+        <input type="text" name="stimulation" class="form-control" value="<%= peptide.stimulation ? peptide.stimulation : '' %>">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4" id="minRefDiv">
         <label><b>Reference: Name and Year</b></label>
-        <input type="text" name="reference" class="form-control" placeholder="Reference: Name and Year" value="<%= peptide.reference %>" >
+        <input type="text" name="reference" class="form-control" value="<%= peptide.reference ? peptide.reference : '' %>" >
       </div>
     </div>
-    <hr>
+    <hr class="upper_hr">
     <div class="form-row">
       <div class="col-md-12">
         <label><b>Full Reference</b></label>
-        <input type="text" name="fullReference" class="form-control" placeholder="Full reference" value="<%= peptide.fullReference %>">
+        <input type="text" name="fullReference" class="form-control" value="<%= peptide.fullReference ? peptide.fullReference : '' %>">
       </div>
     </div>
     <hr>
     <div class="form-row">
       <div class="col-md-6">
         <label><span style="color:red"><b>URL of the article</b></span></label>
-        <input type="text" name="url" class="form-control" placeholder="URL of the article" value="<%= peptide.url %>">
+        <input type="text" name="url" class="form-control" value="<%= peptide.url ? peptide.url : '' %>">
       </div>
       <div class="col-md-6">
         <label><b>Comment</b></label>
-        <input type="text" name="comment" class="form-control" placeholder="Comment" value="<%= peptide.comment %>">
+        <input type="text" name="comment" class="form-control" value="<%= peptide.comment ? peptide.comment : '' %>">
       </div>
 
     </div>
@@ -224,3 +127,105 @@
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
+
+<script>
+
+  //Function that hide or show form fields/hr based on the peptide type chosen in the select field. Also change field size
+  function showHide(select_item) {
+    var hr_group = document.getElementsByClassName("upper_hr");
+    var i;
+    if (select_item === "mutation"){
+      document.getElementById("geneDiv").style.display = 'block';
+      document.getElementById("geneCardDiv").style.display = 'block';
+      document.getElementById("tumorDiv").style.display = 'block';
+      document.getElementById("hlaDiv").style.display = 'block';
+      document.getElementById("freqDiv").style.display = 'block';
+      document.getElementById("preMutationDiv").style.display = 'block';
+      document.getElementById("mutationDiv").style.display = 'block';
+      document.getElementById("postMutationDiv").style.display = 'block';
+      document.getElementById("posDiv").style.display = 'block';
+      document.getElementById("stimDiv").style.display = 'block';
+      document.getElementById("minRefDiv").style.display = 'none';
+      for (i = 0; i < hr_group.length; i++) {
+        hr_group[i].style.display = 'block';
+      }
+
+      document.getElementById("hlaDiv").className = "col-md-4";
+      document.getElementById("freqDiv").className = "col-md-4";
+      document.getElementById("preMutationDiv").className = "col-md-4";
+
+      document.getElementById("seqText").textContent="Peptide sequence before the mutated part";
+    }
+
+    else if (select_item ==="tumor"){
+      document.getElementById("tumorDiv").style.display = 'none';
+      document.getElementById("mutationDiv").style.display = 'none';
+      document.getElementById("postMutationDiv").style.display = 'none';
+
+      document.getElementById("geneDiv").style.display = 'block';
+      document.getElementById("geneCardDiv").style.display = 'block';
+      document.getElementById("preMutationDiv").style.display = 'block';
+      document.getElementById("hlaDiv").style.display = 'block';
+      document.getElementById("freqDiv").style.display = 'block';
+      document.getElementById("posDiv").style.display = 'block';
+      document.getElementById("stimDiv").style.display = 'block';
+      document.getElementById("minRefDiv").style.display = 'none';
+      for (i = 0; i < hr_group.length; i++) {
+        hr_group[i].style.display = 'block';
+      }
+
+      document.getElementById("hlaDiv").className = "col-md-6";
+      document.getElementById("freqDiv").className = "col-md-6";
+      document.getElementById("preMutationDiv").className = "col-md-12";
+
+      document.getElementById("seqText").textContent="Peptide sequence";
+    }
+
+    else if (select_item === "differentiation" || select_item === "overexpressed"){
+      document.getElementById("mutationDiv").style.display = 'none';
+      document.getElementById("postMutationDiv").style.display = 'none';
+
+      document.getElementById("tumorDiv").style.display = 'block';
+      document.getElementById("preMutationDiv").style.display = 'block';
+      document.getElementById("preMutationDiv").className = "col-md-12";
+      document.getElementById("geneDiv").style.display = 'block';
+      document.getElementById("geneCardDiv").style.display = 'block';
+      document.getElementById("hlaDiv").style.display = 'block';
+      document.getElementById("freqDiv").style.display = 'block';
+      document.getElementById("posDiv").style.display = 'block';
+      document.getElementById("stimDiv").style.display = 'block';
+      document.getElementById("minRefDiv").style.display = 'block';
+      for (i = 0; i < hr_group.length; i++) {
+        hr_group[i].style.display = 'block';
+      }
+
+      document.getElementById("hlaDiv").className = "col-md-4";
+      document.getElementById("freqDiv").className = "col-md-4";
+      document.getElementById("preMutationDiv").className = "col-md-12";
+
+      document.getElementById("seqText").textContent="Peptide sequence";
+    }
+
+    else if (select_item === "potential"){
+      document.getElementById("geneDiv").style.display = 'none';
+      document.getElementById("geneCardDiv").style.display = 'none';
+      document.getElementById("hlaDiv").style.display = 'none';
+      document.getElementById("freqDiv").style.display = 'none';
+      document.getElementById("posDiv").style.display = 'none';
+      document.getElementById("stimDiv").style.display = 'none';
+      document.getElementById("tumorDiv").style.display = 'none';
+      document.getElementById("preMutationDiv").style.display = 'none';
+      document.getElementById("mutationDiv").style.display = 'none';
+      document.getElementById("postMutationDiv").style.display = 'none';
+      document.getElementById("minRefDiv").style.display = 'none';
+      for (i = 0; i < hr_group.length; i++) {
+        hr_group[i].style.display = 'none';
+      }
+    }
+  }
+  var sel = document.getElementById("selType");
+
+  //Change the form accordingly based on the peptide to edit
+  window.onload = showHide(sel.options[sel.selectedIndex].value);
+
+</script>

@@ -15,6 +15,7 @@
       document.getElementById("postMutationDiv").style.display = 'block';
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
+      document.getElementById("minRefDiv").style.display = 'block';
       for (i = 0; i < hr_group.length; i++) {
         hr_group[i].style.display = 'block';
       }
@@ -38,6 +39,7 @@
       document.getElementById("freqDiv").style.display = 'block';
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
+      document.getElementById("minRefDiv").style.display = 'block';
       for (i = 0; i < hr_group.length; i++) {
         hr_group[i].style.display = 'block';
       }
@@ -62,6 +64,7 @@
       document.getElementById("freqDiv").style.display = 'block';
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
+      document.getElementById("minRefDiv").style.display = 'block';
       for (i = 0; i < hr_group.length; i++) {
         hr_group[i].style.display = 'block';
       }
@@ -84,6 +87,7 @@
       document.getElementById("preMutationDiv").style.display = 'none';
       document.getElementById("mutationDiv").style.display = 'none';
       document.getElementById("postMutationDiv").style.display = 'none';
+      document.getElementById("minRefDiv").style.display = 'none';
       for (i = 0; i < hr_group.length; i++) {
         hr_group[i].style.display = 'none';
       }
@@ -163,12 +167,12 @@
         <label><b>Lymphocyte Stimulation Method</b></label>
         <input type="text" name="stimulation" class="form-control" >
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4" id="minRefDiv">
         <label><b>Reference: Name and Year</b></label>
         <input type="text" name="reference" class="form-control">
       </div>
     </div>
-    <hr>
+    <hr class="upper_hr">
     <div class="form-row">
       <div class="col-md-12">
         <label><b>Full Reference</b></label>

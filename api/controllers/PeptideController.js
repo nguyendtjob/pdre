@@ -25,7 +25,7 @@ module.exports = {
         var tumor = req.body.tumor;
         var hla = req.body.hla;
         var freq;
-        if (isNaN(req.body.freq)) {
+        if (isNaN(req.body.freq) || req.body.freq == null) {
           freq = 0;
         } else {
           freq = req.body.freq;
@@ -279,6 +279,7 @@ module.exports = {
             sails.log.error(new Error("500: Database Error (edit)"));
             res.send(500, {error: 'Database Error'});
           }
+          console.log(peptide);
           res.view('edit', {peptide: peptide});
         })
       }
@@ -301,7 +302,12 @@ module.exports = {
         var type = req.body.type;
         var tumor = req.body.tumor;
         var hla = req.body.hla;
-        var freq = req.body.freq;
+        var freq;
+        if (isNaN(req.body.freq) || req.body.freq == null) {
+          freq = 0;
+        } else {
+          freq = req.body.freq;
+        }
         var leftSequence = req.body.leftSequence;
         var redPart = req.body.redPart;
         var rightSequence = req.body.rightSequence;
@@ -311,6 +317,7 @@ module.exports = {
         var fullReference = req.body.fullReference;
         var url = req.body.url;
         var comment = req.body.comment;
+
 
         Peptide.update({id: req.params.id}, {
           gene: gene,
