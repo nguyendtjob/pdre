@@ -530,7 +530,7 @@
         <thead>
         <tr>
           <th data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein">Gene/Protein ⓘ</th>
-          <th data-toggle="tooltip" data-placement="top" title="">Tumor ⓘ</th>
+          <th data-toggle="tooltip" data-placement="top" title="Type of tumor which expresses the mutated gene">Tumor ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in blue">HLA ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" title="The residues modified by the mutation are indicated in red">Peptide Sequence ⓘ</th>
@@ -548,7 +548,9 @@
           <td><% if(peptide.geneCard) {%>
             <b><a href="<%= peptide.geneCard %>" target="_blank"><%= peptide.gene%></a></b>
             <% } else {%>
-            <i><b><%= peptide.gene %></b></i>
+            <b><%= peptide.gene %></b>
+            <% } %><% if (peptide.newTag) {%>
+             <img src="/images/new_icon.png"/></a>
             <% } %>
           </td>
           <td><%= peptide.tumor %></td>
@@ -597,7 +599,9 @@
           <td><% if(peptide.geneCard) {%>
             <b><a href="<%= peptide.geneCard %>" target="_blank"><%= peptide.gene%></a></b>
             <% } else {%>
-            <i><b><%= peptide.gene %></b></i>
+            <b><%= peptide.gene %></b>
+            <% } %><% if (peptide.newTag) {%>
+             <img src="/images/new_icon.png"/></a>
             <% } %>
           </td>
           <td></td>
@@ -627,7 +631,7 @@
         <thead>
         <tr>
           <th data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein">Gene/Protein ⓘ</th>
-          <th data-toggle="tooltip" data-placement="top" title="">Tumor ⓘ</th>
+          <th data-toggle="tooltip" data-placement="top" title="Type of tumor which expresses the gene">Tumor ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in blue">HLA ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" title="The residues modified by the mutation are indicated in red">Peptide Sequence ⓘ</th>
@@ -645,7 +649,9 @@
           <td><% if(peptide.geneCard) {%>
             <b><a href="<%= peptide.geneCard %>" target="_blank"><%= peptide.gene%></a></b>
             <% } else {%>
-            <i><b><%= peptide.gene %></b></i>
+            <b><%= peptide.gene %></b>
+            <% } %><% if (peptide.newTag) {%>
+             <img src="/images/new_icon.png"/></a>
             <% } %>
           </td>
           <td><%= peptide.tumor %></td>
@@ -675,7 +681,7 @@
         <thead>
         <tr>
           <th data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein">Gene/Protein ⓘ</th>
-          <th data-toggle="tooltip" data-placement="top" title="">Tumor ⓘ</th>
+          <th data-toggle="tooltip" data-placement="top" title="Expression was described in the following NORMAL tissues">Tumor ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in blue">HLA ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" title="The residues modified by the mutation are indicated in red">Peptide Sequence ⓘ</th>
@@ -693,7 +699,9 @@
           <td><% if(peptide.geneCard) {%>
             <b><a href="<%= peptide.geneCard %>" target="_blank"><%= peptide.gene%></a></b>
             <% } else {%>
-            <i><b><%= peptide.gene %></b></i>
+            <b><%= peptide.gene %></b>
+            <% } %><% if (peptide.newTag) {%>
+             <img src="/images/new_icon.png"/></a>
             <% } %>
           </td>
           <td><%= peptide.tumor %></td>
@@ -745,15 +753,15 @@
         </tbody>
       </table>
     </div>
+    <div>
+      <p id="ref_zone" style="visibility: hidden;" class="padded-multiline"><span style="color:blue"><b>Full Reference of the selected peptide:</b> <i><span class="fullref_text"></span></i></span></p>
+    </div>
     <% if (!req.session.me) { %>
     <hr>
     <p style="text-align:center">Did you find an article that isn't present in the database? <a href="/Peptide/submit"><b>Please let us know.</b></a></p>
     <p style="text-align:center">Feel free to share this website on those networks! <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Share on twitter</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
       <script type="IN/Share"></script></p>
     <% } %>
-  </div>
-  <div>
-    <p id="ref_zone" style="visibility: hidden;" class="padded-multiline"><span style="color:blue"><b>Full Reference of the selected peptide:</b> <i><span class="fullref_text"></span></i></span></p>
   </div>
 </div>
 <input id="min" style="display:none"><input id="max" style="display:none"><input id="freq_limit" style="display:none"><input id="length" style="display:none">

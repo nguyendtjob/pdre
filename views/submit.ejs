@@ -1,12 +1,18 @@
 <script>
-  function ValidateExtension() {
+  function Validate() {
     var allowedFiles = [".pdf"];
     var fileUpload = document.getElementById("submit_file");
     var lblError = document.getElementById("lblError");
     var lblMessage = document.getElementById("lblMessage");
     var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+    var size = ((fileUpload.files.item(0).size/1024)/1024).toFixed(4);
     if (!regex.test(fileUpload.value.toLowerCase())) {
       lblError.innerHTML = "Only <b>" + allowedFiles.join(', ') + "</b> files are allowed.";
+      lblMessage.innerHTML = "";
+      fileUpload.value = "";
+      return false;
+    }else if (size > 3){
+      lblError.innerHTML = "File size limit: <b>3MB</b>";
       lblMessage.innerHTML = "";
       fileUpload.value = "";
       return false;
@@ -24,12 +30,12 @@
   <form method="post" action="/Peptide/send" enctype="multipart/form-data">
     <span id="lblError" style="color: red;"></span>
     <span id="lblMessage">
-    <% if (typeof message != 'undefined') { %>
-    <% if (message == "success") { %>
-    <span style="color:green">The file has been successfully submitted.</span>
-    <% } else if (message == "error") { %>
-    <span style="color:red">An error has occurred. Please try again later.</span>
-    <% }} %>
+      <% if (typeof message != 'undefined') { %>
+      <% if (message == "success") { %>
+      <span style="color:green">The file has been successfully submitted.</span>
+      <% } else if (message == "error") { %>
+      <span style="color:red">An error has occurred. Please try again later.</span>
+      <% }} %>
     </span>
     <br>
     <label><b>E-mail </b><i>(required)</i></label><br/>
@@ -37,7 +43,7 @@
     <label><b>Comment </b><i>(optional)</i></label><br/>
     <textarea id="submit_comment" name="comment"></textarea><br><br>
     <input type="hidden" name="_csrf" value="<%= _csrf %>" />
-    <input id ="submit_file" type="file" name="pdf" onchange="return ValidateExtension()" accept="application/pdf" required/><br><br>
+    <input id ="submit_file" type="file" name="pdf" onchange="return Validate()" accept="application/pdf" required/><br><br>
     <input id ="submit_button" type="submit" class="btn btn-primary">
   </form>
 </div>

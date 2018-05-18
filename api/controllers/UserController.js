@@ -18,7 +18,7 @@ module.exports = {
    * `UserController.login()`
    */
   loginaction: function (req, res) {
-    const bcrypt = require('bcrypt');
+    var bcrypt = require('bcrypt');
 
     // Look up the user
     User.findOne({

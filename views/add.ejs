@@ -103,7 +103,7 @@
   </ol>
 
   <h1 class="display-5">Add Peptide</h1>
-  <form method="post" action="/Peptide/create" id="addForm">
+  <form id="addForm" method="post" action="/Peptide/create" enctype="multipart/form-data">
     <p><i>Fields in <b><span style="color:red">red</span></b> are mandatory.</i></p>
     <div class="form-row">
       <div class="form-group col-md-2" id="typeDiv">
@@ -189,7 +189,13 @@
         <label><b>Comment</b></label>
         <input type="text" name="comment" class="form-control">
       </div>
-
+    </div>
+    <br>
+    <div>
+      <input type="checkbox" name="newTag" value="newTag" checked>New entry?<br>
+    </div>
+    <div>
+      <input id ="file" type="file" name="file" accept="image/*"/><br><br>
     </div>
     <hr>
     <input type="hidden" name="_csrf" value="<%= _csrf %>" />

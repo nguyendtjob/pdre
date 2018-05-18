@@ -39,7 +39,11 @@ module.exports = {
 
     url : { type: 'string' },
 
-    comment : { type: 'string' }
+    newTag : { type: 'boolean'},
+
+    comment : { type: 'string' },
+
+    image : { type : 'string'}
   },
 
   connection: 'sailsMongoDBServer'

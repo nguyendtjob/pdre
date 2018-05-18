@@ -38,32 +38,85 @@ module.exports = {
         var reference = req.body.reference;
         var fullReference = req.body.fullReference;
         var url = req.body.url;
+        var newTag = !!req.body.newTag;
         var comment = req.body.comment;
+        var image = "";
+        /*
+        console.log("TEST OK");
+        if (req.file('file') !== null){
+          req.file('file').upload(function whenDone(err,uploadedFiles){
+            if (err) {
+              sails.log.error(new Error("Create: Error when uploading image file"));
+            }
 
-        Peptide.create({
-          gene: gene,
-          geneCard: geneCard,
-          type: type,
-          tumor: tumor,
-          hla: hla,
-          freq: freq,
-          leftSequence: leftSequence,
-          redPart: redPart,
-          rightSequence: rightSequence,
-          pos: pos,
-          stimulation: stimulation,
-          reference: reference,
-          fullReference: fullReference,
-          url: url,
-          comment: comment
-        }).exec(function (err) {
-          if (err) {
-            sails.log.error(new Error("500: Database Error (create)"));
-            res.send(500, {error: 'Database Error'});
-          }
-          res.redirect('Peptide/adminlist');
-        });
-      }
+            console.log("TEST OK");
+
+            var fs = require('fs');
+            var bitmap = fs.readFileSync(uploadedFiles[0].fd);
+            image = "data:image/jpeg;base64,"+ bitmap.toString('base64');
+            console.log(image);
+            fs.unlink(uploadedFiles[0].fd, function(err) {
+              if (err) {
+                sails.log.error(new Error("Send: Error when deleting pdf in the server"));
+                return;
+              }
+
+              Peptide.create({
+                gene: gene,
+                geneCard: geneCard,
+                type: type,
+                tumor: tumor,
+                hla: hla,
+                freq: freq,
+                leftSequence: leftSequence,
+                redPart: redPart,
+                rightSequence: rightSequence,
+                pos: pos,
+                stimulation: stimulation,
+                reference: reference,
+                fullReference: fullReference,
+                url: url,
+                newTag: newTag,
+                image: image,
+                comment: comment
+              }).exec(function (err) {
+                if (err) {
+                  sails.log.error(new Error("500: Database Error (create)"));
+                  res.send(500, {error: 'Database Error'});
+                }
+                res.redirect('Peptide/adminlist');
+              });
+            });
+
+          });
+        } else {*/
+          Peptide.create({
+            gene: gene,
+            geneCard: geneCard,
+            type: type,
+            tumor: tumor,
+            hla: hla,
+            freq: freq,
+            leftSequence: leftSequence,
+            redPart: redPart,
+            rightSequence: rightSequence,
+            pos: pos,
+            stimulation: stimulation,
+            reference: reference,
+            fullReference: fullReference,
+            url: url,
+            newTag: newTag,
+            image: image,
+            comment: comment
+          }).exec(function (err) {
+            if (err) {
+              sails.log.error(new Error("500: Database Error (create)"));
+              res.send(500, {error: 'Database Error'});
+            }
+            res.redirect('Peptide/adminlist');
+          });
+        }
+      //}
     });
   },
 
@@ -279,7 +332,6 @@ module.exports = {
             sails.log.error(new Error("500: Database Error (edit)"));
             res.send(500, {error: 'Database Error'});
           }
-          console.log(peptide);
           res.view('edit', {peptide: peptide});
         })
       }
@@ -316,6 +368,8 @@ module.exports = {
         var reference = req.body.reference;
         var fullReference = req.body.fullReference;
         var url = req.body.url;
+        var newTag = !!req.body.newTag;
+        var image;
         var comment = req.body.comment;
 
 
@@ -334,6 +388,8 @@ module.exports = {
           reference: reference,
           fullReference: fullReference,
           url: url,
+          newTag: newTag,
+          image: image,
           comment: comment
         }).exec(function (err) {
           if (err) {

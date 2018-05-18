@@ -44,7 +44,7 @@ module.exports.routes = {
   //Route in case someone tries to access to /Peptide/send outside of the form
   'get /Peptide/send': { view: "submit"},
 
-  'get /Peptide/create': {view : "403"}
+  'get /Peptide/create': 'UserController.login'
 
   /***************************************************************************
   *                                                                          *
