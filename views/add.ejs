@@ -1,4 +1,10 @@
+<script src="/js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
+
+  $('document').ready(function(){
+    document.getElementById("over_image").style.display = 'none';
+  });
+
 
   //Function that hide or show form fields/hr based on the peptide type chosen in the select field. Also change field size
   function showHide(select_item) {
@@ -16,6 +22,7 @@
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
       document.getElementById("minRefDiv").style.display = 'block';
+      document.getElementById("over_image").style.display = 'none';
       for (i = 0; i < hr_group.length; i++) {
         hr_group[i].style.display = 'block';
       }
@@ -40,6 +47,7 @@
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
       document.getElementById("minRefDiv").style.display = 'block';
+      document.getElementById("over_image").style.display = 'none';
       for (i = 0; i < hr_group.length; i++) {
         hr_group[i].style.display = 'block';
       }
@@ -69,6 +77,12 @@
         hr_group[i].style.display = 'block';
       }
 
+      if (select_item === "overexpressed"){
+        document.getElementById("over_image").style.display = 'block';
+      } else {
+        document.getElementById("over_image").style.display = 'none';
+      }
+
       document.getElementById("hlaDiv").className = "col-md-4";
       document.getElementById("freqDiv").className = "col-md-4";
       document.getElementById("preMutationDiv").className = "col-md-12";
@@ -88,6 +102,7 @@
       document.getElementById("mutationDiv").style.display = 'none';
       document.getElementById("postMutationDiv").style.display = 'none';
       document.getElementById("minRefDiv").style.display = 'none';
+      document.getElementById("over_image").style.display = 'none';
       for (i = 0; i < hr_group.length; i++) {
         hr_group[i].style.display = 'none';
       }
@@ -192,13 +207,15 @@
     </div>
     <br>
     <div>
-      <input type="checkbox" name="newTag" value="newTag" checked>New entry?<br>
+      <input type="checkbox" name="newTag" value="newTag" checked> New entry?<br>
     </div>
-    <div>
-      <input id ="file" type="file" name="file" accept="image/*"/><br><br>
+    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+    <div id="over_image">
+      <hr>
+      <label><b>Overexpressed gene detailed image</b></label><br/>
+      <input id ="file" type="file" name="file" accept="image/*"/><br>
     </div>
     <hr>
-    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>

@@ -42,7 +42,7 @@
           <a class="nav-link nav_page" href="/Peptide/search">Search</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav_page" href="/">About</a>
+          <a class="nav-link nav_page" href="/about">About</a>
         </li>
         <% } %>
       </ul>
@@ -50,6 +50,12 @@
   </div>
   <div id="body-container"><%- body %></div>
   <div id="footer-container">
+    <% if (!req.session.me) { %>
+    <hr>
+    <p style="text-align:center">Did you find an article that isn't present in the database? <a href="/Peptide/submit"><b>Please let us know.</b></a></p>
+    <p style="text-align:center">Feel free to share this website on those networks! <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Share on twitter</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+      <script type="IN/Share"></script></p>
+    <% } %>
     <hr>
     <table align="center">
       <tr>

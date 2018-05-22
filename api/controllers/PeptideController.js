@@ -41,26 +41,13 @@ module.exports = {
         var newTag = !!req.body.newTag;
         var comment = req.body.comment;
         var image = "";
-        /*
-        console.log("TEST OK");
-        if (req.file('file') !== null){
+
           req.file('file').upload(function whenDone(err,uploadedFiles){
             if (err) {
               sails.log.error(new Error("Create: Error when uploading image file"));
             }
 
-            console.log("TEST OK");
-
-            var fs = require('fs');
-            var bitmap = fs.readFileSync(uploadedFiles[0].fd);
-            image = "data:image/jpeg;base64,"+ bitmap.toString('base64');
-            console.log(image);
-            fs.unlink(uploadedFiles[0].fd, function(err) {
-              if (err) {
-                sails.log.error(new Error("Send: Error when deleting pdf in the server"));
-                return;
-              }
-
+            if (uploadedFiles.length === 0) {
               Peptide.create({
                 gene: gene,
                 geneCard: geneCard,
@@ -86,37 +73,47 @@ module.exports = {
                 }
                 res.redirect('Peptide/adminlist');
               });
-            });
+            }else {
+              var fs = require('fs');
+              var bitmap = fs.readFileSync(uploadedFiles[0].fd);
+              image = "data:image/jpeg;base64,"+ bitmap.toString('base64');
+              fs.unlink(uploadedFiles[0].fd, function(err) {
+                if (err) {
+                  sails.log.error(new Error("Send: Error when deleting pdf in the server"));
+                  return;
+                }
+
+                Peptide.create({
+                  gene: gene,
+                  geneCard: geneCard,
+                  type: type,
+                  tumor: tumor,
+                  hla: hla,
+                  freq: freq,
+                  leftSequence: leftSequence,
+                  redPart: redPart,
+                  rightSequence: rightSequence,
+                  pos: pos,
+                  stimulation: stimulation,
+                  reference: reference,
+                  fullReference: fullReference,
+                  url: url,
+                  newTag: newTag,
+                  image: image,
+                  comment: comment
+                }).exec(function (err) {
+                  if (err) {
+                    sails.log.error(new Error("500: Database Error (create)"));
+                    res.send(500, {error: 'Database Error'});
+                  }
+                  res.redirect('Peptide/adminlist');
+                });
+              });
+            }
 
           });
-        } else {*/
-          Peptide.create({
-            gene: gene,
-            geneCard: geneCard,
-            type: type,
-            tumor: tumor,
-            hla: hla,
-            freq: freq,
-            leftSequence: leftSequence,
-            redPart: redPart,
-            rightSequence: rightSequence,
-            pos: pos,
-            stimulation: stimulation,
-            reference: reference,
-            fullReference: fullReference,
-            url: url,
-            newTag: newTag,
-            image: image,
-            comment: comment
-          }).exec(function (err) {
-            if (err) {
-              sails.log.error(new Error("500: Database Error (create)"));
-              res.send(500, {error: 'Database Error'});
-            }
-            res.redirect('Peptide/adminlist');
-          });
-        }
-      //}
+
+      }
     });
   },
 
@@ -253,8 +250,7 @@ module.exports = {
 
       var mailOptions;
 
-      //Different mailoptions if they left a comment or not in the submit form
-      if (req.body.comment !== ""){
+      //Mail body
         mailOptions = {
           from: config.emailsender,
           to: config.emailreceiver,
@@ -265,18 +261,6 @@ module.exports = {
             path: uploadedFiles[0].fd
           }]
         };
-      } else {
-        mailOptions = {
-          from: config.emailsender,
-          to: config.emailreceiver,
-          subject: 'CAPeD: A new file has been submitted to you',
-          html: '<html><p>Greetings</p><p>Here is a new article suggestion from ' + req.body.email + '.</p><p>They did not leave any comment.</p></html>',
-          attachments: [{
-            filename: uploadedFiles[0].filename,
-            path: uploadedFiles[0].fd
-          }]
-        };
-      }
 
       //Sending the mail
       transporter.sendMail(mailOptions, function(error, info){
@@ -338,6 +322,17 @@ module.exports = {
     });
   },
 
+
+  details: function (req, res) {
+    Peptide.findOne({id: req.params.id}).exec(function (err, peptide) {
+      if (err) {
+        sails.log.error(new Error("500: Database Error (details)"));
+        res.send(500, {error: 'Database Error'});
+      }
+      res.view('details', {peptide: peptide});
+    })
+  },
+
   /**
    * `PeptideController.update()`
    */
@@ -369,38 +364,84 @@ module.exports = {
         var fullReference = req.body.fullReference;
         var url = req.body.url;
         var newTag = !!req.body.newTag;
-        var image;
         var comment = req.body.comment;
+        var image;
+        if (req.body.deleteImage){
+          image = "";
+        } else {
+          image = req.body.image;
+        }
 
-
-        Peptide.update({id: req.params.id}, {
-          gene: gene,
-          geneCard: geneCard,
-          type: type,
-          tumor: tumor,
-          hla: hla,
-          freq: freq,
-          leftSequence: leftSequence,
-          redPart: redPart,
-          rightSequence: rightSequence,
-          pos: pos,
-          stimulation: stimulation,
-          reference: reference,
-          fullReference: fullReference,
-          url: url,
-          newTag: newTag,
-          image: image,
-          comment: comment
-        }).exec(function (err) {
-          if (err) {
-            sails.log.error(new Error("500: Database Error (update)"));
-            res.send(500, {error: 'Database Error'});
+          req.file('file').upload(function whenDone(err,uploadedFiles) {
+            if (err) {
+              sails.log.error(new Error("Create: Error when uploading image file"));
+            }
+            if (uploadedFiles.length === 0) {
+              Peptide.update({id: req.params.id},{
+                gene: gene,
+                geneCard: geneCard,
+                type: type,
+                tumor: tumor,
+                hla: hla,
+                freq: freq,
+                leftSequence: leftSequence,
+                redPart: redPart,
+                rightSequence: rightSequence,
+                pos: pos,
+                stimulation: stimulation,
+                reference: reference,
+                fullReference: fullReference,
+                url: url,
+                newTag: newTag,
+                image: image,
+                comment: comment
+              }).exec(function (err) {
+                if (err) {
+                  sails.log.error(new Error("500: Database Error (update)"));
+                  res.send(500, {error: 'Database Error'});
+                }
+                res.redirect('Peptide/adminlist');
+              });
+            } else {
+            var fs = require('fs');
+            var bitmap = fs.readFileSync(uploadedFiles[0].fd);
+            image = "data:image/jpeg;base64," + bitmap.toString('base64');
+            fs.unlink(uploadedFiles[0].fd, function (err) {
+              if (err) {
+                sails.log.error(new Error("Send: Error when deleting pdf in the server"));
+                return;
+              }
+              Peptide.update({id: req.params.id}, {
+                gene: gene,
+                geneCard: geneCard,
+                type: type,
+                tumor: tumor,
+                hla: hla,
+                freq: freq,
+                leftSequence: leftSequence,
+                redPart: redPart,
+                rightSequence: rightSequence,
+                pos: pos,
+                stimulation: stimulation,
+                reference: reference,
+                fullReference: fullReference,
+                url: url,
+                newTag: newTag,
+                image: image,
+                comment: comment
+              }).exec(function (err) {
+                if (err) {
+                  sails.log.error(new Error("500: Database Error (update)"));
+                  res.send(500, {error: 'Database Error'});
+                }
+                res.redirect('Peptide/adminlist');
+              });
+            });
           }
-          res.redirect('Peptide/adminlist');
-        });
+          });
       }
     });
-   },
+  },
 
   /**
    * `PeptideController.delete()`

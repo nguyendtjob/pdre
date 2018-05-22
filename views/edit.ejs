@@ -6,7 +6,7 @@
   </ol>
 
   <h1 class="display-5">Edit Peptide</h1>
-  <form method="post" action="/Peptide/update/<%= peptide.id %>">
+  <form method="post" action="/Peptide/update/<%= peptide.id %>" enctype="multipart/form-data">
     <p><i>Fields in <b><span style="color:red">red</span></b> are mandatory.</i></p>
     <div class="form-row">
       <div class="form-group col-md-2" id="typeDiv">
@@ -123,16 +123,24 @@
     </div>
     <br>
     <div>
-      <input type="checkbox" name="newTag" value="newTag" <% if (peptide.newTag) { %>checked<%}%>>New entry?<br>
+      <input type="checkbox" name="newTag" value="newTag" <% if (peptide.newTag) { %>checked<%}%>> New entry?<br>
     </div>
-    <hr>
     <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+    <div id="over_image">
+      <hr>
+      <label><b>Overexpressed gene detailed image</b></label><br/>
+      <input type="checkbox" name="deleteImage" value="deleteImage"> Delete image?<br><br>
+      <input type="hidden" name="image" value="<%= peptide.image %>" />
+      <input id ="file" type="file" name="file" accept="image/*"/><br>
+    </div>
+
+
+    <hr>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
 
-<script>
-
+<script type="text/javascript">
   //Function that hide or show form fields/hr based on the peptide type chosen in the select field. Also change field size
   function showHide(select_item) {
     var hr_group = document.getElementsByClassName("upper_hr");
@@ -148,7 +156,8 @@
       document.getElementById("postMutationDiv").style.display = 'block';
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
-      document.getElementById("minRefDiv").style.display = 'none';
+      document.getElementById("minRefDiv").style.display = 'block';
+      document.getElementById("over_image").style.display = 'none';
       for (i = 0; i < hr_group.length; i++) {
         hr_group[i].style.display = 'block';
       }
@@ -172,7 +181,8 @@
       document.getElementById("freqDiv").style.display = 'block';
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
-      document.getElementById("minRefDiv").style.display = 'none';
+      document.getElementById("minRefDiv").style.display = 'block';
+      document.getElementById("over_image").style.display = 'none';
       for (i = 0; i < hr_group.length; i++) {
         hr_group[i].style.display = 'block';
       }
@@ -207,6 +217,12 @@
       document.getElementById("preMutationDiv").className = "col-md-12";
 
       document.getElementById("seqText").textContent="Peptide sequence";
+
+      if (select_item === "overexpressed"){
+        document.getElementById("over_image").style.display = 'block';
+      } else {
+        document.getElementById("over_image").style.display = 'none';
+      }
     }
 
     else if (select_item === "potential"){
@@ -221,6 +237,7 @@
       document.getElementById("mutationDiv").style.display = 'none';
       document.getElementById("postMutationDiv").style.display = 'none';
       document.getElementById("minRefDiv").style.display = 'none';
+      document.getElementById("over_image").style.display = 'none';
       for (i = 0; i < hr_group.length; i++) {
         hr_group[i].style.display = 'none';
       }

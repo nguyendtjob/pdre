@@ -11,8 +11,8 @@
       lblMessage.innerHTML = "";
       fileUpload.value = "";
       return false;
-    }else if (size > 3){
-      lblError.innerHTML = "File size limit: <b>3MB</b>";
+    }else if (size > 7){
+      lblError.innerHTML = "File size limit: <b>7MB</b>";
       lblMessage.innerHTML = "";
       fileUpload.value = "";
       return false;
@@ -26,8 +26,9 @@
 </script>
 
 <div class="container-fluid">
-  <p>You've found an article about an antigenic peptide that isn't present in the database? Feel free to let us know by submitting a pdf file!</p>
   <form method="post" action="/Peptide/send" enctype="multipart/form-data">
+    You've found an article about an antigenic peptide that isn't present in the database? Feel free to let us know by submitting a pdf file! <br/>
+    <i>*All fields are mandatory</i><br/>
     <span id="lblError" style="color: red;"></span>
     <span id="lblMessage">
       <% if (typeof message != 'undefined') { %>
@@ -38,10 +39,10 @@
       <% }} %>
     </span>
     <br>
-    <label><b>E-mail </b><i>(required)</i></label><br/>
+    <label><b>E-mail </b></label><br/>
     <input type="text" name="email" required><br><br>
-    <label><b>Comment </b><i>(optional)</i></label><br/>
-    <textarea id="submit_comment" name="comment"></textarea><br><br>
+    <label><b>Comment </b><i></i></label><br/>
+    <textarea id="submit_comment" name="comment" required></textarea><br><br>
     <input type="hidden" name="_csrf" value="<%= _csrf %>" />
     <input id ="submit_file" type="file" name="pdf" onchange="return Validate()" accept="application/pdf" required/><br><br>
     <input id ="submit_button" type="submit" class="btn btn-primary">

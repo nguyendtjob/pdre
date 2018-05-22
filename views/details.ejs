@@ -1,0 +1,18 @@
+
+<h4 align="center">Expression in tumor and normal tissues for <%= peptide.gene %></h4>
+<p align="center"><i>*Click on the image to enlarge it</i></p>
+<div class="imgbox">
+  <img id="detail_image" class="center-fit" src="<%= peptide.image %>" width="3500"/>
+</div>
+
+<script>
+  var detail = document.getElementById("detail_image");
+  detail.onclick = function(){
+    if (detail.classList.contains("center-fit")){
+      detail.classList.remove("center-fit");
+    }else{
+      detail.classList.add("center-fit");
+    }
+  }
+
+</script>

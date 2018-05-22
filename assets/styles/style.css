@@ -183,3 +183,21 @@ td {
   padding-right: 0.4em;
 }
 
+.imgbox {
+  display: grid;
+  height: 100%;
+}
+.center-fit {
+  max-width: 100%;
+  max-height: 80vh;
+  margin: auto;
+}
+
+.center-large {
+  max-height: 10%;
+  margin: auto;
+}
+
+#homepage_block {
+  margin-top: 300px;
+}

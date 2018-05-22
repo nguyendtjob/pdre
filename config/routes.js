@@ -34,7 +34,11 @@ module.exports.routes = {
 
   //Route for the main page of the website
   '/': {
-    view: "index"
+    view: "homepage"
+  },
+
+  '/about': {
+    view: "about"
   },
 
   //Routes for login
