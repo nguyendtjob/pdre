@@ -175,7 +175,7 @@ td {
 }
 
 #submit_comment {
-  width: 300px;
+  width: 600px;
   height: 300px;
   padding-left:0;
   padding-top:0;
@@ -200,4 +200,20 @@ td {
 
 #homepage_block {
   margin-top: 300px;
+}
+
+td.border_mutation, tr.border_mutation{
+  border-left: 2px solid #DC3546 !important;
+}
+
+td.border_tumor, tr.border_tumor{
+  border-left: 2px solid #FEC107 !important;
+}
+
+td.border_diff, tr.border_diff{
+  border-left: 2px solid #27A844 !important;
+}
+
+td.border_over, tr.border_over{
+  border-left: 2px solid #007AFF !important;
 }

@@ -16,8 +16,7 @@
   }
 
   $(document).ready(function(){
-    //Create the color bar for the navigation cue and make the page visible
-    document.getElementById("table-container").style.borderLeft = "thick solid #D40000";
+    //Make the page visible
     initFadeIn();
 
 
@@ -127,42 +126,27 @@
         { "width": "15%", "targets": [7] }
       ],
 
-      /*
-      //change row color based on the peptide type. Striped style.
+
+      //Gives the border class to the row according to their type. Left broder color depends on CSS
       "rowCallback": function( nRow, aData, index ) {
-        if ( aData[1] === 0 )
+        console.log(typeof aData[1]);
+        if ( aData[1] === '0' )
         {
-          if (index%2 === 0){
-            $('td', nRow).css('background-color', '#FFF4F4');
-          }else{
-            $('td', nRow).css('background-color', '#FFECEC');
-          }
+          $('td:first-child', nRow).addClass('border_mutation');
         }
-        else if ( aData[1] === 1 )
+        else if ( aData[1] === '1' )
         {
-          if (index%2 === 0){
-            $('td', nRow).css('background-color', '#FDFFE9');
-          }else{
-            $('td', nRow).css('background-color', '#FEF8CB');
-          }
+          $('td:first-child', nRow).addClass('border_tumor');
         }
-        else if ( aData[1] === 2 )
+        else if ( aData[1] === '2' )
         {
-          if (index%2 === 0){
-            $('td', nRow).css('background-color', '#F0F8FF');
-          }else{
-            $('td', nRow).css('background-color', '#DCEEFF');
-          }
+          $('td:first-child', nRow).addClass('border_diff');
         }
-        else if ( aData[1] === 3 )
+        else if ( aData[1] === '3' )
         {
-          if (index%2 === 0){
-            $('td', nRow).css('background-color', '#F7FFE1');
-          }else{
-            $('td', nRow).css('background-color', '#EAFFD6');
-          }
+          $('td:first-child', nRow).addClass('border_over');
         }
-      },*/
+      },
 
 
       //Create the category row, done every time the datatable is drawn
@@ -321,9 +305,22 @@
         if (sectionDistance < 550){
           $('.sectionbtn').removeClass("active");
           $('#'+this.id+'btn').addClass("active");
-          document.getElementById("table-container").style.borderLeft = "thick solid "+$(this).attr('color_attr');
         }
       });
+    });
+
+    //Event listener: clear input button
+    $("#reset_input").bind("click", function() {
+      $("input[type=text], textarea").val("");
+      generalTable
+        .columns('0')
+        .search("",true,false,true)
+        .draw();
+
+      potentialTable
+        .columns('0')
+        .search("",true,false,true)
+        .draw();
     });
 
 
@@ -351,19 +348,24 @@
     <div class="collapse navbar-collapse" id="navbar_category">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a id="section0btn" class="btn btn-sm btn-outline-danger sectionbtn">Mutation</a>
+          <a id="section0btn" class="btn btn-sm btn-outline-danger sectionbtn"><b>Mutation</b></a>
         </li>
         <li class="nav-item" >
-          <a id="section1btn" class="btn btn-sm btn-outline-warning sectionbtn">Tumor Specific</a>
+          <a id="section1btn" class="btn btn-sm btn-outline-warning sectionbtn"><b>Tumor Specific</b></a>
         </li>
         <li class="nav-item">
-          <a id="section2btn" class="btn btn-sm btn-outline-success sectionbtn">Differentiation</a>
+          <a id="section2btn" class="btn btn-sm btn-outline-success sectionbtn"><b>Differentiation</b></a>
         </li>
         <li class="nav-item">
-          <a id="section3btn" class="btn btn-sm btn-outline-primary sectionbtn">Overexpressed</a>
+          <a id="section3btn" class="btn btn-sm btn-outline-primary sectionbtn"><b>Overexpressed</b></a>
         </li>
         <li class="nav-item">
-          <a id="section4btn" class="btn btn-sm btn-outline-secondary">Potential</a>
+          <a id="section4btn" class="btn btn-sm btn-outline-secondary"><b>Potential</b></a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a id="reset_input" class="btn btn-sm btn-outline-info"><b>Reset filters</b></a>
         </li>
       </ul>
     </div>
@@ -376,13 +378,13 @@
       <tr>
         <th data-toggle="tooltip" data-placement="top" data-html="true" title="Link to the Gene Card for the encoding gene <br>and/or the parent protein"><span id="geneTH">Gene/Protein ⓘ</span><br><input class="filter column_filter gene_filter" type="text" data-column="0" /></th>
         <th>Type</th>
-        <th data-toggle="tooltip" data-placement="top" data-html="true" title="This column refers to different information depending of the gene:<br/>*Mutation category: Type of tumor which expresses the mutated gene<br/>*Differentiation category: Type of tumor which expresses the gene<br/>*Overexpressed category: Expression was described in the following NORMAL tissues (Click on the RNA icon to see the expression in the tissue)">Tumor ⓘ<br><input class="filter column_filter tumor_filter" type="text" data-column="2" /></th>
-        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen<br/>Class II HLA are shown in blue<br/>*You can use a * as a wildcard instead of any 1 letter<br>(Search is strict in this column)">HLA ⓘ<br><input class="filter hla_filter" type="text" data-column="3" /></th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="This column refers to different information depending of the gene:<br/>*Mutation category: Type of tumor which expresses the mutated gene<br/>*Differentiation category: Type of tumor which expresses the gene<br/>*Overexpressed category: Expression was described in the following NORMAL tissues (Click on the RNA icon to see the expression)">Tumor ⓘ<br><input class="filter column_filter tumor_filter" type="text" data-column="2" /></th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen<br/>Class II HLA are shown in green<br/>*You can use a * as a wildcard instead of any 1 letter<br>(Search is strict in this column)">HLA ⓘ<br><input class="filter hla_filter" type="text" data-column="3" /></th>
         <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ<br>min <input id="freq_limit" class="filter freq_filter range" type="text" data-column="4" /></th>
-        <th><table id="seq_table" class="borderless"><th width="65%"><span data-toggle="tooltip" data-placement="top" data-html="true" title="The residues modified by the mutation are indicated in red<br/>*You can use a * as a wildcard instead of any 1 letter<br/>*You can delimit the start of the sequence with ^ or (<br/>*You can delimit the end of the sequence with $ or )">Peptide Sequence ⓘ</span><input class="filter column_filter seq_filter" type="text" data-column="5" /></th><th><span id="lengthTH"data-toggle="tooltip" data-placement="top" title="Select a specific range of peptide sequences with a minimum and maximum length">Length ⓘ</span> <br><input class="filter range" id="min"> - <input class="filter range" id="max"></th></table></th>
+        <th><table id="seq_table" class="borderless"><th width="65%" data-toggle="tooltip" data-placement="top" data-html="true" title="The residues modified by the mutation are indicated in red<br/>*You can use a * as a wildcard instead of any 1 letter<br/>*You can delimit the start of the sequence with ^ or (<br/>*You can delimit the end of the sequence with $ or )"><span>Peptide Sequence ⓘ</span><input class="filter column_filter seq_filter" type="text" data-column="5" /></th><th data-toggle="tooltip" data-placement="top" title="Select a specific range of peptide sequences with a minimum and maximum length"><span id="lengthTH">Length ⓘ</span> <br><input class="filter range" id="min"> - <input class="filter range" id="max"></th></table></th>
         <th data-toggle="tooltip" data-placement="top" title="Position of the peptide sequence in the protein sequence">Position ⓘ<br><input class="filter column_filter pos_filter" type="text" data-column="6" /></th>
         <th data-toggle="tooltip" data-placement="top" title="Method used to isolate the CTL recognizing the antigen">Lymphocyte Stimulation ⓘ<br><input class="filter column_filter sim_filter" type="text" data-column="7" /></th>
-        <th data-toggle="tooltip" data-placement="top" data-html="true" title="First author and year of the article<br/>*Click on the text to display its complete information at the bottom<br/>(Scrolling the table will clear the reference information)<br/>*Click on the arrow icon to access to the pubmed URL">Reference ⓘ <br><input class="filter column_filter ref_filter" type="text" data-column="9" /></th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="First author and year of the article<br/>*You can search the authors, year or title of the article with this filter (this applies to the potential table too)<br/>*Click on the text to display its complete information at the bottom<br/>(Scrolling the table will clear the reference information)<br/>*Click on the arrow icon to access to the pubmed URL">Reference ⓘ <br><input class="filter column_filter ref_filter" type="text" data-column="9" /></th>
         <th>Full Reference</th>
         <th>Comment</th>
         <th data-toggle="tooltip" data-placement="top" title="Hover on the icon to display the comments specific to the gene if there is any of them">Note ⓘ</th>
@@ -418,7 +420,7 @@
         <% } %>
         </td>
         <% if (peptide.hla.charAt(0) == 'D') {%>
-        <td class="center_td"><span style="color:blue"><%= peptide.hla %></span></td>
+        <td class="center_td"><span style="color:green"><%= peptide.hla %></span></td>
         <% } else { %>
         <td class="center_td"><%= peptide.hla %></td>
         <% } %>
@@ -426,7 +428,7 @@
         <td><%= peptide.leftSequence %><span style="color:red" class="redPart"><%= peptide.redPart %></span><%= peptide.rightSequence %></td>
         <td class="center_td"><%= peptide.pos %></td>
         <td><%= peptide.stimulation %></td>
-        <td class="ref_text"><u><%= peptide.reference %></u><a href="<%= peptide.url %>" target="_blank"><img src="/images/ext_link.png"/></a></td>
+        <td class="ref_text"><u><%= peptide.reference %></u><a href="<%= peptide.url %>" target="_blank"><img src="/images/ext_link.png"></a></td>
         <td><%= peptide.fullReference %></td>
         <td><%= peptide.comment %></td>
         <td class="comment-cell"><% if(peptide.comment) {%>
@@ -438,7 +440,7 @@
       </tbody>
     </table>
     <div>
-      <p id="ref_zone" style="visibility: hidden;" class="padded-multiline"><span style="color:blue"><b>Full Reference of the selected peptide:</b> <i><span id="fullref_text"></span></i></span></p>
+      <p id="ref_zone" style="visibility: hidden;" class="padded-multiline"><span style="color:blue"><b>Selected reference:</b> <i><span id="fullref_text"></span></i></span></p>
     </div>
   </div>
   <hr>
@@ -449,7 +451,7 @@
     <table id="potentialTable" class="table-bordered" width="100%">
       <thead>
       <tr>
-        <th data-toggle="tooltip" data-placement="top" title="Reference and link to the articles">Reference ⓘ </th>
+        <th data-toggle="tooltip" data-placement="top" data-html="true" title="Complete reference of the article<br/>*You can search the authors, year or title of the article with this filter (this applies to the main table too)<br/>*Click on the text to display its complete information at the bottom<br/>(Scrolling the table will clear the reference information)<br/>*Click on the arrow icon to access to the pubmed URL">Reference ⓘ <br><input class="filter column_filter ref_filter" type="text" data-column="9" /></th>
         <th>Note</th>
         <th data-toggle="tooltip" data-placement="top" title="Hover on the icon to display the comments specific to the gene if there is any of them">Note ⓘ</th>
       </tr>

@@ -47,7 +47,7 @@
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
       document.getElementById("minRefDiv").style.display = 'block';
-      document.getElementById("over_image").style.display = 'none';
+      document.getElementById("over_image").style.display = 'block';
       for (i = 0; i < hr_group.length; i++) {
         hr_group[i].style.display = 'block';
       }
@@ -73,16 +73,10 @@
       document.getElementById("posDiv").style.display = 'block';
       document.getElementById("stimDiv").style.display = 'block';
       document.getElementById("minRefDiv").style.display = 'block';
+      document.getElementById("over_image").style.display = 'block';
       for (i = 0; i < hr_group.length; i++) {
         hr_group[i].style.display = 'block';
       }
-
-      if (select_item === "overexpressed"){
-        document.getElementById("over_image").style.display = 'block';
-      } else {
-        document.getElementById("over_image").style.display = 'none';
-      }
-
       document.getElementById("hlaDiv").className = "col-md-4";
       document.getElementById("freqDiv").className = "col-md-4";
       document.getElementById("preMutationDiv").className = "col-md-12";
@@ -212,7 +206,7 @@
     <input type="hidden" name="_csrf" value="<%= _csrf %>" />
     <div id="over_image">
       <hr>
-      <label><b>Overexpressed gene detailed image</b></label><br/>
+      <label><b>Expression image</b></label><br/>
       <input id ="file" type="file" name="file" accept="image/*"/><br>
     </div>
     <hr>
