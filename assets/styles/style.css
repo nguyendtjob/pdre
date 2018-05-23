@@ -228,3 +228,8 @@ td.border_over, tr.border_over{
   position: relative;
   top: -4px !important;
 }
+
+.about {
+  margin-left: 100px;
+  margin-right: 100px;
+}

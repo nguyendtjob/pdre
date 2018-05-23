@@ -311,7 +311,7 @@
     $("#reset_input").bind("click", function() {
       $("input[type=text], textarea").val("");
       generalTable
-        .columns('0')
+        .columns([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
         .search("",true,false,true)
         .draw();
 
