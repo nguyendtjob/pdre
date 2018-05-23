@@ -10,6 +10,7 @@
   width: 40px !important;
 }
 
+
 .freq_filter {
   width: 20px !important;
 }
@@ -20,6 +21,10 @@
 
 .range {
   width: 20px !important;
+}
+
+.com_filter {
+  width: 40px !important;
 }
 
 
