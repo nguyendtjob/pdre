@@ -76,7 +76,11 @@
 <!--TEMPLATES-->
 
 <!--TEMPLATES END-->
-<script src="/js/dependencies/sails.io.js"></script>
+<script src="/js/dependencies/sails.io.js"
+        autoConnect="false"
+        environment="production"
+        headers='{ "x-csrf-token": "<%= typeof _csrf !== 'undefined' ? _csrf : '' %>" }'
+></script>
 <script src="/js/jquery-2.1.4.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/datatables.min.js"></script>
