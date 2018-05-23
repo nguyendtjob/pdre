@@ -128,7 +128,6 @@
 
       //Gives the border class to the row according to their type. Left broder color depends on CSS
       "rowCallback": function( nRow, aData, index ) {
-        console.log(typeof aData[1]);
         if ( aData[1] === '0' )
         {
           $('td:first-child', nRow).addClass('border_mutation');
