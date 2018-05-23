@@ -399,7 +399,7 @@
           <% } else {%>
           <b><%= peptide.gene %></b>
           <% } %><% if (peptide.newTag) {%>
-           <img src="/images/new_icon.png"/>
+          <img src="/images/new_icon.png"/>
           <% } %>
         </td>
         <td>
@@ -416,9 +416,9 @@
           <% } %>
         </td>
         <td><%= peptide.tumor %>
-        <% if (peptide.image) { %>
+          <% if (peptide.image) { %>
           <a href="/Peptide/details/<%= peptide.id %>" target="_blank"><img src="/images/rna_icon.png"/></a>
-        <% } %>
+          <% } %>
         </td>
         <% if (peptide.hla.charAt(0) == 'D') {%>
         <td class="center_td"><span style="color:green"><%= peptide.hla %></span></td>
