@@ -235,3 +235,7 @@ td.border_over, tr.border_over{
   margin-right:auto;
   max-width:1000px;
 }
+
+#close_detail {
+  margin-right: 20px;
+}
