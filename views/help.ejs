@@ -29,15 +29,15 @@
     <div class="post-content">
       <p>Aside of the potential table, every table has several columns with the following metadata:</p>
       <ul>
-        <li>Gene/Protein: The name of the gene or protein. If there is a geneCard link available, you can access it by clicking on it. Newly added gene will have a <img src="/images/new_icon.png"/> icon.</li>
+        <li>Gene/Protein: The name of the gene or protein. If there is a <a href="https://www.genecards.org/" target="_blank">geneCard</a> url available, you can access it by clicking on it. Newly added gene will have a <img src="/images/new_icon.png"/> icon.</li>
         <li>Normal/Tumor: Depending of the gene table, this column indicates the type of tumor which expresses the mutated gene, the type of tumor which expresses the gene, or the expression described in normal tissues. You can click on the <img src="/images/rna_icon.png"/> icon to display the expression in the tissues</li>
-        <li>HLA: Human Leukocyte Antigen. Please note class II HLA are shown in <span style="color:green">green</span>.</li>
+        <li>HLA: Human leukocyte antigen. Please note class II HLA are shown in <span style="color:green">green</span>.</li>
         <li>HLA%: Frequency in Caucasians based on based on (1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and (2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR.</li>
         <li>Peptide sequence. For unique antigens, the residues modified by the mutation are indicated in <span style="color:red">red</span>.</li>
-        <li>Position: position of the peptide sequence in the protein sequence</li>
-        <li>Lymphocyte stimulation: method used to isolate the CTL recognizing the antigen</li>
-        <li>Reference: the first author and the year when the article was published. If you click on <u>dotted text</u>, the complete reference will be displayed at the bottom of the table (it will be cleared if you change tab or if you scroll up or down the table). If you click on the arrow icon, your browser will open a new window or tab with the pubmed url</li>
-        <li>Note: comment indicating some specific characteristic of the gene, such as frameshift product etc. Hover on the <button class="btn btn-outline-secondary btn-sm oi oi-document" data-toggle="tooltip" data-placement="top" title='The note of the gene will appear just like this'></button> icon to display the comment.</li>
+        <li>Position: Position of the peptide sequence in the protein sequence</li>
+        <li>Lymphocyte stimulation: Method used to isolate the CTL recognizing the antigen</li>
+        <li>Reference: The first author and the year when the article was published. If you click on <u>dotted text</u>, the complete reference will be displayed at the bottom of the table (it will be cleared if you change the table tab or if you scroll up or down the table). If you click on the <img src="/images/exT_link2.png"/> icon, your browser will open a new window or tab with the <a href="https://www.ncbi.nlm.nih.gov/pubmed/" target="_blank" >PubMed</a> url</li>
+        <li>Note: Comment indicating some specific characteristic of the gene, such as frameshift product etc. Hover on the <button class="btn btn-outline-secondary btn-sm oi oi-document" data-toggle="tooltip" data-placement="top" title='The note of the gene will appear just like this'></button> icon to display the comment.</li>
       </ul>
     </div>
   </div>
@@ -60,17 +60,17 @@
 <div class="post-container" style="margin-top:30px;">
   <div class="post-thumb" style="margin-top:10px;"><a href="/images/manual_database_06.png" target="_blank"><img src="/images/manual_database_06_th.png" data-toggle="tooltip" data-placement="left" title="Search page with Peptide Sequence set to FIAS then *IAS" alt="Search page"/></a> <a href="/images/manual_database_07.png" target="_blank" ><img src="/images/manual_database_07_th.png" data-toggle="tooltip" data-placement="left" title="Search page with Gene/Peptide set to (alpha" alt="Search page" style="margin-top:30px;"/></a> <a href="/images/manual_database_08.png" target="_blank" ><img src="/images/manual_database_08_th.png" data-toggle="tooltip" data-placement="left" title="Search page with Peptide sequence set to VV)" alt="Search page" style="margin-top:30px;"/></a></div>
   <div class="post-content" style="margin-top:30px;">
-    <p>On the other hand, you can use * as a wildcard, which replaces any 1 character or 0, and you can use several of them. <br><br>For instance, if you type “FIAS” in the peptide sequence filter, this will only display alpha-actinin-4. On the other hand, if you type “*IAS”, it will yield more results. With the HLA example above, if you type "A2*", it will display any gene with an "A2" HLA, "A24" HLA etc. </p>
+    <p>On the other hand, you can use * as a wildcard, which replaces any 1 character or nothing, and you can use several of them. <br><br>For instance, if you type “FIAS” in the peptide sequence filter, this will only display alpha-actinin-4. On the other hand, if you type “*IAS”, it will yield more results. With the HLA example above, if you type "A2*", it will display any gene with an "A2" HLA, "A24" HLA etc. </p>
     <p style="margin-top:60px;">Furthermore, you can also use ( and ) to delimit your search: any filter input starting with ( means that the genes must have the same first letters in the relevant column. Likewise, any filter input ending with ) means that the last letters must match them.
-      Example: if you type “(alpha” in the Gene/Protein filter only alpha-actinin-4 and alpha-foetoprotein will be displayed as the other genes names do not start with “alpha”.
-      <br>Similarly, if you type “VV)” in the peptique sequence filter, only HER-2, IGF2B3 and KIF20A will be shown. Other genes with a VV in their sequence won't be displayed if VV aren't the last letters of their sequence.
+      <br>Example: if you type “(alpha” in the Gene/Protein filter only alpha-actinin-4 and alpha-foetoprotein will be displayed as the other genes names do not start with “alpha”.
+      <br>Similarly, if you type “VV)” in the peptide sequence filter, only HER-2, IGF2B3 and KIF20A will be shown. Other genes with VV won't be displayed if VV aren't the last letters of their sequence.
     </p>
   </div>
 </div>
 <div class="post-container" style="margin-top:30px;">
   <div class="post-thumb" style="margin-top:10px;"><a href="/images/manual_database_09.png" target="_blank"><img src="/images/manual_database_09_th.png" data-toggle="tooltip" data-placement="left" title="Search page with reference set to Nakamura" alt="Search page"/></a></div>
   <div class="post-content" style="margin-top:50px;">
-    <p>The reference filter will apply to the complete reference of the article related to the gene. As such, you can type the name of any author, the year when the article was published or the title of the article.<br>For example, if you type "Nakamura" in the reference filter, the table will display every gene where "Nakamura" is mentioned even if it isn't the first author. In this example, there are 12 results since Mr. Nakamura was a co-author of the articles of those genes. <br><br>Also, as stated above, this will also filter the potential table.</p>
+    <p>The reference filter will apply to the complete reference of the article related to the gene. As such, you can type the name of any author, the year when the article was published or the title of the article.<br>For example, if you type "Nakamura" in the reference filter, the table will display every gene where "Nakamura" is mentioned even if it isn't the first author. In this example, there are 12 results since Mr. Nakamura was a co-author of the articles of those genes. <br><br>Also, as stated above, this will filter the potential table.</p>
   </div>
 </div>
 
