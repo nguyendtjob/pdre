@@ -41,6 +41,10 @@ module.exports.routes = {
     view: "about"
   },
 
+  '/help': {
+    view: "help"
+  },
+
   //Routes for login
   'get /login': 'UserController.login',
   'post /login': 'UserController.loginaction',

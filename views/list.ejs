@@ -177,22 +177,23 @@
           }
         ],
 
-        "columnDefs": [
-          {
-            "targets":[0,1,2,3,4,5,6,7,8,9,10],
-            "sortable": false
-          },
-          {
-            "targets": [1,8,9 ],
-            "visible": false,
-            "searchable": true
-          },
-          { "width": "24%", "targets": [0,4]},
-          { "width": "20%", "targets": 1 },
-          { "width": "5%", "targets": [2]},
-          { "width": "6%", "targets": [3,5]},
-          { "width": "20%", "targets": [6] },
-          { "width": "5%", "targets": 10},
+      "columnDefs": [
+        {
+          "targets":[0,1,2,3,4,5,6,7,8,9,10],
+          "sortable": false
+        },
+        {
+          "targets": [ 8,9 ],
+          "visible": false,
+          "searchable": true
+        },
+        { "width": "20%", "targets": 0 },
+        { "width": "10%", "targets": 1 },
+        { "width": "5%", "targets": [2]},
+        { "width": "6%", "targets": [3,5]},
+        { "width": "15%", "targets": [4] },
+        { "width": "20%", "targets": [6] },
+        { "width": "5%", "targets": 10}
         ]
       }
     );
@@ -530,7 +531,7 @@
         <thead>
         <tr>
           <th data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein">Gene/Protein ⓘ</th>
-          <th data-toggle="tooltip" data-placement="top" title="Type of tumor which expresses the mutated gene">Tumor ⓘ</th>
+          <th data-toggle="tooltip" data-placement="top" title="Type of tumor which expresses the mutated gene">Normal/Tumor ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in green">HLA ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" title="The residues modified by the mutation are indicated in red">Peptide Sequence ⓘ</th>
@@ -581,7 +582,7 @@
         <thead>
         <tr>
           <th data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein">Gene/Protein ⓘ</th>
-          <th data-toggle="tooltip" data-placement="top" title="">Tumor ⓘ</th>
+          <th data-toggle="tooltip" data-placement="top" data-html="true" title="Expression in the tissues<br>*Click on the RNA icon to see the expression"">Normal/Tumor ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in green">HLA ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ</th>
           <th>Peptide Sequence</th>
@@ -604,7 +605,11 @@
              <img src="/images/new_icon.png"/>
             <% } %>
           </td>
-          <td></td>
+          <td>
+            <% if (peptide.image) { %>
+            <a href="/Peptide/details/<%= peptide.id %>" target="_blank"><img src="/images/rna_icon.png"/></a>
+            <% } %>
+          </td>
           <% if (peptide.hla.charAt(0) == 'D') {%>
           <td class="center_td"><span style="color:green"><%= peptide.hla %></span></td>
           <% } else { %>
@@ -631,7 +636,7 @@
         <thead>
         <tr>
           <th data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein">Gene/Protein ⓘ</th>
-          <th data-toggle="tooltip" data-placement="top" title="Type of tumor which expresses the gene">Tumor ⓘ</th>
+          <th data-toggle="tooltip" data-placement="top" data-html="true" title="Type of tumor which expresses the gene<br>*Click on the RNA icon to see the expression">Normal/Tumor ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in green">HLA ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ</th>
           <th>Peptide Sequence</th>
@@ -685,7 +690,7 @@
         <thead>
         <tr>
           <th data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein">Gene/Protein ⓘ</th>
-          <th data-toggle="tooltip" data-placement="top" data-html="true" title="Expression was described in the following NORMAL tissues<br>*Click on the RNA icon to see the expression">Tumor ⓘ</th>
+          <th data-toggle="tooltip" data-placement="top" data-html="true" title="Expression was described in the following NORMAL tissues<br>*Click on the RNA icon to see the expression">Normal/Tumor ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in green">HLA ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ</th>
           <th>Peptide Sequence</th>
