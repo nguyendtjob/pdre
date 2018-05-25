@@ -28,10 +28,14 @@ module.exports.policies = {
 
    '*': true,
 
-  /***************************************************************************
-  *                                                                          *
-  * Here's an example of mapping some policies to run before a controller    *
-  * and its actions                                                          *
-  *                                                                          *
-  ***************************************************************************/
+
+
+  PeptideController: {
+    adminlist: 'sessionAuth',
+    create: 'sessionAuth',
+    add: 'sessionAuth',
+    edit: 'sessionAuth',
+    update: 'sessionAuth',
+    delete: 'sessionAuth'
+  }
 };

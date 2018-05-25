@@ -50,9 +50,8 @@ module.exports.routes = {
   'post /login': 'UserController.loginaction',
 
   //Route in case someone tries to access to /Peptide/send outside of the form
-  'get /Peptide/send': { view: "submit"},
+  'get /Peptide/send': { view: "submit"}
 
-  'get /Peptide/create': 'UserController.login'
 
   /***************************************************************************
   *                                                                          *

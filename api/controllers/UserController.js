@@ -38,7 +38,7 @@ module.exports = {
           return res.negotiate(err);
 
         if(isMatch) {
-          req.session.me = user.id;
+          req.session.authenticated = true;
           return res.redirect('/Peptide/adminlist');
         } else {
           return res.view('login',{error:"error"});

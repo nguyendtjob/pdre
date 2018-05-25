@@ -2,9 +2,13 @@
 <html>
 <head>
   <title>Cancer Antigenic Peptide Database</title>
-
+  <meta charset="UTF-8">
+  <meta name="author" content="Pierre van der Bruggen">
+  <meta name="description" content="In 2001, we have started compiling what we thought were the most relevant human tumor antigens, and created a database. Each line corresponds to a peptide, considered to be a tumor antigen given that it is recognized by T lymphocytes that also recognize tumor cells expressing the parent protein.">
+  <meta name="keywords" content="peptide,cancer,tumor,HLA,antigen,T lymphocyte,CD4,CD8">
   <!-- Viewport mobile tag for sensible mobile support -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
@@ -35,7 +39,7 @@
         <li class="nav-item">
           <a class="nav-link nav_page" href="/Peptide/list">Database</a>
         </li>
-        <% if (req.session.me) { %>
+        <% if (req.session.authenticated) { %>
         <li class="nav-item">
           <a class="nav-link nav_page" href="/Peptide/adminlist">Edit/Remove Peptide</a>
         </li>
@@ -61,7 +65,7 @@
   </div>
   <div id="body-container"><%- body %></div>
   <div id="footer-container">
-    <% if (!req.session.me) { %>
+    <% if (!req.session.authenticated) { %>
     <hr>
     <p style="text-align:center">Did you find an article that is not present in the database? <a href="/Peptide/submit"><b>Please let us know.</b></a></p>
     <div style="text-align:center">Feel free to share this website on those networks! <script type="IN/Share"></script> <p class="fb-share-button" data-href="http://caped.icp.ucl.ac.be/" data-layout="button" data-size="small" data-mobile-iframe="true" style="vertical-align:top;zoom:1;*display:inline"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fcaped.icp.ucl.ac.be%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></p> <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Share on twitter</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script></div>
@@ -70,7 +74,7 @@
     <table align="center">
       <tr>
         <td><a id="logo-footer" href="https://www.deduveinstitute.be/" target="_blank"><img src="/images/logoDDUV.png"/></a></td>
-        <td valign="top"><br/>&emsp;© 2012-2018 Pierre van der Bruggen <br/><% if (!req.session.me) { %>&emsp;<a href="/User/login"><img src="/images/lock-icon.png"/> Login</a><% } %></td>
+        <td valign="top"><br/>&emsp;© 2012-2018 Pierre van der Bruggen <br/><% if (!req.session.authenticated) { %>&emsp;<a href="/User/login"><img src="/images/lock-icon.png"/> Login</a><% } %></td>
       </tr>
     </table>
   </div>

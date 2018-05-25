@@ -93,6 +93,7 @@ u {
   max-width: 450px;
   text-align: left;
 }
+
 #wrapper {
   min-height: 100%;
   position: relative;
@@ -217,15 +218,9 @@ Style for details page
   height: 100%;
 }
 
-
 .center-fit {
   max-width: 100%;
   max-height: 80vh;
-  margin: auto;
-}
-
-.center-large {
-  max-height: 10%;
   margin: auto;
 }
 
@@ -235,18 +230,8 @@ Style for details page
 
 
 /*
-Style for submit page
+Style for homepage
  */
-
-
-#submit_comment {
-  width: 600px;
-  height: 300px;
-  padding-left:0;
-  padding-top:0;
-  padding-bottom:0.4em;
-  padding-right: 0.4em;
-}
 
 #homepage_block {
   margin-top: 300px;
@@ -281,6 +266,7 @@ Style for help page
 .post-thumb img {
   display: block
 }
+
 .post-content {
   margin-left: 430px
 }
@@ -289,4 +275,15 @@ Style for help page
   font-size: 200%
 }
 
+/*
+Style for submit page
+ */
 
+#submit_comment {
+  width: 600px;
+  height: 300px;
+  padding-left:0;
+  padding-top:0;
+  padding-bottom:0.4em;
+  padding-right: 0.4em;
+}
