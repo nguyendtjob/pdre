@@ -88,7 +88,7 @@ module.exports.session = {
   ***************************************************************************/
 
    adapter: 'connect-mongo',
-   url: 'mongodb://localhost:27017/session', // user, password and port optional
+   url: 'mongodb://localhost:27017/session'
 
   /***************************************************************************
   *                                                                          *
