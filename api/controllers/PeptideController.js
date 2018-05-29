@@ -291,7 +291,12 @@ module.exports = {
         sails.log.error(new Error("500: Database Error (details)"));
         res.send(500, {error: 'Database Error'});
       }
-      res.view('details', {peptide: peptide});
+
+      if(!peptide){
+        res.redirect('404');
+      }else{
+        res.view('details', {peptide: peptide});
+      }
     })
   },
 

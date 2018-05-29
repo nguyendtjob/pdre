@@ -45,6 +45,8 @@ module.exports.routes = {
     view: "help"
   },
 
+  '/Peptide': 'PeptideController.list',
+
   //Routes for login
   'get /login': 'UserController.login',
   'post /login': 'UserController.loginaction',
