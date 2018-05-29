@@ -265,11 +265,11 @@ Style for help page
 }
 
 #help_bar {
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 60px; /* Stay at the top */
+  position: fixed;
+  z-index: 1;
+  top: 60px;
   left: 0;/
-  overflow-x: hidden; /* Disable horizontal scroll */
+  overflow-x: hidden;
   padding-top: 20px;
 }
 
