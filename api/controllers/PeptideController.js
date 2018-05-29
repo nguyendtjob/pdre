@@ -222,7 +222,7 @@ module.exports = {
       var nodemailer = require('nodemailer');
       var config = require("../../config/secrets");
 
-      //Credentials of the gmail account
+      //Credentials of host
       var transporter = nodemailer.createTransport({
         host: config.emailsmtp,
         port: config.emailport,

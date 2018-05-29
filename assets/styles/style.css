@@ -258,21 +258,19 @@ Style for help page
   max-width:1200px;
   overflow: auto
 }
-.post-thumb {
-  float: left;
-  margin-bottom:auto;
 
-}
-.post-thumb img {
-  display: block
-}
-
-.post-content {
-  margin-left: 430px
-}
 .post-title {
   font-weight: bold;
   font-size: 200%
+}
+
+#help_bar {
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 60px; /* Stay at the top */
+  left: 0;/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
 }
 
 /*
