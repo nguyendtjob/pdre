@@ -24,7 +24,6 @@
     </li>
   </ul>
 </div>
-
 <div class="post-container">
   <h3 id="database" class="post-title">Database page</h3>
   <p>The Database page displays tables of peptides recorded in the database. Click on the desired tab to display the table of your choice.
@@ -32,11 +31,11 @@
     <li>The “mutation” tab will display unique antigens which result from point mutations in genes that are expressed ubiquitously.</li>
     <li>The “tumor-specific” tab will display shared antigens which are expressed in many tumors but not in normal tissues.</li>
     <li>The “differentiation” tab will display shared antigens which are also expressed in the normal tissue of origin of the malignancy.</li>
-    <li>The “overexpressed” tab will display shred antigens which are expressed in a wide variety of normal tissues and overexpressed in tumors.</li>
+    <li>The “overexpressed” tab will display shared antigens which are expressed in a wide variety of normal tissues and overexpressed in tumors.</li>
     <li>Finally, the “potential” tab will display references of articles that have not (yet) been included in the tables because formal evidence to fulfill one or several of the aforementioned criteria has not been provided.</li>
   </ol>
   <i>Overview of the database page</i>
-  <img src="/images/manual_database_01.png" alt="Overview of the database page" width="1200"/>
+  <img class="image_help" src="/images/manual_database_01.png" alt="Overview of the database page" width="1200"/>
   <hr>
   <p><b id="columns">Metadata</b></p>
   <p>Aside of the potential table, every table has several columns with the following metadata:</p>
@@ -52,7 +51,7 @@
     <li>Note: Comment indicating some specific characteristic of the gene, such as frameshift product etc. Hover on the <button class="btn btn-outline-secondary btn-sm oi oi-document" data-toggle="tooltip" data-placement="top" title='The note of the gene will appear just like this'></button> icon to display the comment.</li>
   </ul>
   <i>Complete reference shown at the bottom</i>
-  <img src="/images/manual_database_03.png" alt="Complete reference" width="1200"/>
+  <img class="image_help" src="/images/manual_database_03.png" alt="Complete reference" width="1200"/>
 </div>
 <br/>
 <hr>
@@ -61,7 +60,7 @@
   <h3 id="search" class="post-title">Search page</h3>
   <p>The search page is designed so you can browse through the complete database with ease. <br/>You can navigate immediately to the desired type of genes with the navigation buttons on the top left. <br/>Of course, you can filter the table so you can search the desired genes with specific criteria. All you have to do is to use the filters located below the column headers. Any input in those fields will immediately filter the results from the search table without any need of reloading the page. You can also combine several filters for a more precise search.<br/><br/>For instance, if you type “A2” in the HLA field and “peptide” in the lymphocyte stimulation field, only genes having an HLA and lymphocyte stimulation matching those criteria will be displayed. In that example, there are only 97 entries that match both critera. The number of entries based on your search criteria is displayed at the bottom left of the table. <br/><br/>You can easily reset your search critera and the whole table with the Reset Filters button on the top right. <br/>Please note that any filter aside of reference will clear the potential table as its content is not relevant to the metadata you are looking for.</p>
   <i>Search page with HLA set to A2 and lymphocyte stimulation set to Peptide</i>
-  <img src="/images/manual_database_04.png" alt="Search page" width="1200" />
+  <img class="image_help" src="/images/manual_database_04.png" alt="Search page" width="1200" />
   <hr>
   <br/>
   <p id="filter"><b>Filters</b></p>
@@ -69,13 +68,13 @@
     <br/>For example, if you type “alpha” in the Gene/Protein filter, it will show every gene with “alpha” in their name, such as alpha-actinin-4 or pml-RARalpha fusion protein. However, please note that you cannot combine several terms within the same filter. For example, if you type “alpha RAR”, it will not show pml-RARalpha fusion protein because the filter will not search for both “alpha” and “RAR” but rather one single word “alpha RAR”. Please note the HLA column is different and requires accurate search input. For instance, if you type "A2", the table will not show genes with a "A22" HLA.
   </p>
   <i>Search page with Gene/Protein set to alpha</i>
-  <img src="/images/manual_database_05.png" alt="Search page" width="1200"/>
+  <img class="image_help" src="/images/manual_database_05.png" alt="Search page" width="1200"/>
   <hr>
   <br/>
   <p id="wildcard"><b>Wildcard</b></p>
   <p>On the other hand, you can use <b>*</b> as a wildcard, which replaces any 1 character or none, and you can use several of them. <br/><br/>For instance, if you type “FIAS” in the peptide sequence filter, this will only display alpha-actinin-4. On the other hand, if you type “*IAS”, it will yield more results. With the HLA example above, if you type "A2*", it will display any gene with an "A2" HLA, "A24" HLA etc. </p>
   <i>Search page with Peptide Sequence set to FIAS then *IAS</i>
-  <img src="/images/manual_database_06.png" alt="Search page" width="1200"/>
+  <img class="image_help" src="/images/manual_database_06.png" alt="Search page" width="1200"/>
   <hr>
   <br/>
   <p id="delimiters"><b>Delimiters</b></p>
@@ -84,16 +83,14 @@
     <br/>Similarly, if you type “VV)” in the peptide sequence filter, only HER-2, IGF2B3 and KIF20A will be shown. Other genes with VV won't be displayed if VV aren't the last letters of their sequence.
   </p>
   <i>Search page with Gene/Peptide set to (alpha</i>
-  <img src="/images/manual_database_07.png" alt="Search page" width="1200"/>
-  <br/>
+  <img class="image_help" src="/images/manual_database_07.png" alt="Search page" width="1200"/>
+  <br/><br/>
   <i>Search page with Peptide sequence set to VV)</i>
-  <img src="/images/manual_database_08.png" alt="Search page" width="1200"/>
-
+  <img class="image_help" src="/images/manual_database_08.png" alt="Search page" width="1200"/>
   <hr>
   <br/>
   <p id="reference"><b>References</b></p>
   <p>The reference filter will apply to the complete reference of the article related to the gene. As such, you can type the name of any author, the year when the article was published or the title of the article.<br/>For example, if you type "Nakamura" in the reference filter, the table will display every gene where "Nakamura" is mentioned even if it isn't the first author. In this example, there are 12 results since Mr. Nakamura was a co-author of the articles of those genes. <br/><br/>Also, as stated above, this will filter the potential table as well.</p>
   <i>Search page with reference set to Nakamura</i>
-  <img src="/images/manual_database_09.png" alt="Search page" width="1200"/>
-
+  <img class="image_help" src="/images/manual_database_09.png" alt="Search page" width="1200"/>
 </div>

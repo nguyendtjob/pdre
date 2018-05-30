@@ -51,12 +51,11 @@ module.exports = {
   /**
    * `UserController.logout()`
    */
-  logout: function (req, res) {
-    req.session.destroy(function(err){
+  logout: function (req, res) {    req.session.destroy(function(err){
       if (err)
         return res.negotiate(err);
 
-      return res.redirect('/Peptide/list');
+      return res.redirect('/Peptide/search');
 
     })
   }

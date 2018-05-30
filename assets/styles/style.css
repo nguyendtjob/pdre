@@ -224,10 +224,6 @@ Style for details page
   margin: auto;
 }
 
-#close_detail {
-  margin-right: 20px;
-}
-
 
 /*
 Style for homepage
@@ -268,9 +264,15 @@ Style for help page
   position: fixed;
   z-index: 1;
   top: 60px;
-  left: 0;/
+  left: 0;
   overflow-x: hidden;
   padding-top: 20px;
+
+}
+
+.image_help{
+  border-style: solid;
+  border-width: 1px;
 }
 
 /*

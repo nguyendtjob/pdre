@@ -18,6 +18,7 @@ module.exports = {
     var tumor = req.body.tumor;
     var hla = req.body.hla;
     var freq;
+    //Freq must be an int, so making sure of it
     if (isNaN(req.body.freq) || req.body.freq == null) {
       freq = 0;
     } else {
@@ -35,11 +36,13 @@ module.exports = {
     var comment = req.body.comment;
     var image = "";
 
+    //Skipper used to upload the expression image, even if there isn't any image uploaded
     req.file('file').upload(function whenDone(err,uploadedFiles){
       if (err) {
         sails.log.error(new Error("Create: Error when uploading image file"));
       }
 
+      //In case there is no image
       if (uploadedFiles.length === 0) {
         Peptide.create({
           gene: gene,
@@ -67,6 +70,7 @@ module.exports = {
           res.redirect('Peptide/adminlist');
         });
       }else {
+        //Convert the uploaded image into base64 string, then delete the uploaded image from the disk
         var fs = require('fs');
         var bitmap = fs.readFileSync(uploadedFiles[0].fd);
         image = "data:image/jpeg;base64,"+ bitmap.toString('base64');
@@ -111,6 +115,7 @@ module.exports = {
   /**
    * `PeptideController.list()`
    */
+  //Request to the database. Fetch the peptides based on their types so they are grouped for the page
   list: function (req, res) {
     Peptide.find().where({type: "mutation"}).exec(function (err, mutations) {
       if (err) {
@@ -158,6 +163,7 @@ module.exports = {
   /**
    * `PeptideController.search()`
    */
+  //Request to the database. Separate the peptides and the potential articles
   search: function (req, res) {
     Peptide.find().where({type: {'!' : ["potential"]}}).exec(function (err, peptides){
       if (err) {
@@ -225,7 +231,7 @@ module.exports = {
       //Credentials of host
       var transporter = nodemailer.createTransport({
         host: config.emailsmtp,
-        port: config.emailport,
+        port: config.emailport
       });
 
       var mailOptions;
@@ -280,7 +286,11 @@ module.exports = {
         sails.log.error(new Error("500: Database Error (edit)"));
         res.send(500, {error: 'Database Error'});
       }
-      res.view('edit', {peptide: peptide});
+      if(!peptide){
+        res.redirect('404');
+      }else {
+        res.view('edit', {peptide: peptide});
+      }
     })
   },
 
@@ -331,11 +341,12 @@ module.exports = {
     } else {
       image = req.body.image;
     }
-
+    //Similarly to create, uses skipper to upload the file
     req.file('file').upload(function whenDone(err,uploadedFiles) {
       if (err) {
         sails.log.error(new Error("Create: Error when uploading image file"));
       }
+      //Proceed with update if there is no image
       if (uploadedFiles.length === 0) {
         Peptide.update({id: req.params.id},{
           gene: gene,
@@ -363,6 +374,7 @@ module.exports = {
           res.redirect('Peptide/adminlist');
         });
       } else {
+        //Convert the image into base 64 then delete uploaded image from the disk
         var fs = require('fs');
         var bitmap = fs.readFileSync(uploadedFiles[0].fd);
         image = "data:image/jpeg;base64," + bitmap.toString('base64');

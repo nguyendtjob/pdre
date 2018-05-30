@@ -121,17 +121,17 @@
         <input type="text" name="comment" class="form-control" value="<%= peptide.comment ? peptide.comment : '' %>">
       </div>
     </div>
-    <br>
+    <br/>
     <div>
-      <input type="checkbox" name="newTag" value="newTag" <% if (peptide.newTag) { %>checked<%}%>> New entry?<br>
+      <input type="checkbox" name="newTag" value="newTag" <% if (peptide.newTag) { %>checked<%}%>> New entry?<br/>
     </div>
     <input type="hidden" name="_csrf" value="<%= _csrf %>" />
     <div id="over_image">
       <hr>
       <label><b>Expression image</b></label><br/>
-      <input type="checkbox" name="deleteImage" value="deleteImage"> Delete image?<br><br>
+      <input type="checkbox" name="deleteImage" value="deleteImage"> Delete image?<br/><br/>
       <input type="hidden" name="image" value="<%= peptide.image ? peptide.image:''%>" />
-      <input id ="file" type="file" name="file" accept="image/*"/><br>
+      <input id ="file" type="file" name="file" accept="image/jpeg"/><br/>
     </div>
 
 

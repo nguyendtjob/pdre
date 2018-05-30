@@ -1,4 +1,5 @@
 <script>
+  //Function that check if the file extention is correct and if the file size isn't too big
   function Validate() {
     var allowedFiles = [".pdf"];
     var fileUpload = document.getElementById("submit_file");
@@ -21,7 +22,6 @@
       lblMessage.innerHTML = "";
       return true;
     }
-
   }
 </script>
 
@@ -38,13 +38,13 @@
       <span style="color:red">An error has occurred. Please try again later.</span>
       <% }} %>
     </span>
-    <br>
+    <br/>
     <label><b>E-mail </b></label><br/>
-    <input type="text" name="email" required><br><br>
+    <input type="text" name="email" required><br/><br/>
     <label><b>Comment </b><i></i></label><br/>
-    <textarea id="submit_comment" name="comment" required></textarea><br><br>
+    <textarea id="submit_comment" name="comment" required></textarea><br/><br/>
     <input type="hidden" name="_csrf" value="<%= _csrf %>" />
-    <input id ="submit_file" type="file" name="pdf" onchange="return Validate()" accept="application/pdf" required/><br><br>
+    <input id ="submit_file" type="file" name="pdf" onchange="return Validate()" accept="application/pdf" required/><br/><br/>
     <input id ="submit_button" type="submit" class="btn btn-primary" value="Submit">
   </form>
 </div>
