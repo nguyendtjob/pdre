@@ -17,10 +17,10 @@
     initFadeIn();
     //setting the mutation datable
     var mutationTable = $('#mutationTable').DataTable({
-        dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-6'><'col-sm-1'B>>",
+        dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<i><B>",
         "scrollX": true,
         "orderCellsTop": true,
-        scrollY: '65vh',
+        scrollY: '60vh',
         paging: false,
         scrollCollapse: true,
         headerOffset: 102,
@@ -107,10 +107,10 @@
 
     //setting the tumor datatable
     var tumorTable = $('#tumorTable').DataTable({
-        dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-6'><'col-sm-1'B>>",
+        dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<i><B>",
         "scrollX": true,
         "orderCellsTop": true,
-        scrollY: '65vh',
+        scrollY: '60vh',
         paging: false,
         scrollCollapse: true,
         headerOffset: 102,
@@ -177,33 +177,33 @@
           }
         ],
 
-      "columnDefs": [
-        {
-          "targets":[0,1,2,3,4,5,6,7,8,9,10],
-          "sortable": false
-        },
-        {
-          "targets": [ 8,9 ],
-          "visible": false,
-          "searchable": true
-        },
-        { "width": "20%", "targets": 0 },
-        { "width": "10%", "targets": 1 },
-        { "width": "5%", "targets": [2]},
-        { "width": "6%", "targets": [3,5]},
-        { "width": "15%", "targets": [4] },
-        { "width": "20%", "targets": [6] },
-        { "width": "5%", "targets": 10}
+        "columnDefs": [
+          {
+            "targets":[0,1,2,3,4,5,6,7,8,9,10],
+            "sortable": false
+          },
+          {
+            "targets": [ 8,9 ],
+            "visible": false,
+            "searchable": true
+          },
+          { "width": "20%", "targets": 0 },
+          { "width": "10%", "targets": 1 },
+          { "width": "5%", "targets": [2]},
+          { "width": "6%", "targets": [3,5]},
+          { "width": "15%", "targets": [4] },
+          { "width": "20%", "targets": [6] },
+          { "width": "5%", "targets": 10}
         ]
       }
     );
 
     //setting the differentiation datatable
     var differentiationTable = $('#differentationTable').DataTable({
-        dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-6'><'col-sm-1'B>>",
+        dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<i><B>",
         "scrollX": true,
         "orderCellsTop": true,
-        scrollY: '65vh',
+        scrollY: '60vh',
         paging: false,
         scrollCollapse: true,
         headerOffset: 102,
@@ -290,10 +290,10 @@
 
     //setting the overexpressed datatable
     var overexpressedTable = $('#overexpressedTable').DataTable({
-        dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-6'><'col-sm-1'B>>",
+        dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<i><B>",
         "scrollX": true,
         "orderCellsTop": true,
-        scrollY: '65vh',
+        scrollY: '60vh',
         paging: false,
         scrollCollapse: true,
         headerOffset: 102,
@@ -381,43 +381,48 @@
 
     //Setting the potential datatable
     var potentialTable = $('#potentialTable').DataTable({
-        dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-6'><'col-sm-1'B>>",
+        //Dom for print button in comment. Uncomment it for the print button
+        //dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<i><B>",
+        dom: "<'row'>" + "<'row'<'col-sm-12'tr>>" + "<i>",
         "scrollX": true,
         "orderCellsTop": true,
-        scrollY: '65vh',
+        scrollY: '60vh',
         paging: false,
         scrollCollapse: true,
         "order": [[ 0, "asc" ]],
-        buttons: [
-          {
-            extend:'print',
-            text: 'Print Table',
-            title: '',
-            //autoPrint: false,
-            exportOptions: {
-              stripHtml: false,
-              columns: [0]
-            },
-            customize: function ( win ) {
-              //Add title
-              $(win.document.body).prepend('<p><h1>Potential antigens table</h1></p>')
+        //Print button functions commented out
+        /*
+          buttons: [
+            {
+              extend:'print',
+              text: 'Print Table',
+              title: '',
+              //autoPrint: false,
+              exportOptions: {
+                stripHtml: false,
+                columns: [0]
+              },
+              customize: function ( win ) {
+                //Add title
+                $(win.document.body).prepend('<p><h1>Potential antigens table</h1></p>')
 
-              //Remove the information icon
-              $(win.document.body).find("th").each(function () {
-                var string = $(this).text();
-                var change = string.replace(/ ⓘ/g, '');
-                $(this).text(change);
-              });
+                //Remove the information icon
+                $(win.document.body).find("th").each(function () {
+                  var string = $(this).text();
+                  var change = string.replace(/ ⓘ/g, '');
+                  $(this).text(change);
+                });
 
-              //Remove link icon
-              $(win.document.body).find("img").remove();
+                //Remove link icon
+                $(win.document.body).find("img").remove();
 
-              //Remove link
-              $(win.document.body).find("a").contents().unwrap();
+                //Remove link
+                $(win.document.body).find("a").contents().unwrap();
 
+              }
             }
-          }
-        ],
+          ],
+          */
         "columnDefs": [
           {
             "targets":[2],
@@ -478,9 +483,9 @@
         default:
           row = overexpressedTable.row( tr );
       }
-        data = row.data();
-        $('.fullref_text').text(data[8]);
-        document.getElementById("ref_zone").style.visibility = 'visible';
+      data = row.data();
+      $('.fullref_text').text(data[8]);
+      document.getElementById("ref_zone").style.visibility = 'visible';
 
     });
 
@@ -493,6 +498,7 @@
     //Add margin to print button
     $('.buttons-print').each(function() {
       $(this).css('margin-top','7px');
+      $(this).css('float','right');
     })
 
 
@@ -551,7 +557,7 @@
             <% } else {%>
             <b><%= peptide.gene %></b>
             <% } %><% if (peptide.newTag) {%>
-             <img src="/images/new_icon.png"/>
+            <img src="/images/new_icon.png"/>
             <% } %>
           </td>
           <td><%= peptide.tumor %></td>
@@ -602,7 +608,7 @@
             <% } else {%>
             <b><%= peptide.gene %></b>
             <% } %><% if (peptide.newTag) {%>
-             <img src="/images/new_icon.png"/>
+            <img src="/images/new_icon.png"/>
             <% } %>
           </td>
           <td>
@@ -656,7 +662,7 @@
             <% } else {%>
             <b><%= peptide.gene %></b>
             <% } %><% if (peptide.newTag) {%>
-             <img src="/images/new_icon.png"/>
+            <img src="/images/new_icon.png"/>
             <% } %>
           </td>
           <td><%= peptide.tumor %>
@@ -710,7 +716,7 @@
             <% } else {%>
             <b><%= peptide.gene %></b>
             <% } %><% if (peptide.newTag) {%>
-             <img src="/images/new_icon.png"/>
+            <img src="/images/new_icon.png"/>
             <% } %>
           </td>
           <td><%= peptide.tumor %>

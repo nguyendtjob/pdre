@@ -82,6 +82,7 @@ u {
 
 .navbar{
   border-color: black;
+  padding: 2px !important;
 }
 
 
@@ -105,8 +106,9 @@ u {
 }
 
 #body-container{
-  min-height: calc(100vh - 110px);
+  min-height: 65vh;
 }
+
 
 #footer-container{
   height: 30px;
@@ -209,6 +211,10 @@ td.border_over, tr.border_over{
   text-align: center;
 }
 
+.btn-group{
+  float: right !important;
+}
+
 /*
 Style for details page
  */
@@ -230,7 +236,7 @@ Style for homepage
  */
 
 #homepage_block {
-  margin-top: 300px;
+  margin-top: 30px;
 }
 
 /*
@@ -273,6 +279,7 @@ Style for help page
 .image_help{
   border-style: solid;
   border-width: 1px;
+  border-color: black;
 }
 
 /*
