@@ -80,9 +80,10 @@ u {
   border-color: #ccc;
 }
 
-.navbar{
-  border-color: black;
-  padding: 2px !important;
+#navheader{
+  border-bottom: 1px solid #dee2e6!important;
+  padding-bottom: 0px !important;
+  padding-right: 20px !important;
 }
 
 
@@ -214,6 +215,27 @@ td.border_over, tr.border_over{
 .btn-group{
   float: right !important;
 }
+
+table.dataTable thead .sorting::before,
+table.dataTable thead .sorting_asc::before {
+  display:none;
+}
+
+table.dataTable thead .sorting_desc::before {
+  display:none;
+}
+
+
+table.dataTable thead .sorting::after,
+table.dataTable thead .sorting_asc::after {
+  display:none;
+}
+
+table.dataTable thead .sorting_desc::after {
+  display:none;
+}
+
+
 
 /*
 Style for details page

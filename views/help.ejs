@@ -1,26 +1,25 @@
 <div id="help_bar">
-  <p style="margin-left:5px"><b>Navigation</b></p>
   <ul class="navbar-nav" style="margin-top:-15px">
     <li class="nav-item">
-      <a href="#database"><b>Database Page</b></a>
+      <a href="#database" style="text-decoration: underline"><b>Database Page</b></a>
     </li>
     <li class="nav-item" >
-      <a href="#columns" ><b>Metadata</b></a>
+      <a href="#metadata" style="font-size:12px"><b>Metadata</b></a>
     </li>
     <li class="nav-item">
-      <a href="#search" ><b>Search Page</b></a>
+      <a href="#search" style="text-decoration: underline"><b>Search Page</b></a>
     </li>
     <li class="nav-item">
-      <a href="#filter" ><b>Filters</b></a>
+      <a href="#filter" style="font-size:12px"><b>General filters</b></a>
     </li>
     <li class="nav-item">
-      <a href="#wildcard" ><b>Wildcard</b></a>
+      <a href="#reference" style="font-size:12px"><b>Reference filter</b></a>
     </li>
     <li class="nav-item">
-      <a href="#delimiters" ><b>Delimiters</b></a>
+      <a href="#wildcard" style="font-size:12px"><b>Wildcard</b></a>
     </li>
     <li class="nav-item">
-      <a href="#reference"><b>References</b></a>
+      <a href="#delimiters" style="font-size:12px"><b>Delimiters</b></a>
     </li>
   </ul>
 </div>
@@ -37,7 +36,7 @@
   <i>Overview of the database page</i>
   <img class="image_help" src="/images/manual_database_01.png" alt="Overview of the database page" width="1200"/>
   <hr>
-  <p><b id="columns">Metadata</b></p>
+  <p><b id="metadata">Metadata</b></p>
   <p>Aside of the potential table, every table has several columns with the following metadata:</p>
   <ul>
     <li>Gene/Protein: The name of the gene or protein. If there is a <a href="https://www.genecards.org/" target="_blank">geneCard</a> url available, you can access it by clicking on it. Newly added gene will have a <img src="/images/new_icon.png"/> icon.</li>
@@ -58,12 +57,12 @@
 <br/>
 <div class="post-container">
   <h3 id="search" class="post-title">Search page</h3>
-  <p>The search page is designed so you can browse through the complete database with ease. <br/>You can navigate immediately to the desired type of genes with the navigation buttons on the top left. <br/>Of course, you can filter the table so you can search the desired genes with specific criteria. All you have to do is to use the filters located below the column headers. Any input in those fields will immediately filter the results from the search table without any need of reloading the page. You can also combine several filters for a more precise search.<br/><br/>For instance, if you type “A2” in the HLA field and “peptide” in the lymphocyte stimulation field, only genes having an HLA and lymphocyte stimulation matching those criteria will be displayed. In that example, there are only 97 entries that match both critera. The number of entries based on your search criteria is displayed at the bottom left of the table. <br/><br/>You can easily reset your search critera and the whole table with the Reset Filters button on the top right. <br/>Please note that any filter aside of reference will clear the potential table as its content is not relevant to the metadata you are looking for.</p>
+  <p>The search page is designed so you can browse through the complete database with ease. <br/>You can navigate immediately to the desired type of genes with the navigation buttons on the top left. You can sort by column by clicking on the column header and you can also sort multiple columns by holding the shift key before clicking on the columns you want to sort together. In such case, the order of the columns you clicked will determine the order of the sort process.<br/>Of course, you can filter the table so you can search the desired genes with specific criteria. All you have to do is to use the filters located below the column headers. Any input in those fields will immediately filter the results from the search table without any need of reloading the page. You can also combine several filters for a more precise search.<br/><br/>For instance, if you type “A2” in the HLA field and “peptide” in the lymphocyte stimulation field, only genes having an HLA and lymphocyte stimulation matching those criteria will be displayed. In that example, there are only 97 entries that match both critera. The number of entries based on your search criteria is displayed at the bottom left of the table. <br/><br/>You can easily reset your search critera and the whole table with the Reset Filters button on the top right. <br/>Please note that any filter aside of reference will clear the potential table as its content is not relevant to the metadata you are looking for.</p>
   <i>Search page with HLA set to A2 and lymphocyte stimulation set to Peptide</i>
   <img class="image_help" src="/images/manual_database_03.png" alt="Search page" width="1200" />
   <hr>
   <br/>
-  <p id="filter"><b>Filters</b></p>
+  <p id="filter"><b>General filters</b></p>
   <p>With the exception of the HLA field, search done with the filter fields will display genes having meta data containing the letters/words you have typed (lower and upper case won't matter). You do not have to type the exact terms.
     <br/>For example, if you type “alpha” in the Gene/Protein filter, it will show every gene with “alpha” in their name, such as alpha-actinin-4 or pml-RARalpha fusion protein. However, please note that you cannot combine several terms within the same filter. For example, if you type “alpha RAR”, it will not show pml-RARalpha fusion protein because the filter will not search for both “alpha” and “RAR” but rather one single word “alpha RAR”. Please note the HLA column is different and requires accurate search input. For instance, if you type "A2", the table will not show genes with a "A22" HLA.
   </p>
@@ -71,8 +70,14 @@
   <img class="image_help" src="/images/manual_database_04.png" alt="Search page" width="1200"/>
   <hr>
   <br/>
+  <p id="reference"><b>Reference filter</b></p>
+  <p>The reference filter will apply to the complete reference of the article related to the gene. As such, you can type the name of any author, the year when the article was published or the title of the article.<br/>For example, if you type "Nakamura" in the reference filter, the table will display 12 results since Mr. Nakamura was a co-author of the articles of those genes. <br/><br/>Unlike other filters, the reference filter will also apply to the potential table as well. In this example, 4 entries are displayed, since Mr. Nakamura is one of the listed authors of those articles.</p>
+  <i>Search page with reference set to Nakamura</i>
+  <img class="image_help" src="/images/manual_database_08.png" alt="Search page" width="1200"/>
+  <hr>
+  <br/>
   <p id="wildcard"><b>Wildcard</b></p>
-  <p>On the other hand, you can use <b>*</b> as a wildcard, which replaces any 1 character or none, and you can use several of them. <br/><br/>For instance, if you type “FIAS” in the peptide sequence filter, this will only display alpha-actinin-4. On the other hand, if you type “*IAS”, it will yield more results. With the HLA example above, if you type "A2*", it will display any gene with an "A2" HLA, "A24" HLA etc. </p>
+  <p>To make your search easier, you can use <b>*</b> as a wildcard, which replaces any 1 character or none. You can use several of them, in which case the search function will consider any combination of letters equal or shorter than the number of * put together. <br/><br/>For instance, if you type “FIAS” in the peptide sequence filter, this will only display alpha-actinin-4. On the other hand, if you type “*IAS”, it will yield more results. <br/>With the HLA example above, if you type "A2*", it will display any gene with an "A2" HLA, "A24" HLA etc. <br/>As stated above, you can use several * together. In the same example, "A**" will lead to "A1", "A2", "A11" etc. In other words, ** is any combination of 0 to 2 letters together.</p>
   <i>Search page with Peptide Sequence set to FIAS then *IAS</i>
   <img class="image_help" src="/images/manual_database_05.png" alt="Search page" width="1200"/>
   <hr>
@@ -87,10 +92,4 @@
   <br/><br/>
   <i>Search page with Peptide sequence set to VV)</i>
   <img class="image_help" src="/images/manual_database_07.png" alt="Search page" width="1200"/>
-  <hr>
-  <br/>
-  <p id="reference"><b>References</b></p>
-  <p>The reference filter will apply to the complete reference of the article related to the gene. As such, you can type the name of any author, the year when the article was published or the title of the article.<br/>For example, if you type "Nakamura" in the reference filter, the table will display every gene where "Nakamura" is mentioned even if it isn't the first author. In this example, there are 12 results since Mr. Nakamura was a co-author of the articles of those genes. <br/><br/>Also, as stated above, this will filter the potential table as well.</p>
-  <i>Search page with reference set to Nakamura</i>
-  <img class="image_help" src="/images/manual_database_08.png" alt="Search page" width="1200"/>
 </div>
