@@ -5,7 +5,7 @@
     var fileUpload = document.getElementById("submit_file");
     var lblError = document.getElementById("lblError");
     var lblMessage = document.getElementById("lblMessage");
-    var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+    var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:\(\)])+(" + allowedFiles.join('|') + ")$");
     var size = ((fileUpload.files.item(0).size/1024)/1024).toFixed(4);
     if (!regex.test(fileUpload.value.toLowerCase())) {
       lblError.innerHTML = "Only <b>" + allowedFiles.join(', ') + "</b> files are allowed.";
