@@ -28,7 +28,6 @@
       scrollY: '65vh',
       paging: false,
       scrollCollapse: true,
-      headerOffset: 102,
       "orderFixed": [ 1, 'asc' ],
       "order": [[ 1, "asc" ], [ 0, "asc" ]],
       buttons: [
@@ -175,7 +174,6 @@
       scrollY: '65vh',
       paging: false,
       scrollCollapse: true,
-      headerOffset: 102,
       "order": [ 0, "asc" ],
       "columnDefs": [
         {
@@ -340,7 +338,7 @@
 <!-- Initial setup of the page -->
 <div id="div_body" style="visibility: hidden">
   <!-- Category navigation bar -->
-  <nav class="navbar navbar-expand-lg navbar-light" style="margin-left: -5px;margin-right:12px;">
+  <nav class="table_nav navbar navbar-expand-lg navbar-light">
     <div class="collapse navbar-collapse" id="navbar_category">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
@@ -462,7 +460,7 @@
       <tbody>
       <% potentials.forEach(function(peptide){ %>
       <tr>
-        <td><a href="<%= peptide.url %>" target="_blank"><%= peptide.fullReference ? peptide.fullReference:'URL to the article' %></a></td>
+        <td><a href="<%= peptide.url %>" target="_blank"><%= peptide.fullReference ? peptide.fullReference:'No information: click to access to the URL to the article' %></a></td>
         <td><%= peptide.comment ? peptide.comment:'' %></td>
         <td class="comment-cell"><% if(peptide.comment) {%>
           <button class="btn btn-outline-secondary btn-sm oi oi-document" data-toggle="tooltip" data-placement="left" title='<%= peptide.comment %>'></button>

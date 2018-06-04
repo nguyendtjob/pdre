@@ -27,9 +27,7 @@ module.exports.policies = {
   ***************************************************************************/
 
    '*': true,
-
-
-
+  //Checking if the user is identified for every admin action below
   PeptideController: {
     adminlist: 'sessionAuth',
     create: 'sessionAuth',

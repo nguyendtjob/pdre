@@ -23,7 +23,6 @@
         scrollY: '60vh',
         paging: false,
         scrollCollapse: true,
-        headerOffset: 102,
         rowsGroup: [0,1],
         "order": [[ 0, "asc" ]],
         buttons: [
@@ -96,10 +95,10 @@
           },
           { "width": "10%", "targets": 0 },
           { "width": "20%", "targets": 1 },
-          { "width": "5%", "targets": [2]},
+          { "width": "5%", "targets": 2},
           { "width": "6%", "targets": [3,5]},
-          { "width": "15%", "targets": [4] },
-          { "width": "20%", "targets": [6] },
+          { "width": "15%", "targets": 4 },
+          { "width": "20%", "targets": 6 },
           { "width": "5%", "targets": 10}
         ]
       }
@@ -113,7 +112,6 @@
         scrollY: '60vh',
         paging: false,
         scrollCollapse: true,
-        headerOffset: 102,
         rowsGroup: [0, 1],
         "order": [[ 0, "asc" ]],
 
@@ -189,10 +187,10 @@
           },
           { "width": "20%", "targets": 0 },
           { "width": "10%", "targets": 1 },
-          { "width": "5%", "targets": [2]},
+          { "width": "5%", "targets": 2},
           { "width": "6%", "targets": [3,5]},
-          { "width": "15%", "targets": [4] },
-          { "width": "20%", "targets": [6] },
+          { "width": "15%", "targets": 4 },
+          { "width": "20%", "targets": 6 },
           { "width": "5%", "targets": 10}
         ]
       }
@@ -206,7 +204,6 @@
         scrollY: '60vh',
         paging: false,
         scrollCollapse: true,
-        headerOffset: 102,
         rowsGroup: [0, 1],
         "order": [[ 0, "asc" ]],
         buttons: [
@@ -279,11 +276,11 @@
           },
           { "width": "10%", "targets": 0 },
           { "width": "20%", "targets": 1 },
-          { "width": "5%", "targets": [2]},
+          { "width": "5%", "targets": 2},
           { "width": "6%", "targets": [3,5]},
-          { "width": "15%", "targets": [4] },
-          { "width": "20%", "targets": [6] },
-          { "width": "5%", "targets": 10},
+          { "width": "15%", "targets": 4 },
+          { "width": "20%", "targets": 6 },
+          { "width": "5%", "targets": 10}
         ]
       }
     );
@@ -296,7 +293,6 @@
         scrollY: '60vh',
         paging: false,
         scrollCollapse: true,
-        headerOffset: 102,
         rowsGroup: [0, 1],
         "order": [[ 0, "asc" ]],
         buttons: [
@@ -369,11 +365,11 @@
           },
           { "width": "10%", "targets": 0 },
           { "width": "20%", "targets": 1 },
-          { "width": "5%", "targets": [2]},
+          { "width": "5%", "targets": 2},
           { "width": "6%", "targets": [3,5]},
-          { "width": "15%", "targets": [4] },
-          { "width": "20%", "targets": [6] },
-          { "width": "5%", "targets": 10},
+          { "width": "15%", "targets": 4 },
+          { "width": "20%", "targets": 6 },
+          { "width": "5%", "targets": 10}
         ]
       }
     );
@@ -430,26 +426,19 @@
           },
           {
             "targets": [1],
-            "visible": false,
+            "visible": false
           },
-          { "width": "5%", "targets": [2]},
+          { "width": "5%", "targets": [2]}
         ]
       }
     );
 
-    //Function when a bootstrap tab is clicked
+    //Functions when a tab is clicked
     $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
       //Adjusting width of the columns for the header for the visible table
       $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
 
-
-      //Adjusting the headers
-      mutationTable.fixedHeader.adjust();
-      tumorTable.fixedHeader.adjust();
-      differentiationTable.fixedHeader.adjust();
-      overexpressedTable.fixedHeader.adjust();
-      potentialTable.fixedHeader.adjust();
-
+      //Hide any displayed reference
       document.getElementById("ref_zone").style.visibility = 'hidden';
     } );
 
@@ -588,7 +577,7 @@
         <thead>
         <tr>
           <th data-toggle="tooltip" data-placement="top" title="Link to the Gene Card for the encoding gene and/or the parent protein">Gene/Protein ⓘ</th>
-          <th data-toggle="tooltip" data-placement="top" data-html="true" title="Expression in the tissues<br/>*Click on the RNA icon to see the expression"">Normal/Tumor ⓘ</th>
+          <th data-toggle="tooltip" data-placement="top" data-html="true" title="Expression in the tissues<br/>*Click on the RNA icon to see the expression">Normal/Tumor ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Human leukocyte antigen <br/>Class II HLA are shown in green">HLA ⓘ</th>
           <th data-toggle="tooltip" data-placement="top" data-html="true" title="Frequency in Caucasians, based on <br/>(1) Marsh SGE, Parham P, Barber LD. The HLA Factsbook (Academic Press, 2000) for HLA-A, B, C, and <br/>(2) Colombani J. HLA, Fonctions immunitaires et applications médicales (John Libbey Eurotext, 1993) for HLA-DP and DR">HLA% ⓘ</th>
           <th>Peptide Sequence</th>

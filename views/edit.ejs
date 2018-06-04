@@ -12,41 +12,11 @@
       <div class="form-group col-md-2" id="typeDiv">
         <label><b>Peptide Category</b><br/></label>
         <select  class="form-control" id="selType" name="type" onchange="showHide(this.options[this.selectedIndex].value)">
-          <% if (peptide.type == "mutation") { %>
-          <option value="mutation" selected >Mutation</option>
-          <option value="tumor">Tumor Specific</option>
-          <option value="differentiation">Differentiation</option>
-          <option value="overexpressed">Overexpressed</option>
-          <option value="potential">Potential</option>
-
-          <% } else if (peptide.type == "tumor") { %>
-          <option value="mutation">Mutation</option>
-          <option value="tumor" selected>Tumor Specific</option>
-          <option value="differentiation">Differentiation</option>
-          <option value="overexpressed">Overexpressed</option>
-          <option value="potential">Potential</option>
-
-          <% } else  if (peptide.type == "differentiation") { %>
-          <option value="mutation">Mutation</option>
-          <option value="tumor">Tumor Specific</option>
-          <option value="differentiation" selected>Differentiation</option>
-          <option value="overexpressed">Overexpressed</option>
-          <option value="potential">Potential</option>
-
-          <% } else if (peptide.type == "overexpressed") { %>
-          <option value="mutation">Mutation</option>
-          <option value="tumor">Tumor Specific</option>
-          <option value="differentiation">Differentiation</option>
-          <option value="overexpressed" selected>Overexpressed</option>
-          <option value="potential">Potential</option>
-
-          <% } else {%>
-          <option value="mutation">Mutation</option>
-          <option value="tumor">Tumor Specific</option>
-          <option value="differentiation">Differentiation</option>
-          <option value="overexpressed">Overexpressed</option>
-          <option value="potential" selected>Potential</option>
-          <% } %>
+          <option value="mutation" <% if (peptide.type == "mutation") { %> selected <% } %>>Mutation</option>
+          <option value="tumor" <% if (peptide.type == "tumor") { %> selected <% } %> >Tumor Specific</option>
+          <option value="differentiation" <% if (peptide.type == "differentiation") { %> selected <% } %> >Differentiation</option>
+          <option value="overexpressed" <% if (peptide.type == "overexpressed") { %> selected <% } %> >Overexpressed</option>
+          <option value="potential" <% if (peptide.type == "potential") { %> selected <% } %>>Potential</option>
         </select>
       </div>
       <div class="col-md-5" id="geneDiv">
@@ -136,7 +106,7 @@
 
 
     <hr>
-    <button type="submit" class="btn btn-primary" value="Save changes">Submit</button>
+    <button type="submit" class="btn btn-primary" value="Save changes">Save changes</button>
   </form>
 </div>
 
