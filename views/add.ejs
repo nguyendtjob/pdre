@@ -1,110 +1,3 @@
-<script src="/js/jquery-2.1.4.min.js"></script>
-<script type="text/javascript">
-
-  $('document').ready(function(){
-    document.getElementById("over_image").style.display = 'none';
-  });
-
-
-  //Function that hide or show form fields/hr based on the peptide type chosen in the select field. Also change field size
-  function showHide(select_item) {
-    var hr_group = document.getElementsByClassName("upper_hr");
-    var i;
-    if (select_item === "mutation"){
-      document.getElementById("geneDiv").style.display = 'block';
-      document.getElementById("geneCardDiv").style.display = 'block';
-      document.getElementById("tumorDiv").style.display = 'block';
-      document.getElementById("hlaDiv").style.display = 'block';
-      document.getElementById("freqDiv").style.display = 'block';
-      document.getElementById("preMutationDiv").style.display = 'block';
-      document.getElementById("mutationDiv").style.display = 'block';
-      document.getElementById("postMutationDiv").style.display = 'block';
-      document.getElementById("posDiv").style.display = 'block';
-      document.getElementById("stimDiv").style.display = 'block';
-      document.getElementById("minRefDiv").style.display = 'block';
-      document.getElementById("over_image").style.display = 'none';
-      for (i = 0; i < hr_group.length; i++) {
-        hr_group[i].style.display = 'block';
-      }
-
-      document.getElementById("hlaDiv").className = "col-md-4";
-      document.getElementById("freqDiv").className = "col-md-4";
-      document.getElementById("preMutationDiv").className = "col-md-4";
-
-      document.getElementById("seqText").textContent="Peptide sequence before the mutated part";
-    }
-
-    else if (select_item === "tumor"){
-      document.getElementById("tumorDiv").style.display = 'none';
-      document.getElementById("mutationDiv").style.display = 'none';
-      document.getElementById("postMutationDiv").style.display = 'none';
-
-      document.getElementById("geneDiv").style.display = 'block';
-      document.getElementById("geneCardDiv").style.display = 'block';
-      document.getElementById("preMutationDiv").style.display = 'block';
-      document.getElementById("hlaDiv").style.display = 'block';
-      document.getElementById("freqDiv").style.display = 'block';
-      document.getElementById("posDiv").style.display = 'block';
-      document.getElementById("stimDiv").style.display = 'block';
-      document.getElementById("minRefDiv").style.display = 'block';
-      document.getElementById("over_image").style.display = 'block';
-      for (i = 0; i < hr_group.length; i++) {
-        hr_group[i].style.display = 'block';
-      }
-
-      document.getElementById("hlaDiv").className = "col-md-6";
-      document.getElementById("freqDiv").className = "col-md-6";
-      document.getElementById("preMutationDiv").className = "col-md-12";
-
-      document.getElementById("seqText").textContent="Peptide sequence";
-    }
-
-    else if (select_item === "differentiation" || select_item === "overexpressed"){
-      document.getElementById("mutationDiv").style.display = 'none';
-      document.getElementById("postMutationDiv").style.display = 'none';
-
-      document.getElementById("tumorDiv").style.display = 'block';
-      document.getElementById("preMutationDiv").style.display = 'block';
-      document.getElementById("preMutationDiv").className = "col-md-12";
-      document.getElementById("geneDiv").style.display = 'block';
-      document.getElementById("geneCardDiv").style.display = 'block';
-      document.getElementById("hlaDiv").style.display = 'block';
-      document.getElementById("freqDiv").style.display = 'block';
-      document.getElementById("posDiv").style.display = 'block';
-      document.getElementById("stimDiv").style.display = 'block';
-      document.getElementById("minRefDiv").style.display = 'block';
-      document.getElementById("over_image").style.display = 'block';
-      for (i = 0; i < hr_group.length; i++) {
-        hr_group[i].style.display = 'block';
-      }
-      document.getElementById("hlaDiv").className = "col-md-4";
-      document.getElementById("freqDiv").className = "col-md-4";
-      document.getElementById("preMutationDiv").className = "col-md-12";
-
-      document.getElementById("seqText").textContent="Peptide sequence";
-    }
-
-    else if (select_item === "potential"){
-      document.getElementById("geneDiv").style.display = 'none';
-      document.getElementById("geneCardDiv").style.display = 'none';
-      document.getElementById("hlaDiv").style.display = 'none';
-      document.getElementById("freqDiv").style.display = 'none';
-      document.getElementById("posDiv").style.display = 'none';
-      document.getElementById("stimDiv").style.display = 'none';
-      document.getElementById("tumorDiv").style.display = 'none';
-      document.getElementById("preMutationDiv").style.display = 'none';
-      document.getElementById("mutationDiv").style.display = 'none';
-      document.getElementById("postMutationDiv").style.display = 'none';
-      document.getElementById("minRefDiv").style.display = 'none';
-      document.getElementById("over_image").style.display = 'none';
-      for (i = 0; i < hr_group.length; i++) {
-        hr_group[i].style.display = 'none';
-      }
-    }
-  }
-
-</script>
-
 <div class="container-fluid">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/Peptide/adminlist">Peptides</a></li>
@@ -214,3 +107,109 @@
   </form>
 </div>
 
+<script src="/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+
+  $('document').ready(function(){
+    document.getElementById("over_image").style.display = 'none';
+  });
+
+
+  //Function that hide or show form fields/hr based on the peptide type chosen in the select field. Also change field size
+  function showHide(select_item) {
+    var hr_group = document.getElementsByClassName("upper_hr");
+    var i;
+    if (select_item === "mutation"){
+      document.getElementById("geneDiv").style.display = 'block';
+      document.getElementById("geneCardDiv").style.display = 'block';
+      document.getElementById("tumorDiv").style.display = 'block';
+      document.getElementById("hlaDiv").style.display = 'block';
+      document.getElementById("freqDiv").style.display = 'block';
+      document.getElementById("preMutationDiv").style.display = 'block';
+      document.getElementById("mutationDiv").style.display = 'block';
+      document.getElementById("postMutationDiv").style.display = 'block';
+      document.getElementById("posDiv").style.display = 'block';
+      document.getElementById("stimDiv").style.display = 'block';
+      document.getElementById("minRefDiv").style.display = 'block';
+      document.getElementById("over_image").style.display = 'none';
+      for (i = 0; i < hr_group.length; i++) {
+        hr_group[i].style.display = 'block';
+      }
+
+      document.getElementById("hlaDiv").className = "col-md-4";
+      document.getElementById("freqDiv").className = "col-md-4";
+      document.getElementById("preMutationDiv").className = "col-md-4";
+
+      document.getElementById("seqText").textContent="Peptide sequence before the mutated part";
+    }
+
+    else if (select_item === "tumor"){
+      document.getElementById("tumorDiv").style.display = 'none';
+      document.getElementById("mutationDiv").style.display = 'none';
+      document.getElementById("postMutationDiv").style.display = 'none';
+
+      document.getElementById("geneDiv").style.display = 'block';
+      document.getElementById("geneCardDiv").style.display = 'block';
+      document.getElementById("preMutationDiv").style.display = 'block';
+      document.getElementById("hlaDiv").style.display = 'block';
+      document.getElementById("freqDiv").style.display = 'block';
+      document.getElementById("posDiv").style.display = 'block';
+      document.getElementById("stimDiv").style.display = 'block';
+      document.getElementById("minRefDiv").style.display = 'block';
+      document.getElementById("over_image").style.display = 'block';
+      for (i = 0; i < hr_group.length; i++) {
+        hr_group[i].style.display = 'block';
+      }
+
+      document.getElementById("hlaDiv").className = "col-md-6";
+      document.getElementById("freqDiv").className = "col-md-6";
+      document.getElementById("preMutationDiv").className = "col-md-12";
+
+      document.getElementById("seqText").textContent="Peptide sequence";
+    }
+
+    else if (select_item === "differentiation" || select_item === "overexpressed"){
+      document.getElementById("mutationDiv").style.display = 'none';
+      document.getElementById("postMutationDiv").style.display = 'none';
+
+      document.getElementById("tumorDiv").style.display = 'block';
+      document.getElementById("preMutationDiv").style.display = 'block';
+      document.getElementById("preMutationDiv").className = "col-md-12";
+      document.getElementById("geneDiv").style.display = 'block';
+      document.getElementById("geneCardDiv").style.display = 'block';
+      document.getElementById("hlaDiv").style.display = 'block';
+      document.getElementById("freqDiv").style.display = 'block';
+      document.getElementById("posDiv").style.display = 'block';
+      document.getElementById("stimDiv").style.display = 'block';
+      document.getElementById("minRefDiv").style.display = 'block';
+      document.getElementById("over_image").style.display = 'block';
+      for (i = 0; i < hr_group.length; i++) {
+        hr_group[i].style.display = 'block';
+      }
+      document.getElementById("hlaDiv").className = "col-md-4";
+      document.getElementById("freqDiv").className = "col-md-4";
+      document.getElementById("preMutationDiv").className = "col-md-12";
+
+      document.getElementById("seqText").textContent="Peptide sequence";
+    }
+
+    else if (select_item === "potential"){
+      document.getElementById("geneDiv").style.display = 'none';
+      document.getElementById("geneCardDiv").style.display = 'none';
+      document.getElementById("hlaDiv").style.display = 'none';
+      document.getElementById("freqDiv").style.display = 'none';
+      document.getElementById("posDiv").style.display = 'none';
+      document.getElementById("stimDiv").style.display = 'none';
+      document.getElementById("tumorDiv").style.display = 'none';
+      document.getElementById("preMutationDiv").style.display = 'none';
+      document.getElementById("mutationDiv").style.display = 'none';
+      document.getElementById("postMutationDiv").style.display = 'none';
+      document.getElementById("minRefDiv").style.display = 'none';
+      document.getElementById("over_image").style.display = 'none';
+      for (i = 0; i < hr_group.length; i++) {
+        hr_group[i].style.display = 'none';
+      }
+    }
+  }
+
+</script>

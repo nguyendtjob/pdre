@@ -76,7 +76,7 @@ module.exports = {
         image = "data:image/jpeg;base64,"+ bitmap.toString('base64');
         fs.unlink(uploadedFiles[0].fd, function(err) {
           if (err) {
-            sails.log.error(new Error("Send: Error when deleting pdf in the server"));
+            sails.log.error(new Error("Create: Error when deleting image in the server"));
             return;
           }
 
@@ -241,7 +241,7 @@ module.exports = {
         from: config.emailsender,
         to: config.emailreceiver,
         subject: 'CAPeD: A new file has been submitted to you',
-        html: '<html><p>Greetings</p><p>Here is a new article suggestion from ' + req.body.email + '.</p><p>Here is their comment: </p><p><i>' + req.body.comment + '</i></p></html>',
+        html: '<html><p>Greetings</p><p>A new article from ' + req.body.email + ' has been submitted.</p><p>Here is their comment: </p><p><i>' + req.body.comment + '</i></p></html>',
         attachments: [{
           filename: uploadedFiles[0].filename,
           path: uploadedFiles[0].fd
@@ -344,7 +344,7 @@ module.exports = {
     //Similarly to create, uses skipper to upload the file
     req.file('file').upload(function whenDone(err,uploadedFiles) {
       if (err) {
-        sails.log.error(new Error("Create: Error when uploading image file"));
+        sails.log.error(new Error("Update: Error when uploading image file"));
       }
       //Proceed with update if there is no image
       if (uploadedFiles.length === 0) {
