@@ -56,12 +56,12 @@ describe('UserController', function() {
       });
     });
 
-    it('should redirect to general list', function (done) {
+    it('should redirect to search list', function (done) {
       supertest(sails.hooks.http.app)
         .post('/User/logout')
         .set('Cookie',cookie)
         .expect(302)
-        .expect('location','/Peptide/list', done);
+        .expect('location','/Peptide/search', done);
     });
   });
 });
