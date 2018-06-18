@@ -222,8 +222,6 @@ module.exports = {
         sails.log.error(new Error("Send: Error when uploading pdf"));
         return res.view('submit', {message:"error"});
       }
-
-
       //Nodemailer module used to send the mail
       var nodemailer = require('nodemailer');
       var config = require("../../config/secrets");
@@ -233,9 +231,7 @@ module.exports = {
         host: config.emailsmtp,
         port: config.emailport
       });
-
       var mailOptions;
-
       //Mail body
       mailOptions = {
         from: config.emailsender,
@@ -265,7 +261,6 @@ module.exports = {
           }
           return res.view('submit', {message:"success"});
         });
-
       });
     });
   },
@@ -380,7 +375,7 @@ module.exports = {
         image = "data:image/jpeg;base64," + bitmap.toString('base64');
         fs.unlink(uploadedFiles[0].fd, function (err) {
           if (err) {
-            sails.log.error(new Error("Send: Error when deleting pdf in the server"));
+            sails.log.error(new Error("Update: Error when deleting pdf in the server"));
             return;
           }
           Peptide.update({id: req.params.id}, {

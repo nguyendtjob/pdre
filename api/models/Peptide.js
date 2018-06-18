@@ -44,8 +44,6 @@ module.exports = {
     comment : { type: 'string' },
 
     image : { type : 'string'}
-  },
-
-  connection: 'sailsMongoDBServer'
+  }
 };
 
